@@ -1,0 +1,12 @@
+*.txt
+*.class
+*.idea
+*.iml
+target/
+out/
+bin/
+doc/
+*.rar
+*.jar
+*.zip
+*.odp
