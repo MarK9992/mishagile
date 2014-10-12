@@ -1,6 +1,7 @@
 package client;
 
 import communication.Form;
+import communication.FormType;
 
 import java.util.ArrayList;
 
@@ -34,7 +35,7 @@ public class ClientManager {
         return null;
     }
 
-    public boolean sendForm(String firstname, String name, Form form) {
+    public boolean sendForm(String firstname, String name, FormType formType) {
         Client cl = checkClient(firstname, name);
 
         if(cl != null) {
