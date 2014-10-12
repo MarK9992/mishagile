@@ -1,4 +1,4 @@
-package ui;
+package view;
 
 import org.junit.Test;
 
@@ -9,6 +9,6 @@ public class uiTest {
 
     @Test
     public void uiTest() {
-        new LoginUi();
+        new LoginView();
     }
 }

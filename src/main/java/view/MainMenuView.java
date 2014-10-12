@@ -1,121 +1,85 @@
-package ui;
+package view;
 
-import client.Client;
 import client.ClientManager;
 import communication.FormType;
 import user.UserAccount;
-import user.UserManager;
 
 import java.util.Scanner;
-
-import static user.UserRank.*;
 
 /**
  * Created by root on 11/10/14.
  */
-public class MenuUi {
+public class MainMenuView extends View {
 
-	// Attributes
-	private Scanner sc;
-	private UserAccount ua;
-	private ClientManager cm;
+    // Attributes
+    private Scanner sc;
+    private UserAccount ua;
+    private ClientManager cm;
 
-	// Constructors
-	public MenuUi(UserAccount um) {
-		sc = new Scanner(System.in);
-		this.ua = um;
-		cm = new ClientManager();
-		display();
-	}
+    // Constructors
+    public MainMenuView(UserAccount um) {
+        super();
+        this.ua = um;
+        cm = new ClientManager();
+        display();
+    }
 
-	public MenuUi() {
-		this(new UserAccount());
-	}
+    public MainMenuView() {
+        this(new UserAccount());
+    }
 
-	// Methods
-	private void display() {
-		clear();
+    // Methods
+    protected void display() {
+        clear();
 
-		switch (ua.getRank()) {
+        switch (ua.getRank()) {
 
-		case ACD:
-			menuAcd();
-			break;
-
-		case BCD:
-			menuBcd();
-			break;
-
-		case CD:
-			menuCd();
-			break;
-
-		case FIN:
-			menuFin();
-			break;
-
-		}
-
-		mainMenuReturn();
-	}
-
-	public static boolean inputCheck(int input, int max) {
-		return input <= max;
-	}
-
-	// TODO refactor?
-	private void menuAcd() {
-		System.out
-				.println("1. Check if client insured\n2. Search claim\n3. Send form to client\n0. Logout");
-		System.out.print("\nPlease choose an option:");
-		int option = sc.nextInt();
-		sc.nextLine();
-
-		// TODO: Remplacer 4 par le nombre de choix
-		while (!inputCheck(option, 4)) {
-			System.out.print("\nPlease choose a VALID option: ");
-			option = sc.nextInt();
-			sc.nextLine();
-		}
-
-		switch (option) {
-            case 1:
-                checkClient();
+            case ACD:
+                menuAcd();
                 break;
-            case 2:
-                new SearchClaimUi();
-                break;
-            case 3:
-                sendForm();
-                break;
-            case 4:
-                // do something
 
-            case 0:
-                new LoginUi();
-		}
-	}
+            case BCD:
+                menuBcd();
+                break;
 
-	private void menuBcd() {
+            case CD:
+                menuCd();
+                break;
+
+            case FIN:
+                menuFin();
+                break;
+
+        }
+
+        mainMenuReturn();
+    }
+
+    public static boolean inputCheck(int input, int max) {
+        return input <= max;
+    }
+
+    // TODO refactor?
+    private void menuAcd() {
         System.out
                 .println("1. Check if client insured\n2. Search claim\n3. Send form to client\n0. Logout");
-		System.out.print("\nPlease choose an option:");
-		int option = sc.nextInt();
-		sc.nextLine();
+        System.out.print("\nPlease choose an option:");
+        int option = sc.nextInt();
+        sc.nextLine();
 
-		// TODO: Remplacer 4 par le nombre de choix
-		while (!inputCheck(option, 4)) {
-			System.out.print("\nPlease choose a VALID option: ");
-			option = sc.nextInt();
-			sc.nextLine();
-		}
+        // TODO: Remplacer 4 par le nombre de choix
+        while (!inputCheck(option, 4)) {
+            System.out.print("\nPlease choose a VALID option: ");
+            option = sc.nextInt();
+            sc.nextLine();
+        }
 
-		switch (option) {
+        switch (option) {
             case 1:
                 checkClient();
                 break;
             case 2:
-                new SearchClaimUi();
+                new SearchClaimView();
                 break;
             case 3:
                 sendForm();
@@ -124,30 +88,30 @@ public class MenuUi {
                 // do something
 
             case 0:
-                new LoginUi();
-		}
-	}
+                new LoginView();
+        }
+    }
 
-	private void menuCd() {
+    private void menuBcd() {
         System.out
                 .println("1. Check if client insured\n2. Search claim\n3. Send form to client\n0. Logout");
-		System.out.print("\nPlease choose an option:");
-		int option = sc.nextInt();
-		sc.nextLine();
+        System.out.print("\nPlease choose an option:");
+        int option = sc.nextInt();
+        sc.nextLine();
 
-		// TODO: Remplacer 4 par le nombre de choix
-		while (!inputCheck(option, 4)) {
-			System.out.print("\nPlease choose a VALID option: ");
-			option = sc.nextInt();
-			sc.nextLine();
-		}
+        // TODO: Remplacer 4 par le nombre de choix
+        while (!inputCheck(option, 4)) {
+            System.out.print("\nPlease choose a VALID option: ");
+            option = sc.nextInt();
+            sc.nextLine();
+        }
 
-		switch (option) {
+        switch (option) {
             case 1:
                 checkClient();
                 break;
             case 2:
-                new SearchClaimUi();
+                new SearchClaimView();
                 break;
             case 3:
                 sendForm();
@@ -156,30 +120,30 @@ public class MenuUi {
                 // do something
 
             case 0:
-                new LoginUi();
-		}
-	}
+                new LoginView();
+        }
+    }
 
-	private void menuFin() {
+    private void menuCd() {
         System.out
                 .println("1. Check if client insured\n2. Search claim\n3. Send form to client\n0. Logout");
-		System.out.print("\nPlease choose an option:");
-		int option = sc.nextInt();
-		sc.nextLine();
+        System.out.print("\nPlease choose an option:");
+        int option = sc.nextInt();
+        sc.nextLine();
 
-		// TODO: Remplacer 4 par le nombre de choix
-		while (!inputCheck(option, 4)) {
-			System.out.print("\nPlease choose a VALID option: ");
-			option = sc.nextInt();
-			sc.nextLine();
-		}
+        // TODO: Remplacer 4 par le nombre de choix
+        while (!inputCheck(option, 4)) {
+            System.out.print("\nPlease choose a VALID option: ");
+            option = sc.nextInt();
+            sc.nextLine();
+        }
 
-		switch (option) {
+        switch (option) {
             case 1:
                 checkClient();
                 break;
             case 2:
-                new SearchClaimUi();
+                new SearchClaimView();
                 break;
             case 3:
                 sendForm();
@@ -188,32 +152,58 @@ public class MenuUi {
                 // do something
 
             case 0:
-                new LoginUi();
-		}
-	}
+                new LoginView();
+        }
+    }
 
-	public static void clear() {
-		for (int i = 0; i < 20; i++) {
-			System.out.println();
-		}
-	}
+    private void menuFin() {
+        System.out
+                .println("1. Check if client insured\n2. Search claim\n3. Send form to client\n0. Logout");
+        System.out.print("\nPlease choose an option:");
+        int option = sc.nextInt();
+        sc.nextLine();
 
-	private void mainMenuReturn() {
-		System.out.println("\n\nPress enter to get back to the main menu... ");
-		sc.nextLine();
-		new MenuUi(this.ua);
-	}
+        // TODO: Remplacer 4 par le nombre de choix
+        while (!inputCheck(option, 4)) {
+            System.out.print("\nPlease choose a VALID option: ");
+            option = sc.nextInt();
+            sc.nextLine();
+        }
+
+        switch (option) {
+            case 1:
+                checkClient();
+                break;
+            case 2:
+                new SearchClaimView();
+                break;
+            case 3:
+                sendForm();
+                break;
+            case 4:
+                // do something
+
+            case 0:
+                new LoginView();
+        }
+    }
+
+    private void mainMenuReturn() {
+        System.out.println("\n\nPress enter to get back to the main menu... ");
+        sc.nextLine();
+        new MainMenuView(this.ua);
+    }
 
     // asks user to enter a name and a firstname and checks if he's insured
-	private void checkClient() {
+    private void checkClient() {
         String[] names = askClientNames();
 
-		if (cm.checkClient(names[0], names[1]) != null) {
-			System.out.println("Client insured.");
-		} else {
-			System.out.println("Client not insured.");
-		}
-	}
+        if (cm.checkClient(names[0], names[1]) != null) {
+            System.out.println("Client insured.");
+        } else {
+            System.out.println("Client not insured.");
+        }
+    }
 
     // sends a form to a given client
     private void sendForm() {
@@ -254,15 +244,14 @@ public class MenuUi {
                     System.out.println("Please enter a correct input. (A, B or C, 0 to exit)");
                     bool = false;
             }
-        } while(!bool);
+        } while (!bool);
     }
 
     // performs the sending of a form
     private void performFormSending(String[] names, FormType formType) {
-        if(cm.sendForm(names[0], names[1], formType)) {
+        if (cm.sendForm(names[0], names[1], formType)) {
             System.out.println("Sending successfull");
-        }
-        else {
+        } else {
             System.out.println("Error client does not exist.");
         }
     }
