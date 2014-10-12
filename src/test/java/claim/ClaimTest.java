@@ -60,27 +60,6 @@ public class ClaimTest {
 		assertTrue(!c1.matchDate("01/01/2014"));
 	}
 
-	@Test
-	public void equalsTest() {
-		assertTrue(c.equals(c));
-		assertTrue(!c.equals(new Integer(1)));
-		assertTrue(!c.equals(new Claim(1, 0, "previous history of accident",
-				ClaimStatus.CHECKED)));
-		assertTrue(!c.equals(new Claim(0, 1, "previous history of accident",
-				ClaimStatus.CHECKED)));
-		assertTrue(!c.equals(new Claim(0, 0, "false", ClaimStatus.CHECKED)));
-		assertTrue(c.equals(new Claim()));
-	}
-
-	@Test
-	public void hashCodeTest() {
-		int result = c.getCarPrice();
-
-		result = 31 * result + c.getDamageCost();
-		result = 31 * result + c.getCarHistory().hashCode();
-		assertEquals(result, c.hashCode());
-	}
-
 	@After
 	public void tearDown() {
 		c = null;

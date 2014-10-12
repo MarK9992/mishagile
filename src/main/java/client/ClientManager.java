@@ -1,5 +1,7 @@
 package client;
 
+import communication.Form;
+
 import java.util.ArrayList;
 
 /**
@@ -30,6 +32,15 @@ public class ClientManager {
             }
         }
         return null;
+    }
+
+    public boolean sendForm(String firstname, String name, Form form) {
+        Client cl = checkClient(firstname, name);
+
+        if(cl != null) {
+            return true;
+        }
+        return false;
     }
 
     // Accessors
