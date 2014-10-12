@@ -88,4 +88,9 @@ public class Client {
 		result = 31 * result + claimList.hashCode();
 		return result;
 	}
+
+	@Override
+	public String toString() {
+		return firstName + name;
+	}
 }

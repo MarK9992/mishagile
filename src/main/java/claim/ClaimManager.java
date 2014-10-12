@@ -28,12 +28,15 @@ public class ClaimManager {
 
 	// Methods
 
-	public ArrayList<Claim> checkClaimByClient(Client claimant) {
+	public ArrayList<Claim> checkClaimByClient(String firstName, String name) {
 		ArrayList<Claim> matches = new ArrayList<Claim>();
 		for (Claim cl : claimList) {
-			if (cl.matchClaimant(claimant)) {
+			if (cl.getClaimant().match(firstName, name)) {
 				matches.add(cl);
 			}
+		}
+		if (matches.size() == 0) {
+			matches = null;
 		}
 		return matches;
 	}
@@ -45,16 +48,22 @@ public class ClaimManager {
 				matches.add(cl);
 			}
 		}
+		if (matches.size() == 0) {
+			matches = null;
+		}
 		return matches;
 	}
 
-	public ArrayList<Claim> checkClaimByClientAndDate(Client claimant,
-			String date) {
+	public ArrayList<Claim> checkClaimByClientAndDate(String firstName,
+			String name, String date) {
 		ArrayList<Claim> matches = new ArrayList<Claim>();
 		for (Claim cl : claimList) {
-			if (cl.matchClaimant(claimant) && cl.matchDate(date)) {
+			if (cl.getClaimant().match(firstName, name) && cl.matchDate(date)) {
 				matches.add(cl);
 			}
+		}
+		if (matches.size() == 0) {
+			matches = null;
 		}
 		return matches;
 	}
