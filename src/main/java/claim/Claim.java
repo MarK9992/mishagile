@@ -1,5 +1,7 @@
 package claim;
 
+import client.Client;
+
 /**
  * Created by root on 11/10/14.
  */
@@ -11,19 +13,24 @@ public class Claim {
 	// TODO data structure?
 	private String carHistory;
 	private ClaimStatus status;
+	private Client claimant;
+	private String date;
 
 	// Constructors
 
 	public Claim() {
-		this(0, 0, "previous history of accident", ClaimStatus.UNCHECKED);
+		this(0, 0, "previous history of accident", ClaimStatus.UNCHECKED,
+				new Client(), "01/01/2014");
 	}
 
 	public Claim(int carPrice, int damageCost, String carHistory,
-			ClaimStatus status) {
+			ClaimStatus status, Client claimant, String date) {
 		this.carPrice = carPrice;
 		this.damageCost = damageCost;
 		this.carHistory = carHistory;
 		this.status = status;
+		this.claimant = claimant;
+		this.date = date;
 	}
 
 	// Accessors
@@ -40,6 +47,22 @@ public class Claim {
 		return carHistory;
 	}
 
+	// Methods
+
+	public boolean matchClaimant(Client claimant) {
+		if (this.claimant.match(claimant.getFirstName(), claimant.getName())) {
+			return true;
+		}
+		return false;
+	}
+
+	public boolean matchDate(String date) {
+		if (this.date.equals(date)) {
+			return true;
+		}
+		return false;
+	}
+
 	// Override
 
 	public ClaimStatus getStatus() {
@@ -47,31 +70,62 @@ public class Claim {
 	}
 
 	@Override
-	public boolean equals(Object o) {
-		if (this == o)
+	public boolean equals(Object obj) {
+		if (this == obj) {
 			return true;
-		if (!(o instanceof Claim))
+		}
+		if (obj == null) {
 			return false;
-
-		Claim claim = (Claim) o;
-
-		if (carPrice != claim.carPrice)
+		}
+		if (!(obj instanceof Claim)) {
 			return false;
-		if (damageCost != claim.damageCost)
+		}
+		Claim other = (Claim) obj;
+		if (carHistory == null) {
+			if (other.carHistory != null) {
+				return false;
+			}
+		} else if (!carHistory.equals(other.carHistory)) {
 			return false;
-		if (!carHistory.equals(claim.carHistory))
+		}
+		if (carPrice != other.carPrice) {
 			return false;
-		if (!status.equals(claim.status))
+		}
+		if (claimant == null) {
+			if (other.claimant != null) {
+				return false;
+			}
+		} else if (!claimant.equals(other.claimant)) {
 			return false;
-
+		}
+		if (damageCost != other.damageCost) {
+			return false;
+		}
+		if (date == null) {
+			if (other.date != null) {
+				return false;
+			}
+		} else if (!date.equals(other.date)) {
+			return false;
+		}
+		if (status != other.status) {
+			return false;
+		}
 		return true;
 	}
 
 	@Override
 	public int hashCode() {
-		int result = carPrice;
-		result = 31 * result + damageCost;
-		result = 31 * result + carHistory.hashCode();
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((carHistory == null) ? 0 : carHistory.hashCode());
+		result = prime * result + carPrice;
+		result = prime * result
+				+ ((claimant == null) ? 0 : claimant.hashCode());
+		result = prime * result + damageCost;
+		result = prime * result + ((date == null) ? 0 : date.hashCode());
+		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		return result;
 	}
 
