@@ -88,7 +88,7 @@ public class MenuUi {
                 // do something
 
             case 0:
-                // do something
+                new LoginUi();
         }
         display();
     }
@@ -121,7 +121,7 @@ public class MenuUi {
                 // do something
 
             case 0:
-                // do something
+                new LoginUi();
         }
         display();
     }
@@ -154,7 +154,7 @@ public class MenuUi {
                 // do something
 
             case 0:
-                // do something
+                new LoginUi();
         }
         display();
     }
@@ -187,7 +187,7 @@ public class MenuUi {
                 // do something
 
             case 0:
-                // do something
+                new LoginUi();
         }
         display();
     }

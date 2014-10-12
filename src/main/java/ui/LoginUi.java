@@ -10,40 +10,42 @@ import java.util.Scanner;
  */
 public class LoginUi {
 
-    private Scanner sc;
-    private UserManager um;
+	private Scanner sc;
+	private UserManager um;
 
-    // Constructor
-    public LoginUi(UserManager um){
-        sc = new Scanner(System.in);
-        this.um = um;
-        display();
-    }
+	// Constructor
+	public LoginUi(UserManager um) {
+		sc = new Scanner(System.in);
+		this.um = um;
+		display();
+	}
 
-    public LoginUi(){
-        this(new UserManager());
-    }
+	public LoginUi() {
+		this(new UserManager());
+	}
 
-    // Methods
-    public String getLogin(){
-        System.out.print("LOGIN: ");
-        return sc.nextLine();
-    }
+	// Methods
+	public String getLogin() {
+		System.out.print("LOGIN: ");
+		return sc.nextLine();
+	}
 
-    public String getPassword(){
-        System.out.print("PASSWORD: ");
-        return sc.nextLine();
-    }
+	public String getPassword() {
+		System.out.print("PASSWORD: ");
+		return sc.nextLine();
+	}
 
-    public void display(){
-        System.out.println("Welcome to INSERT METAPHOR\n\nPlease enter your login and password.\n");
+	public void display() {
+		System.out
+				.println("Welcome to INSERT METAPHOR\n\nPlease enter your login and password.\n");
 
-        UserAccount ua;
+		UserAccount ua;
 
-        while((ua = um.login(getLogin(),getPassword())) == null){
-            System.out.println("LOGIN and/or PASSWORD incorrect. Please try again.\n");
-        }
+		while ((ua = um.login(getLogin(), getPassword())) == null) {
+			System.out
+					.println("LOGIN and/or PASSWORD incorrect. Please try again.\n");
+		}
 
-        MenuUi mui = new MenuUi(ua);
-    }
+		MenuUi mui = new MenuUi(ua);
+	}
 }
