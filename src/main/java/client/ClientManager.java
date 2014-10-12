@@ -13,15 +13,17 @@ public class ClientManager {
     // Attributes
 
     private ArrayList<Client> clientList;
+    private ArrayList<Form> formList;
 
     // Constructors
 
     public ClientManager() {
-        this(new ArrayList<Client>());
+        this(new ArrayList<Client>(), new ArrayList<Form>());
     }
 
-    public ClientManager(ArrayList<Client> clientList) {
+    public ClientManager(ArrayList<Client> clientList, ArrayList<Form> formList) {
         this.clientList = clientList;
+        this.formList = formList;
     }
 
     // Methods
@@ -39,6 +41,7 @@ public class ClientManager {
         Client cl = checkClient(firstname, name);
 
         if(cl != null) {
+            formList.add(new Form(formType, cl));
             return true;
         }
         return false;
@@ -48,5 +51,9 @@ public class ClientManager {
 
     public ArrayList<Client> getClientList() {
         return clientList;
+    }
+
+    public ArrayList<Form> getFormList() {
+        return formList;
     }
 }

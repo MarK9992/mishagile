@@ -21,6 +21,7 @@ public class ClientManagerTest {
 
     private ClientManager cm, cm1;
     private ArrayList<Client> clientList;
+    private ArrayList<Form> formList;
     private Client cl;
 
     @Before
@@ -29,13 +30,16 @@ public class ClientManagerTest {
         cl = new Client();
         clientList = new ArrayList<Client>();
         clientList.add(cl);
-        cm1 = new ClientManager(clientList);
+        formList = new ArrayList<Form>();
+        formList.add(new Form());
+        cm1 = new ClientManager(clientList, formList);
     }
 
     @Test
     public void testClientManager() {
         assertEquals(new ArrayList<Client>(), cm.getClientList());
         assertEquals(clientList, cm1.getClientList());
+        assertEquals(formList, cm1.getFormList());
     }
 
     @Test
@@ -48,6 +52,7 @@ public class ClientManagerTest {
     public void sendFormTest() {
         assertTrue(cm1.sendForm("firstname", "name", FormType.A));
         assertTrue(!cm1.sendForm("René", "La Taupe", FormType.A));
+        assertEquals(new Form(FormType.A, cm1.checkClient("firstname", "name")), cm1.getFormList().get(cm1.getFormList().size() - 1));
     }
 
     @After
@@ -56,5 +61,6 @@ public class ClientManagerTest {
         cm1 = null;
         clientList = null;
         cl = null;
+        formList = null;
     }
 }

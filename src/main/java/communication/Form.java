@@ -1,5 +1,7 @@
 package communication;
 
+import client.Client;
+
 import java.util.HashMap;
 
 /**
@@ -10,15 +12,17 @@ public class Form extends HashMap<String, String> {
     // Attributes
 
     private FormType type;
+    private Client client;
 
     // Constructors
 
     public Form() {
-        this(FormType.A);
+        this(FormType.A, new Client());
     }
 
-    public Form(FormType formType) {
+    public Form(FormType formType, Client client) {
         type = formType;
+        this.client = client;
 
         switch (type) {
             case A:
@@ -53,6 +57,10 @@ public class Form extends HashMap<String, String> {
 
     public FormType getType() {
         return type;
+    }
+
+    public Client getClient() {
+        return client;
     }
 
 }
