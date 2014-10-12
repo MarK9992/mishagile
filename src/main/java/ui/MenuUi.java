@@ -1,5 +1,6 @@
 package ui;
 
+import client.ClientManager;
 import user.UserAccount;
 import user.UserManager;
 
@@ -15,11 +16,13 @@ public class MenuUi {
     // Attributes
     private Scanner sc;
     private UserAccount ua;
+    private ClientManager cm;
 
     // Constructors
     public MenuUi(UserAccount um){
         sc = new Scanner(System.in);
         this.ua = um;
+        cm = new ClientManager();
         display();
     }
 
@@ -60,7 +63,7 @@ public class MenuUi {
     private void menuAcd() {
         clear();
         System.out.println("MENU ACD...");
-        System.out.print("\nPlease choose an option: ");
+        System.out.print("\nPlease choose an option:\nCheck if client insured (1)");
         int option = sc.nextInt();
         sc.nextLine();
 
@@ -73,8 +76,8 @@ public class MenuUi {
 
         switch(option){
             case 1:
-                // do something
-
+                checkClient();
+                break;
             case 2:
                 // do something
 
@@ -87,12 +90,13 @@ public class MenuUi {
             case 0:
                 // do something
         }
+        display();
     }
 
     private void menuBcd() {
         clear();
         System.out.println("MENU BCD...");
-        System.out.print("\nPlease choose an option: ");
+        System.out.print("\nPlease choose an option:\nCheck if client insured (1)");
         int option = sc.nextInt();
         sc.nextLine();
 
@@ -105,8 +109,8 @@ public class MenuUi {
 
         switch(option){
             case 1:
-                // do something
-
+                checkClient();
+                break;
             case 2:
                 // do something
 
@@ -119,12 +123,13 @@ public class MenuUi {
             case 0:
                 // do something
         }
+        display();
     }
 
     private void menuCd() {
         clear();
         System.out.println("MENU CD...");
-        System.out.print("\nPlease choose an option: ");
+        System.out.print("\nPlease choose an option:\nCheck if client insured (1)");
         int option = sc.nextInt();
         sc.nextLine();
 
@@ -137,8 +142,8 @@ public class MenuUi {
 
         switch(option){
             case 1:
-                // do something
-
+                checkClient();
+                break;
             case 2:
                 // do something
 
@@ -151,12 +156,13 @@ public class MenuUi {
             case 0:
                 // do something
         }
+        display();
     }
 
     private void menuFin() {
         clear();
         System.out.println("MENU FIN...");
-        System.out.print("\nPlease choose an option: ");
+        System.out.print("\nPlease choose an option:\nCheck if client insured (1)");
         int option = sc.nextInt();
         sc.nextLine();
 
@@ -169,8 +175,8 @@ public class MenuUi {
 
         switch(option){
             case 1:
-                // do something
-
+                checkClient();
+                break;
             case 2:
                 // do something
 
@@ -183,11 +189,27 @@ public class MenuUi {
             case 0:
                 // do something
         }
+        display();
     }
 
     private void clear(){
         for(int i = 0; i<20; i++){
             System.out.println();
+        }
+    }
+
+    private void checkClient() {
+        String name, firstname;
+
+        System.out.println("Enter client's name and firstname.\nname: ");
+        name = sc.nextLine();
+        System.out.println("firstname");
+        firstname = sc.nextLine();
+        if(cm.checkClient(firstname, name) != null) {
+            System.out.println("Client insured.");
+        }
+        else {
+            System.out.println("Client not insured.");
         }
     }
 }
