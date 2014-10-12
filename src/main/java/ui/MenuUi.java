@@ -62,8 +62,8 @@ public class MenuUi {
     // TODO refactor?
     private void menuAcd() {
         clear();
-        System.out.println("MENU ACD...");
-        System.out.print("\nPlease choose an option:\nCheck if client insured (1)");
+        System.out.println("Check if client insured (1)\nLogout (0)");
+        System.out.print("\nPlease choose an option:");
         int option = sc.nextInt();
         sc.nextLine();
 
@@ -95,8 +95,8 @@ public class MenuUi {
 
     private void menuBcd() {
         clear();
-        System.out.println("MENU BCD...");
-        System.out.print("\nPlease choose an option:\nCheck if client insured (1)");
+        System.out.println("Check if client insured (1)\nLogout (0)");
+        System.out.print("\nPlease choose an option:");
         int option = sc.nextInt();
         sc.nextLine();
 
@@ -128,8 +128,8 @@ public class MenuUi {
 
     private void menuCd() {
         clear();
-        System.out.println("MENU CD...");
-        System.out.print("\nPlease choose an option:\nCheck if client insured (1)");
+        System.out.println("Check if client insured (1)\nLogout (0)");
+        System.out.print("\nPlease choose an option:");
         int option = sc.nextInt();
         sc.nextLine();
 
@@ -161,8 +161,8 @@ public class MenuUi {
 
     private void menuFin() {
         clear();
-        System.out.println("MENU FIN...");
-        System.out.print("\nPlease choose an option:\nCheck if client insured (1)");
+        System.out.println("Check if client insured (1)\nLogout (0)");
+        System.out.print("\nPlease choose an option:");
         int option = sc.nextInt();
         sc.nextLine();
 
