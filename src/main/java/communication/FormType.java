@@ -6,6 +6,5 @@ package communication;
 public enum FormType {
     A,
     B,
-    C,
-    D
+    C
 }

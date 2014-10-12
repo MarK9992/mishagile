@@ -21,8 +21,32 @@ public class Form extends HashMap<String, String> {
         type = formType;
 
         switch (type) {
-
+            case A:
+                formA();
+                break;
+            case B:
+                formB();
+                break;
+            case C:
+                formC();
+                break;
+            default:
         }
+    }
+
+    private void formA() {
+        put("field1", null);
+    }
+
+    private void formB() {
+        put("field1", null);
+        put("field2", null);
+    }
+
+    private void formC() {
+        put("field1", null);
+        put("field2", null);
+        put("field3", null);
     }
 
     // Accessors

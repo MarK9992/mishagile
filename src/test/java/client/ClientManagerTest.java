@@ -44,7 +44,7 @@ public class ClientManagerTest {
         assertEquals(new Client(), cm1.checkClient("firstname", "name"));
     }
 
-    @Ignore
+    @Test
     public void sendFormTest() {
         assertTrue(cm1.sendForm("firstname", "name", FormType.A));
         assertTrue(!cm1.sendForm("René", "La Taupe", FormType.A));
