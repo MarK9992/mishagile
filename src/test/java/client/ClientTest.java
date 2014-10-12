@@ -40,6 +40,14 @@ public class ClientTest {
     }
 
     @Test
+    public void testMatch() {
+        assertTrue(c.match("firstname", "name"));
+        assertTrue(!c.match("false", "name"));
+        assertTrue(c1.match("Bob", "Sylvestre"));
+        assertTrue(!c1.match("Bob", "false"));
+    }
+
+    @Test
     public void equalsTest() {
         assertTrue(c1.equals(c1));
         assertTrue(!c1.equals(new Integer(1)));
