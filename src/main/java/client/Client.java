@@ -2,6 +2,8 @@ package client;
 
 import java.util.ArrayList;
 
+import claim.Claim;
+
 /**
  * Created by root on 11/10/14.
  */
