@@ -47,7 +47,19 @@ public class Claim {
 		return carHistory;
 	}
 
+	public ClaimStatus getStatus() {
+		return status;
+	}
+
+	public Client getClaimant() {
+		return claimant;
+	}
+
 	// Methods
+
+	public String getDate() {
+		return date;
+	}
 
 	public boolean matchClaimant(Client claimant) {
 		if (this.claimant.match(claimant.getFirstName(), claimant.getName())) {
@@ -64,10 +76,6 @@ public class Claim {
 	}
 
 	// Override
-
-	public ClaimStatus getStatus() {
-		return status;
-	}
 
 	@Override
 	public boolean equals(Object obj) {
@@ -129,4 +137,10 @@ public class Claim {
 		return result;
 	}
 
+	@Override
+	public String toString() {
+		return "Car price: " + carPrice + "\nDamage cost:" + damageCost
+				+ "\nCar history: " + carHistory + "\nClaimant: " + claimant
+				+ "\nDate: " + date;
+	}
 }

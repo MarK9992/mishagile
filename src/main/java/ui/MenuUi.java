@@ -13,203 +13,210 @@ import static user.UserRank.*;
  */
 public class MenuUi {
 
-    // Attributes
-    private Scanner sc;
-    private UserAccount ua;
-    private ClientManager cm;
+	// Attributes
+	private Scanner sc;
+	private UserAccount ua;
+	private ClientManager cm;
 
-    // Constructors
-    public MenuUi(UserAccount um){
-        sc = new Scanner(System.in);
-        this.ua = um;
-        cm = new ClientManager();
-        display();
-    }
+	// Constructors
+	public MenuUi(UserAccount um) {
+		sc = new Scanner(System.in);
+		this.ua = um;
+		cm = new ClientManager();
+		display();
+	}
 
-    public MenuUi(){
-        this(new UserAccount());
-    }
+	public MenuUi() {
+		this(new UserAccount());
+	}
 
-    // Methods
-    public void display(){
-        clear();
+	// Methods
+	private void display() {
+		clear();
 
-        switch(ua.getRank()){
+		switch (ua.getRank()) {
 
-            case ACD:
-                menuAcd();
-                break;
+		case ACD:
+			menuAcd();
+			break;
 
-            case BCD:
-                menuBcd();
-                break;
+		case BCD:
+			menuBcd();
+			break;
 
-            case CD:
-                menuCd();
-                break;
+		case CD:
+			menuCd();
+			break;
 
-            case FIN:
-                menuFin();
-                break;
+		case FIN:
+			menuFin();
+			break;
 
-        }
-    }
+		}
 
-    private boolean inputCheck(int input, int max){
-        return input <= max;
-    }
+		mainMenuReturn();
+	}
 
-    // TODO refactor?
-    private void menuAcd() {
-        clear();
-        System.out.println("Check if client insured (1)\nLogout (0)");
-        System.out.print("\nPlease choose an option:");
-        int option = sc.nextInt();
-        sc.nextLine();
+	public static boolean inputCheck(int input, int max) {
+		return input <= max;
+	}
 
-        // TODO: Remplacer 4 par le nombre de choix
-        while(!inputCheck(option,4)){
-            System.out.print("\nPlease choose a VALID option: ");
-            option = sc.nextInt();
-            sc.nextLine();
-        }
+	// TODO refactor?
+	private void menuAcd() {
+		System.out
+				.println("1. Check if client insured\n2. Search claim\n0. Logout");
+		System.out.print("\nPlease choose an option:");
+		int option = sc.nextInt();
+		sc.nextLine();
 
-        switch(option){
-            case 1:
-                checkClient();
-                break;
-            case 2:
-                // do something
+		// TODO: Remplacer 4 par le nombre de choix
+		while (!inputCheck(option, 4)) {
+			System.out.print("\nPlease choose a VALID option: ");
+			option = sc.nextInt();
+			sc.nextLine();
+		}
 
-            case 3:
-                // do something
+		switch (option) {
+		case 1:
+			checkClient();
+			break;
+		case 2:
+			new SearchClaimUi();
+			break;
 
-            case 4:
-                // do something
+		case 3:
+			// do something
 
-            case 0:
-                new LoginUi();
-        }
-        display();
-    }
+		case 4:
+			// do something
 
-    private void menuBcd() {
-        clear();
-        System.out.println("Check if client insured (1)\nLogout (0)");
-        System.out.print("\nPlease choose an option:");
-        int option = sc.nextInt();
-        sc.nextLine();
+		case 0:
+			new LoginUi();
+		}
+	}
 
-        // TODO: Remplacer 4 par le nombre de choix
-        while(!inputCheck(option,4)){
-            System.out.print("\nPlease choose a VALID option: ");
-            option = sc.nextInt();
-            sc.nextLine();
-        }
+	private void menuBcd() {
+		System.out
+				.println("1. Check if client insured\n2. Search claim\n0. Logout");
+		System.out.print("\nPlease choose an option:");
+		int option = sc.nextInt();
+		sc.nextLine();
 
-        switch(option){
-            case 1:
-                checkClient();
-                break;
-            case 2:
-                // do something
+		// TODO: Remplacer 4 par le nombre de choix
+		while (!inputCheck(option, 4)) {
+			System.out.print("\nPlease choose a VALID option: ");
+			option = sc.nextInt();
+			sc.nextLine();
+		}
 
-            case 3:
-                // do something
+		switch (option) {
+		case 1:
+			checkClient();
+			break;
+		case 2:
+			new SearchClaimUi();
+			break;
 
-            case 4:
-                // do something
+		case 3:
+			// do something
 
-            case 0:
-                new LoginUi();
-        }
-        display();
-    }
+		case 4:
+			// do something
 
-    private void menuCd() {
-        clear();
-        System.out.println("Check if client insured (1)\nLogout (0)");
-        System.out.print("\nPlease choose an option:");
-        int option = sc.nextInt();
-        sc.nextLine();
+		case 0:
+			new LoginUi();
+		}
+	}
 
-        // TODO: Remplacer 4 par le nombre de choix
-        while(!inputCheck(option,4)){
-            System.out.print("\nPlease choose a VALID option: ");
-            option = sc.nextInt();
-            sc.nextLine();
-        }
+	private void menuCd() {
+		System.out
+				.println("1. Check if client insured\n2. Search claim\n0. Logout");
+		System.out.print("\nPlease choose an option:");
+		int option = sc.nextInt();
+		sc.nextLine();
 
-        switch(option){
-            case 1:
-                checkClient();
-                break;
-            case 2:
-                // do something
+		// TODO: Remplacer 4 par le nombre de choix
+		while (!inputCheck(option, 4)) {
+			System.out.print("\nPlease choose a VALID option: ");
+			option = sc.nextInt();
+			sc.nextLine();
+		}
 
-            case 3:
-                // do something
+		switch (option) {
+		case 1:
+			checkClient();
+			break;
+		case 2:
+			new SearchClaimUi();
+			break;
 
-            case 4:
-                // do something
+		case 3:
+			// do something
 
-            case 0:
-                new LoginUi();
-        }
-        display();
-    }
+		case 4:
+			// do something
 
-    private void menuFin() {
-        clear();
-        System.out.println("Check if client insured (1)\nLogout (0)");
-        System.out.print("\nPlease choose an option:");
-        int option = sc.nextInt();
-        sc.nextLine();
+		case 0:
+			new LoginUi();
+		}
+	}
 
-        // TODO: Remplacer 4 par le nombre de choix
-        while(!inputCheck(option,4)){
-            System.out.print("\nPlease choose a VALID option: ");
-            option = sc.nextInt();
-            sc.nextLine();
-        }
+	private void menuFin() {
+		System.out
+				.println("1. Check if client insured\n2. Search claim\n0. Logout");
+		System.out.print("\nPlease choose an option:");
+		int option = sc.nextInt();
+		sc.nextLine();
 
-        switch(option){
-            case 1:
-                checkClient();
-                break;
-            case 2:
-                // do something
+		// TODO: Remplacer 4 par le nombre de choix
+		while (!inputCheck(option, 4)) {
+			System.out.print("\nPlease choose a VALID option: ");
+			option = sc.nextInt();
+			sc.nextLine();
+		}
 
-            case 3:
-                // do something
+		switch (option) {
+		case 1:
+			checkClient();
+			break;
+		case 2:
+			new SearchClaimUi();
+			break;
 
-            case 4:
-                // do something
+		case 3:
+			// do something
 
-            case 0:
-                new LoginUi();
-        }
-        display();
-    }
+		case 4:
+			// do something
 
-    private void clear(){
-        for(int i = 0; i<20; i++){
-            System.out.println();
-        }
-    }
+		case 0:
+			new LoginUi();
+		}
+	}
 
-    private void checkClient() {
-        String name, firstname;
+	public static void clear() {
+		for (int i = 0; i < 20; i++) {
+			System.out.println();
+		}
+	}
 
-        System.out.println("Enter client's name and firstname.\nname: ");
-        name = sc.nextLine();
-        System.out.println("firstname");
-        firstname = sc.nextLine();
-        if(cm.checkClient(firstname, name) != null) {
-            System.out.println("Client insured.");
-        }
-        else {
-            System.out.println("Client not insured.");
-        }
-    }
+	private void mainMenuReturn() {
+		System.out.println("\n\nPress enter to get back to the main menu... ");
+		sc.nextLine();
+		new MenuUi(this.ua);
+	}
+
+	private void checkClient() {
+		String name, firstname;
+
+		System.out.println("Enter client's name and firstname.\nname: ");
+		name = sc.nextLine();
+		System.out.println("firstname");
+		firstname = sc.nextLine();
+		if (cm.checkClient(firstname, name) != null) {
+			System.out.println("Client insured.");
+		} else {
+			System.out.println("Client not insured.");
+		}
+	}
 }

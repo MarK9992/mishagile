@@ -36,10 +36,8 @@ public class ClaimManagerTest {
 
 	@Test
 	public void testCheckClaimByClient() {
-		assertNull(cm.checkClaimByClient(new Client("firstname", "name",
-				Insurance.D, new ArrayList<Claim>())));
-		assertEquals(claimList, cm1.checkClaimByClient(new Client("firstname",
-				"name", Insurance.D, new ArrayList<Claim>())));
+		assertNull(cm.checkClaimByClient("firstname", "name"));
+		assertEquals(claimList, cm1.checkClaimByClient("firstname", "name"));
 	}
 
 	@Test
@@ -50,11 +48,10 @@ public class ClaimManagerTest {
 
 	@Test
 	public void testCheckClaimByClientAndDate() {
-		assertNull(cm.checkClaimByClientAndDate(new Client("firstname", "name",
-				Insurance.D, new ArrayList<Claim>()), "01/01/2014"));
-		assertEquals(claimList, cm1.checkClaimByClientAndDate(new Client(
-				"firstname", "name", Insurance.D, new ArrayList<Claim>()),
+		assertNull(cm.checkClaimByClientAndDate("firstname", "name",
 				"01/01/2014"));
+		assertEquals(claimList, cm1.checkClaimByClientAndDate("firstname",
+				"name", "01/01/2014"));
 	}
 
 	@After
