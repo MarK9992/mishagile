@@ -35,6 +35,9 @@ public class ClaimManager {
 				matches.add(cl);
 			}
 		}
+		if (matches.size() == 0) {
+			matches = null;
+		}
 		return matches;
 	}
 
@@ -44,6 +47,9 @@ public class ClaimManager {
 			if (cl.matchDate(date)) {
 				matches.add(cl);
 			}
+		}
+		if (matches.size() == 0) {
+			matches = null;
 		}
 		return matches;
 	}
@@ -55,6 +61,9 @@ public class ClaimManager {
 			if (cl.matchClaimant(claimant) && cl.matchDate(date)) {
 				matches.add(cl);
 			}
+		}
+		if (matches.size() == 0) {
+			matches = null;
 		}
 		return matches;
 	}
