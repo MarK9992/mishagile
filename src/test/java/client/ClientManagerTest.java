@@ -7,6 +7,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 /**
  * Created by root on 11/10/14.
@@ -28,6 +29,12 @@ public class ClientManagerTest {
     public void testClientManager() {
         assertEquals(new ArrayList<Client>(), cm.getClientList());
         assertEquals(clientList, cm1.getClientList());
+    }
+
+    @Test
+    public void testCheckClient() {
+        assertNull(cm.checkClient("Antoine", "DeCaunes"));
+        assertEquals(new Client(), cm1.checkClient("firstname", "name"));
     }
 
     @After

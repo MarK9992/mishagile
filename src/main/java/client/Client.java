@@ -27,6 +27,15 @@ public class Client {
         this.claimList = claimList;
     }
 
+    // Methods
+
+    public boolean match(String firstName, String name) {
+        if(this.firstName.equals(firstName) && this.name.equals(name)) {
+            return true;
+        }
+        return false;
+    }
+
     // Accessors
 
     public String getFirstName() {
