@@ -16,16 +16,17 @@ public class Claim {
 	private Client claimant;
 	private String date;
     private Category category;
+    private Decision decision;
 
 	// Constructors
 
 	public Claim() {
 		this(0, 0, "previous history of accident", ClaimStatus.UNCHECKED,
-				new Client(), "01/01/2014", Category.undefined);
+				new Client(), "01/01/2014", Category.undefined, Decision.undefined);
 	}
 
-	public Claim(int carPrice, int damageCost, String carHistory,
-			ClaimStatus status, Client claimant, String date, Category category) {
+    public Claim(int carPrice, int damageCost, String carHistory,
+			ClaimStatus status, Client claimant, String date, Category category, Decision decision) {
 		this.carPrice = carPrice;
 		this.damageCost = damageCost;
 		this.carHistory = carHistory;
@@ -33,6 +34,7 @@ public class Claim {
 		this.claimant = claimant;
 		this.date = date;
         this.category = category;
+        this.decision = decision;
 	}
 
 	// Accessors
@@ -64,15 +66,33 @@ public class Claim {
      */
     public Category getCategory() { return category; }
 
+    /**
+     * Returns the decision field.
+     *
+     * @return the decision field
+     */
+    public Decision getDecision() {
+        return decision;
+    }
+
     // Mutators
 
     /**
      * Sets the category.
      *
-     * @param category the category to set
+     * @param category the category to apply
      */
     void setCategory(Category category) {
         this.category = category;
+    }
+
+    /**
+     * Sets the decision.
+     *
+     * @param decision the decision to apply
+     */
+    void setDecision(Decision decision) {
+        this.decision = decision;
     }
 
 	// Methods
@@ -97,70 +117,42 @@ public class Claim {
 
 	// Override
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (obj == null) {
-			return false;
-		}
-		if (!(obj instanceof Claim)) {
-			return false;
-		}
-		Claim other = (Claim) obj;
-		if (carHistory == null) {
-			if (other.carHistory != null) {
-				return false;
-			}
-		} else if (!carHistory.equals(other.carHistory)) {
-			return false;
-		}
-		if (carPrice != other.carPrice) {
-			return false;
-		}
-		if (claimant == null) {
-			if (other.claimant != null) {
-				return false;
-			}
-		} else if (!claimant.equals(other.claimant)) {
-			return false;
-		}
-		if (damageCost != other.damageCost) {
-			return false;
-		}
-		if (date == null) {
-			if (other.date != null) {
-				return false;
-			}
-		} else if (!date.equals(other.date)) {
-			return false;
-		}
-		if (status != other.status) {
-			return false;
-		}
-		return true;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result
-				+ ((carHistory == null) ? 0 : carHistory.hashCode());
-		result = prime * result + carPrice;
-		result = prime * result
-				+ ((claimant == null) ? 0 : claimant.hashCode());
-		result = prime * result + damageCost;
-		result = prime * result + ((date == null) ? 0 : date.hashCode());
-		result = prime * result + ((status == null) ? 0 : status.hashCode());
-		return result;
-	}
-
-	@Override
+    @Override
 	public String toString() {
 		return "Car price: " + carPrice + "\nDamage cost: " + damageCost
 				+ "\nCar history: " + carHistory + "\nClaimant: " + claimant
 				+ "\nDate: " + date;
 	}
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Claim)) return false;
+
+        Claim claim = (Claim) o;
+
+        if (carPrice != claim.carPrice) return false;
+        if (damageCost != claim.damageCost) return false;
+        if (!carHistory.equals(claim.carHistory)) return false;
+        if (category != claim.category) return false;
+        if (!claimant.equals(claim.claimant)) return false;
+        if (!date.equals(claim.date)) return false;
+        if (decision != claim.decision) return false;
+        if (status != claim.status) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = carPrice;
+        result = 31 * result + damageCost;
+        result = 31 * result + carHistory.hashCode();
+        result = 31 * result + status.hashCode();
+        result = 31 * result + claimant.hashCode();
+        result = 31 * result + date.hashCode();
+        result = 31 * result + category.hashCode();
+        result = 31 * result + decision.hashCode();
+        return result;
+    }
 }
