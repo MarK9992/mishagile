@@ -67,4 +67,8 @@ public class ClaimManager {
 		}
 		return matches;
 	}
+
+	public void addClaim(Claim claim) {
+		claimList.add(claim);
+	}
 }

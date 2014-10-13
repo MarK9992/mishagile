@@ -20,9 +20,10 @@ public class UserManager {
 
 	public UserManager(ArrayList<UserAccount> userList) {
 		this.userList = userList;
+		this.userList.add(new UserAccount());
 	}
 
-	// Méthode
+	// Method
 
 	public UserAccount login(String login, String password) {
 		for (UserAccount ua : userList) {
