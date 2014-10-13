@@ -53,6 +53,16 @@ public class Form extends HashMap<String, String> {
         put("field3", null);
     }
 
+    // Methods
+
+    /**
+     * Returns a string representation of the object.
+     * @return the string representation of the object
+     */
+    public String toString() {
+        return "type: " + type + ", client: " + client + ", field values: " + values();
+    }
+
     // Accessors
 
     public FormType getType() {
