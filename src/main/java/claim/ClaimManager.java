@@ -91,4 +91,24 @@ public class ClaimManager {
     public void setClaimDecision(Claim claim, Decision decision) {
         claim.setDecision(decision);
     }
+
+    /**
+     * Given a list of claims, filters the claims that are classified.
+     *
+     * @param claims the claim list
+     * @return the classified claims, null if none
+     */
+    public ArrayList<Claim> lookForClassifiedClaims(ArrayList<Claim> claims) {
+        ArrayList<Claim> classified = new ArrayList<Claim>();
+
+        for(Claim claim: claims) {
+            if(claim.getDecision() != Decision.undefined) {
+                classified.add(claim);
+            }
+        }
+        if (classified.size() == 0) {
+            return null;
+        }
+        return classified;
+    }
 }

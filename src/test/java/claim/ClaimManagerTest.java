@@ -2,6 +2,7 @@ package claim;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 
@@ -18,8 +19,8 @@ import client.Insurance;
 public class ClaimManagerTest {
 
 	private ClaimManager cm, cm1;
-	private ArrayList<Claim> claimList;
-    private Claim claim1, claim2;
+	private ArrayList<Claim> claimList, claimList1;
+    private Claim claim1, claim2, claim3, claim4;
 
 	@Before
 	public void setUp() {
@@ -29,6 +30,15 @@ public class ClaimManagerTest {
 		cm1 = new ClaimManager(claimList);
         claim1 = new Claim();
         claim2 = new Claim();
+        claim3 = new Claim();
+        claim3.setDecision(Decision.OK);
+        claim4 = new Claim();
+        claim4.setDecision(Decision.NOK);
+        claimList1 = new ArrayList<Claim>();
+        claimList1.add(claim1);
+        claimList1.add(claim2);
+        claimList1.add(claim3);
+        claimList1.add(claim4);
 	}
 
 	@Test
@@ -75,6 +85,18 @@ public class ClaimManagerTest {
         assertEquals(Decision.undefined, cm1.getClaimList().get(0).getDecision());
     }
 
+    @Test
+    public void lookForClassifiedClaimsTest() {
+        ArrayList<Claim> classClaims = cm.lookForClassifiedClaims(claimList1);
+
+        assertTrue(classClaims.size() == 2);
+        assertTrue(classClaims.contains(claim3));
+        assertTrue(classClaims.contains(claim4));
+        assertTrue(!classClaims.contains(claim1));
+        assertTrue(!classClaims.contains(claim2));
+        assertNull(cm.lookForClassifiedClaims(claimList));
+    }
+
 	@After
 	public void tearDown() {
 		cm = null;
@@ -82,5 +104,8 @@ public class ClaimManagerTest {
 		claimList = null;
         claim1 = null;
         claim2 = null;
+        claim3 = null;
+        claim4 = null;
+        claimList1 = null;
 	}
 }
