@@ -67,6 +67,7 @@ public class ClientManager {
         for(Form f: formList) {
             if(f.getType() == formType && f.getClient().match(firstname, name)) {
                 ClientSimulator.getInstance().fillForm(f, Math.random()*ClientSimulator.RANGE);
+                formList.remove(f);
                 return f;
             }
         }
