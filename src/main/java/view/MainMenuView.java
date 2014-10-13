@@ -1,5 +1,6 @@
 package view;
 
+import claim.ClaimManager;
 import client.ClientManager;
 import communication.FormType;
 import user.UserAccount;
@@ -11,259 +12,298 @@ import java.util.Scanner;
  */
 public class MainMenuView extends View {
 
-    // Attributes
-    private Scanner sc;
-    private UserAccount ua;
-    private ClientManager cm;
+	// Attributes
+	private UserAccount ua;
+	private ClientManager cm;
+	private ClaimManager claimManager;
 
-    // Constructors
-    public MainMenuView(UserAccount um) {
-        super();
-        this.ua = um;
-        cm = new ClientManager();
-        display();
-    }
+	// Constructors
+	public MainMenuView(UserAccount um, ClientManager cm,
+			ClaimManager claimManager) {
+		super();
+		this.ua = um;
+		this.cm = cm;
+		this.claimManager = claimManager;
+		display();
+	}
 
-    public MainMenuView() {
-        this(new UserAccount());
-    }
+	public MainMenuView() {
+		this(new UserAccount(), new ClientManager(), new ClaimManager());
+	}
 
-    // Methods
-    protected void display() {
-        clear();
+	// Methods
+	protected void display() {
+		clear();
 
-        switch (ua.getRank()) {
+		switch (ua.getRank()) {
 
-            case ACD:
-                menuAcd();
-                break;
+		case ACD:
+			menuAcd();
+			break;
 
-            case BCD:
-                menuBcd();
-                break;
+		case BCD:
+			menuBcd();
+			break;
 
-            case CD:
-                menuCd();
-                break;
+		case CD:
+			menuCd();
+			break;
 
-            case FIN:
-                menuFin();
-                break;
+		case FIN:
+			menuFin();
+			break;
 
-        }
+		}
 
-        mainMenuReturn();
-    }
+		mainMenuReturn();
+	}
 
-    public static boolean inputCheck(int input, int max) {
-        return input <= max;
-    }
+	public static boolean inputCheck(String input, int max) {
+		int option;
+		try {
+			option = Integer.parseInt(input);
+		} catch (NumberFormatException e) {
+			return false;
+		}
+		return option <= max;
+	}
 
-    // TODO refactor?
-    private void menuAcd() {
-        System.out
-                .println("1. Check if client insured\n2. Search claim\n3. Send form to client\n0. Logout");
-        System.out.print("\nPlease choose an option:");
-        int option = sc.nextInt();
-        sc.nextLine();
+	private void printSharedMenu() {
+		System.out
+				.println("1. Check if client insured\n2. Search claim\n3. Send form to client\n4. Create client\n5. Register claim\n0. Logout");
+	}
 
-        // TODO: Remplacer 4 par le nombre de choix
-        while (!inputCheck(option, 4)) {
-            System.out.print("\nPlease choose a VALID option: ");
-            option = sc.nextInt();
-            sc.nextLine();
-        }
+	// TODO refactor?
+	private void menuAcd() {
+		printSharedMenu();
+		System.out.print("\nPlease choose an option:");
+		String option = sc.nextLine();
 
-        switch (option) {
-            case 1:
-                checkClient();
-                break;
-            case 2:
-                new SearchClaimView();
-                break;
-            case 3:
-                sendForm();
-                break;
-            case 4:
-                // do something
+		// TODO: Remplacer 4 par le nombre de choix
+		while (!inputCheck(option, 5)) {
+			System.out.print("\nPlease choose a VALID option: ");
+			option = sc.nextLine();
+		}
 
-            case 0:
-                new LoginView();
-        }
-    }
+		switch (Integer.parseInt(option)) {
+		case 1:
+			checkClient();
+			break;
+		case 2:
+			new SearchClaimView(ua, claimManager);
+			break;
+		case 3:
+			sendForm();
+			break;
+		case 4:
+			addClient();
+			break;
+		case 5:
+			addClaim();
+			break;
+		case 0:
+			new LoginView();
+		}
+	}
 
-    private void menuBcd() {
-        System.out
-                .println("1. Check if client insured\n2. Search claim\n3. Send form to client\n0. Logout");
-        System.out.print("\nPlease choose an option:");
-        int option = sc.nextInt();
-        sc.nextLine();
+	private void menuBcd() {
+		printSharedMenu();
+		System.out.print("\nPlease choose an option:");
+		String option = sc.nextLine();
 
-        // TODO: Remplacer 4 par le nombre de choix
-        while (!inputCheck(option, 4)) {
-            System.out.print("\nPlease choose a VALID option: ");
-            option = sc.nextInt();
-            sc.nextLine();
-        }
+		// TODO: Remplacer 4 par le nombre de choix
+		while (!inputCheck(option, 5)) {
+			System.out.print("\nPlease choose a VALID option: ");
+			option = sc.nextLine();
+		}
 
-        switch (option) {
-            case 1:
-                checkClient();
-                break;
-            case 2:
-                new SearchClaimView();
-                break;
-            case 3:
-                sendForm();
-                break;
-            case 4:
-                // do something
+		switch (Integer.parseInt(option)) {
+		case 1:
+			checkClient();
+			break;
+		case 2:
+			new SearchClaimView(ua, claimManager);
+			break;
+		case 3:
+			sendForm();
+			break;
+		case 4:
+			addClient();
+			break;
+		case 5:
+			addClaim();
+			break;
 
-            case 0:
-                new LoginView();
-        }
-    }
+		case 0:
+			new LoginView();
+		}
+	}
 
-    private void menuCd() {
-        System.out
-                .println("1. Check if client insured\n2. Search claim\n3. Send form to client\n0. Logout");
-        System.out.print("\nPlease choose an option:");
-        int option = sc.nextInt();
-        sc.nextLine();
+	private void menuCd() {
+		printSharedMenu();
+		System.out.print("\nPlease choose an option:");
+		String option = sc.nextLine();
 
-        // TODO: Remplacer 4 par le nombre de choix
-        while (!inputCheck(option, 4)) {
-            System.out.print("\nPlease choose a VALID option: ");
-            option = sc.nextInt();
-            sc.nextLine();
-        }
+		// TODO: Remplacer 4 par le nombre de choix
+		while (!inputCheck(option, 5)) {
+			System.out.print("\nPlease choose a VALID option: ");
+			option = sc.nextLine();
+		}
 
-        switch (option) {
-            case 1:
-                checkClient();
-                break;
-            case 2:
-                new SearchClaimView();
-                break;
-            case 3:
-                sendForm();
-                break;
-            case 4:
-                // do something
+		switch (Integer.parseInt(option)) {
+		case 1:
+			checkClient();
+			break;
+		case 2:
+			new SearchClaimView(ua, claimManager);
+			break;
+		case 3:
+			sendForm();
+			break;
+		case 4:
+			addClient();
+			break;
+		case 5:
+			addClaim();
+			break;
+		case 0:
+			new LoginView();
+		}
+	}
 
-            case 0:
-                new LoginView();
-        }
-    }
+	private void menuFin() {
+		printSharedMenu();
+		System.out.print("\nPlease choose an option:");
+		String option = sc.nextLine();
 
-    private void menuFin() {
-        System.out
-                .println("1. Check if client insured\n2. Search claim\n3. Send form to client\n0. Logout");
-        System.out.print("\nPlease choose an option:");
-        int option = sc.nextInt();
-        sc.nextLine();
+		// TODO: Remplacer 4 par le nombre de choix
+		while (!inputCheck(option, 5)) {
+			System.out.print("\nPlease choose a VALID option: ");
+			option = sc.nextLine();
+		}
 
-        // TODO: Remplacer 4 par le nombre de choix
-        while (!inputCheck(option, 4)) {
-            System.out.print("\nPlease choose a VALID option: ");
-            option = sc.nextInt();
-            sc.nextLine();
-        }
+		switch (Integer.parseInt(option)) {
+		case 1:
+			checkClient();
+			break;
+		case 2:
+			new SearchClaimView(ua, claimManager);
+			break;
+		case 3:
+			sendForm();
+			break;
+		case 4:
+			addClient();
+			break;
+		case 5:
+			addClaim();
+			break;
+		case 0:
+			new LoginView();
+		}
+	}
 
-        switch (option) {
-            case 1:
-                checkClient();
-                break;
-            case 2:
-                new SearchClaimView();
-                break;
-            case 3:
-                sendForm();
-                break;
-            case 4:
-                // do something
+	private void mainMenuReturn() {
+		System.out.println("\n\nPress enter to get back to the main menu... ");
+		sc.nextLine();
+		new MainMenuView(this.ua, this.cm, this.claimManager);
+	}
 
-            case 0:
-                new LoginView();
-        }
-    }
+	// asks user to enter a name and a firstname and checks if he's insured
+	private void checkClient() {
+		String[] names = askClientNames();
 
-    private void mainMenuReturn() {
-        System.out.println("\n\nPress enter to get back to the main menu... ");
-        sc.nextLine();
-        new MainMenuView(this.ua);
-    }
+		if (cm.checkClient(names[0], names[1]) != null) {
+			System.out.println("Client insured.");
+		} else {
+			System.out.println("Client not insured.");
+		}
+	}
 
-    // asks user to enter a name and a firstname and checks if he's insured
-    private void checkClient() {
-        String[] names = askClientNames();
+	// sends a form to a given client
+	private void sendForm() {
+		String[] names = askClientNames();
+		Boolean bool;
 
-        if (cm.checkClient(names[0], names[1]) != null) {
-            System.out.println("Client insured.");
-        } else {
-            System.out.println("Client not insured.");
-        }
-    }
+		System.out
+				.println("What kind of form would you like to send ? (A, B or C, 0 to exit)");
+		do {
+			switch (sc.nextLine().charAt(0)) {
+			case 'A':
+				performFormSending(names, FormType.A);
+				bool = true;
+				break;
+			case 'a':
+				performFormSending(names, FormType.A);
+				bool = true;
+				break;
+			case 'B':
+				performFormSending(names, FormType.B);
+				bool = true;
+				break;
+			case 'b':
+				performFormSending(names, FormType.B);
+				bool = true;
+				break;
+			case 'C':
+				performFormSending(names, FormType.C);
+				bool = true;
+				break;
+			case 'c':
+				performFormSending(names, FormType.C);
+				bool = true;
+				break;
+			case '0':
+				bool = true;
+				break;
+			default:
+				System.out
+						.println("Please enter a correct input. (A, B or C, 0 to exit)");
+				bool = false;
+			}
+		} while (!bool);
+	}
 
-    // sends a form to a given client
-    private void sendForm() {
-        String[] names = askClientNames();
-        Boolean bool;
+	// performs the sending of a form
+	private void performFormSending(String[] names, FormType formType) {
+		if (cm.sendForm(names[0], names[1], formType)) {
+			System.out.println("Sending successfull");
+		} else {
+			System.out.println("Error client does not exist.");
+		}
+	}
 
-        System.out.println("What kind of form would you like to send ? (A, B or C, 0 to exit)");
-        do {
-            switch (sc.nextLine().charAt(0)) {
-                case 'A':
-                    performFormSending(names, FormType.A);
-                    bool = true;
-                    break;
-                case 'a':
-                    performFormSending(names, FormType.A);
-                    bool = true;
-                    break;
-                case 'B':
-                    performFormSending(names, FormType.B);
-                    bool = true;
-                    break;
-                case 'b':
-                    performFormSending(names, FormType.B);
-                    bool = true;
-                    break;
-                case 'C':
-                    performFormSending(names, FormType.C);
-                    bool = true;
-                    break;
-                case 'c':
-                    performFormSending(names, FormType.C);
-                    bool = true;
-                    break;
-                case '0':
-                    bool = true;
-                    break;
-                default:
-                    System.out.println("Please enter a correct input. (A, B or C, 0 to exit)");
-                    bool = false;
-            }
-        } while (!bool);
-    }
+	// asks user to enter a name and a firstname and returns the inputs
+	private String[] askClientNames() {
+		String[] names = new String[2];
 
-    // performs the sending of a form
-    private void performFormSending(String[] names, FormType formType) {
-        if (cm.sendForm(names[0], names[1], formType)) {
-            System.out.println("Sending successfull");
-        } else {
-            System.out.println("Error client does not exist.");
-        }
-    }
+		System.out.println("Enter client's name and firstname.\nname: ");
+		names[1] = sc.nextLine();
+		System.out.println("firstname");
+		names[0] = sc.nextLine();
+		return names;
+	}
 
-    // asks user to enter a name and a firstname and returns the inputs
-    private String[] askClientNames() {
-        String[] names = new String[2];
+	private void addClient() {
+		String firstname, name;
+		System.out.print("Firstname: ");
+		firstname = sc.nextLine();
+		System.out.print("\nName: ");
+		name = sc.nextLine();
 
-        System.out.println("Enter client's name and firstname.\nname: ");
-        names[2] = sc.nextLine();
-        System.out.println("firstname");
-        names[1] = sc.nextLine();
-        return names;
-    }
+		if (cm.checkClient(firstname, name) == null) {
+			do {
+				System.out.print("\nInsurance (A, B, C or D): ");
+			} while (!cm.addClient(firstname, name, sc.nextLine().charAt(0)));
+		}
+
+		else {
+			System.out.println("Client already exists!");
+		}
+	}
+
+	private void addClaim() {
+
+	}
+
 }
