@@ -50,4 +50,15 @@ public abstract class View {
         names[0] = sc.nextLine();
         return names;
     }
+
+    protected boolean inputCheck(String input, int max) {
+        int option;
+
+        try {
+            option = Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+        return option <= max;
+    }
 }

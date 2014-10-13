@@ -32,7 +32,7 @@ public class SearchClaimView extends View {
 		System.out.print("\nPlease choose an option:");
 		String option = sc.nextLine();
 
-		while (!MainMenuView.inputCheck(option, 3)) {
+		while (!inputCheck(option, 3)) {
 			System.out.print("\nPlease choose a VALID option: ");
 			option = sc.nextLine();
 		}
@@ -97,7 +97,7 @@ public class SearchClaimView extends View {
 				.print("\nEnter the index of the claim you want to see detailed: ");
 		String choice = sc.nextLine();
 
-		while (!MainMenuView.inputCheck(choice, searchList.size())) {
+		while (!inputCheck(choice, searchList.size())) {
 			System.out.print("\nPlease choose a VALID index: ");
 			choice = sc.nextLine();
 		}

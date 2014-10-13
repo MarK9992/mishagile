@@ -63,16 +63,6 @@ public class MainMenuView extends View {
 		mainMenuReturn();
 	}
 
-	public static boolean inputCheck(String input, int max) {
-		int option;
-		try {
-			option = Integer.parseInt(input);
-		} catch (NumberFormatException e) {
-			return false;
-		}
-		return option <= max;
-	}
-
 	private void printSharedMenu() {
 		System.out
 				.println("1. Check if client insured\n2. Search claim\n3. Send form to client\n4. Create client\n5. Register claim\n0. Logout");
