@@ -35,4 +35,19 @@ public abstract class View {
 			System.out.println();
 		}
 	}
+
+    /**
+     *  Asks user to enter a name and a firstname and returns the inputs.
+     *
+      * @return a String[2] containing the firstname at index 0 and the name at index 1
+     */
+    protected String[] askClientNames() {
+        String[] names = new String[2];
+
+        System.out.print("Enter client's name and firstname.\nname: ");
+        names[1] = sc.nextLine();
+        System.out.print("firstname");
+        names[0] = sc.nextLine();
+        return names;
+    }
 }

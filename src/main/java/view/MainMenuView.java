@@ -242,17 +242,6 @@ public class MainMenuView extends View {
         }
 	}
 
-	// asks user to enter a name and a firstname and returns the inputs
-	private String[] askClientNames() {
-		String[] names = new String[2];
-
-		System.out.println("Enter client's name and firstname.\nname: ");
-		names[1] = sc.nextLine();
-		System.out.println("firstname");
-		names[0] = sc.nextLine();
-		return names;
-	}
-
 	private Client addClient() {
 		String[] names = askClientNames();
 
@@ -335,5 +324,12 @@ public class MainMenuView extends View {
                             .println("Please enter a correct input. (A, B or C)");
             }
         } while (true);
+    }
+
+    /**
+     * Allows a user to classify a claim.
+     */
+    private void classifyClaim() {
+        Claim claim = searchClaim();
     }
 }
