@@ -60,34 +60,34 @@ public class SearchClaimView extends View {
 	}
 
 	private void ClaimantSearch() {
-		clear();
-		System.out.print("Firstname: ");
-		String firstname = sc.nextLine();
-		System.out.print("\nLastname: ");
-		String lastname = sc.nextLine();
-		searchList = cm.checkClaimByClient(firstname, lastname);
+        String[] names;
+
+        clear();
+        names = askClientNames();
+		searchList = cm.checkClaimByClient(names[0], names[1]);
 		printList();
 		printDetails();
 	}
 
 	private void DateSearch() {
 		clear();
-		System.out.print("Date: ");
-		String date = sc.nextLine();
-		searchList = cm.checkClaimByDate(date);
+		searchList = cm.checkClaimByDate(askDate());
 		printList();
 		printDetails();
 	}
 
+    // asks the user to enter a date
+    private String askDate() {
+        System.out.print("Enter a date dd/mm/yyyy format: ");
+        return sc.nextLine();
+    }
+
 	private void ClaimantAndDateSearch() {
-		clear();
-		System.out.print("Firstname: ");
-		String firstname = sc.nextLine();
-		System.out.print("\nLastname: ");
-		String lastname = sc.nextLine();
-		System.out.print("\nDate: ");
-		String date = sc.nextLine();
-		searchList = cm.checkClaimByClientAndDate(firstname, lastname, date);
+        String[] names;
+
+        clear();
+        names = askClientNames();
+		searchList = cm.checkClaimByClientAndDate(names[0], names[1], askDate());
 		printList();
 		printDetails();
 	}
