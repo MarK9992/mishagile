@@ -76,9 +76,19 @@ public class ClaimManager {
      * Sets the category of a given claim.
      *
      * @param claim the claim to set its category
-     * @param category the category to set the claim
+     * @param category the category to apply to the claim
      */
     public void setClaimCategory(Claim claim, Category category) {
            claim.setCategory(category);
+    }
+
+    /**
+     * Sets the decision about a claim.
+     *
+     * @param claim the claim to set its decision
+     * @param decision the decision to apply to the claim
+     */
+    public void setClaimDecision(Claim claim, Decision decision) {
+        claim.setDecision(decision);
     }
 }

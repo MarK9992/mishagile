@@ -66,6 +66,15 @@ public class ClaimManagerTest {
         assertEquals(Category.undefined, cm1.getClaimList().get(0).getCategory());
     }
 
+    @Test
+    public void setClaimDecisionTest() {
+        cm.setClaimDecision(claim1, Decision.NOK);
+        cm.setClaimDecision(claim2, Decision.OK);
+        assertEquals(Decision.NOK, claim1.getDecision());
+        assertEquals(Decision.OK, claim2.getDecision());
+        assertEquals(Decision.undefined, cm1.getClaimList().get(0).getDecision());
+    }
+
 	@After
 	public void tearDown() {
 		cm = null;
