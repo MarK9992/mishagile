@@ -64,6 +64,17 @@ public class Claim {
      */
     public Category getCategory() { return category; }
 
+    // Mutators
+
+    /**
+     * Sets the category.
+     *
+     * @param category the category to set
+     */
+    void setCategory(Category category) {
+        this.category = category;
+    }
+
 	// Methods
 
 	public String getDate() {

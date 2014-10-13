@@ -315,11 +315,4 @@ public class MainMenuView extends View {
             }
         } while (true);
     }
-
-    /**
-     * Allows a user to classify a claim.
-     */
-    private void classifyClaim() {
-        Claim claim = searchClaim();
-    }
 }

@@ -19,6 +19,7 @@ public class ClaimManagerTest {
 
 	private ClaimManager cm, cm1;
 	private ArrayList<Claim> claimList;
+    private Claim claim1, claim2;
 
 	@Before
 	public void setUp() {
@@ -26,6 +27,8 @@ public class ClaimManagerTest {
 		claimList = new ArrayList<Claim>();
 		claimList.add(new Claim());
 		cm1 = new ClaimManager(claimList);
+        claim1 = new Claim();
+        claim2 = new Claim();
 	}
 
 	@Test
@@ -54,10 +57,21 @@ public class ClaimManagerTest {
 				"name", "01/01/2014"));
 	}
 
+    @Test
+    public void setClaimCategoryTest() {
+        cm.setClaimCategory(claim1, Category.complex);
+        cm.setClaimCategory(claim2, Category.simple);
+        assertEquals(Category.complex, claim1.getCategory());
+        assertEquals(Category.simple, claim2.getCategory());
+        assertEquals(Category.undefined, cm1.getClaimList().get(0).getCategory());
+    }
+
 	@After
 	public void tearDown() {
 		cm = null;
 		cm1 = null;
 		claimList = null;
+        claim1 = null;
+        claim2 = null;
 	}
 }

@@ -71,4 +71,14 @@ public class ClaimManager {
 	public void addClaim(Claim claim) {
 		claimList.add(claim);
 	}
+
+    /**
+     * Sets the category of a given claim.
+     *
+     * @param claim the claim to set its category
+     * @param category the category to set the claim
+     */
+    public void setClaimCategory(Claim claim, Category category) {
+           claim.setCategory(category);
+    }
 }
