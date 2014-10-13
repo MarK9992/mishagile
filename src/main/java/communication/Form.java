@@ -53,6 +53,38 @@ public class Form extends HashMap<String, String> {
         put("field3", null);
     }
 
+    // Methods
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Form)) return false;
+        if (!super.equals(o)) return false;
+
+        Form form = (Form) o;
+
+        if (!client.equals(form.client)) return false;
+        if (type != form.type) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + type.hashCode();
+        result = 31 * result + client.hashCode();
+        return result;
+    }
+
+    /**
+     * Returns a string representation of the object.
+     * @return the string representation of the object
+     */
+    /*public String toString() {
+        return "type: " + type + ", client: " + client + ", field values: " + values();
+    }*/
+
     // Accessors
 
     public FormType getType() {

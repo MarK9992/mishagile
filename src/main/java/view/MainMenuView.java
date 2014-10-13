@@ -5,6 +5,7 @@ import claim.ClaimManager;
 import claim.ClaimStatus;
 import client.Client;
 import client.ClientManager;
+import communication.Form;
 import communication.FormType;
 import user.UserAccount;
 
@@ -83,7 +84,7 @@ public class MainMenuView extends View {
 		String option = sc.nextLine();
 
 		// TODO: Remplacer 4 par le nombre de choix
-		while (!inputCheck(option, 5)) {
+		while (!inputCheck(option, 6)) {
 			System.out.print("\nPlease choose a VALID option: ");
 			option = sc.nextLine();
 		}
@@ -104,6 +105,9 @@ public class MainMenuView extends View {
 		case 5:
 			addClaim();
 			break;
+        case 6:
+            checkForm();
+            break;
 		case 0:
 			new LoginView();
 		}
@@ -115,7 +119,7 @@ public class MainMenuView extends View {
 		String option = sc.nextLine();
 
 		// TODO: Remplacer 4 par le nombre de choix
-		while (!inputCheck(option, 5)) {
+		while (!inputCheck(option, 6)) {
 			System.out.print("\nPlease choose a VALID option: ");
 			option = sc.nextLine();
 		}
@@ -136,7 +140,9 @@ public class MainMenuView extends View {
 		case 5:
 			addClaim();
 			break;
-
+        case 6:
+            checkForm();
+            break;
 		case 0:
 			new LoginView();
 		}
@@ -226,54 +232,13 @@ public class MainMenuView extends View {
 	// sends a form to a given client
 	private void sendForm() {
 		String[] names = askClientNames();
-		Boolean bool;
+        FormType type = askFormType();
 
-		System.out
-				.println("What kind of form would you like to send ? (A, B or C, 0 to exit)");
-		do {
-			switch (sc.nextLine().charAt(0)) {
-			case 'A':
-				performFormSending(names, FormType.A);
-				bool = true;
-				break;
-			case 'a':
-				performFormSending(names, FormType.A);
-				bool = true;
-				break;
-			case 'B':
-				performFormSending(names, FormType.B);
-				bool = true;
-				break;
-			case 'b':
-				performFormSending(names, FormType.B);
-				bool = true;
-				break;
-			case 'C':
-				performFormSending(names, FormType.C);
-				bool = true;
-				break;
-			case 'c':
-				performFormSending(names, FormType.C);
-				bool = true;
-				break;
-			case '0':
-				bool = true;
-				break;
-			default:
-				System.out
-						.println("Please enter a correct input. (A, B or C, 0 to exit)");
-				bool = false;
-			}
-		} while (!bool);
-	}
-
-	// performs the sending of a form
-	private void performFormSending(String[] names, FormType formType) {
-		if (cm.sendForm(names[0], names[1], formType)) {
-			System.out.println("Sending successfull");
-		} else {
-			System.out.println("Error client does not exist.");
-		}
+        if (cm.sendForm(names[0], names[1], type)) {
+            System.out.println("Sending successfull");
+        } else {
+            System.out.println("Error client does not exist.");
+        }
 	}
 
 	// asks user to enter a name and a firstname and returns the inputs
@@ -288,23 +253,19 @@ public class MainMenuView extends View {
 	}
 
 	private Client addClient() {
-		String firstname, name;
-		System.out.print("Client's firstname: ");
-		firstname = sc.nextLine();
-		System.out.print("\nClient's name: ");
-		name = sc.nextLine();
+		String[] names = askClientNames();
 
-		if (cm.checkClient(firstname, name) == null) {
+		if (cm.checkClient(names[0], names[1]) == null) {
 			do {
 				System.out.print("\nInsurance (A, B, C or D): ");
-			} while (!cm.addClient(firstname, name, sc.nextLine().charAt(0)));
+			} while (!cm.addClient(names[0], names[1], sc.nextLine().charAt(0)));
 		}
 
 		else {
 			System.out.println("Client already exists.");
 		}
 
-		return cm.checkClient(firstname, name);
+		return cm.checkClient(names[0], names[1]);
 	}
 
 	private boolean isInt(String input) {
@@ -345,4 +306,33 @@ public class MainMenuView extends View {
 		cm.addClaimToClient(client, newClaim);
 	}
 
+    private void checkForm() {
+        String[] names = askClientNames();
+        Form form = cm.checkForm(names[0], names[1], askFormType());
+
+        System.out.println(form);
+    }
+
+    private FormType askFormType() {
+        System.out.println("What kind of form ? (A, B, or C)");
+        do {
+            switch (sc.nextLine().charAt(0)) {
+                case 'A':
+                    return FormType.A;
+                case 'a':
+                    return FormType.A;
+                case 'B':
+                    return FormType.B;
+                case 'b':
+                    return FormType.B;
+                case 'C':
+                    return FormType.C;
+                case 'c':
+                    return FormType.C;
+                default:
+                    System.out
+                            .println("Please enter a correct input. (A, B or C)");
+            }
+        } while (true);
+    }
 }
