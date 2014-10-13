@@ -37,6 +37,13 @@ public class ClientManager {
         return null;
     }
 
+    /**
+     * Send a form to a client.
+     * @param firstname the firstname of the client
+     * @param name the surname of the client
+     * @param formType the form type to send
+     * @return true if succesfull, false otherwise
+     */
     public boolean sendForm(String firstname, String name, FormType formType) {
         Client cl = checkClient(firstname, name);
 
@@ -45,6 +52,22 @@ public class ClientManager {
             return true;
         }
         return false;
+    }
+
+    /**
+     * Retrieves a form send to the client.
+     * @param firstname the firstname of the client
+     * @param name the surname of the client
+     * @param formType the form type to send
+     * @return the form if exists, null otherwise
+     */
+    public Form checkForm(String firstname, String name, FormType formType) {
+        for(Form f: formList) {
+            if(f.getType() == formType && f.getClient().match(firstname, name)) {
+                return f;
+            }
+        }
+        return null;
     }
 
     // Accessors
