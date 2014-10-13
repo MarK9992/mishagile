@@ -91,6 +91,6 @@ public class Client {
 
 	@Override
 	public String toString() {
-		return firstName + name;
+		return firstName + " " + name;
 	}
 }

@@ -1,6 +1,9 @@
 package view;
 
+import claim.Claim;
 import claim.ClaimManager;
+import claim.ClaimStatus;
+import client.Client;
 import client.ClientManager;
 import communication.Form;
 import communication.FormType;
@@ -249,7 +252,7 @@ public class MainMenuView extends View {
 		return names;
 	}
 
-	private void addClient() {
+	private Client addClient() {
 		String[] names = askClientNames();
 
 		if (cm.checkClient(names[0], names[1]) == null) {
@@ -259,12 +262,46 @@ public class MainMenuView extends View {
 		}
 
 		else {
-			System.out.println("Client already exists!");
+			System.out.println("Client already exists.");
 		}
+
+		return cm.checkClient(names[0], names[1]);
+	}
+
+	private boolean isInt(String input) {
+		try {
+			int test = Integer.parseInt(input);
+		} catch (NumberFormatException e) {
+			return false;
+		}
+		return true;
 	}
 
 	private void addClaim() {
+		Client client = addClient();
+		String date, carHistory, carPrice, damageCost;
+		System.out.print("Date: ");
+		date = sc.nextLine();
+		System.out.print("\nCar history: ");
+		carHistory = sc.nextLine();
+		System.out.print("\nCar price: ");
+		carPrice = sc.nextLine();
 
+		while (!isInt(carPrice)) {
+			System.out.print("\nPlease enter a VALID price: ");
+			carPrice = sc.nextLine();
+		}
+
+		System.out.print("\nDamage cost: ");
+		damageCost = sc.nextLine();
+
+		while (!isInt(damageCost)) {
+			System.out.print("\nPlease enter a VALID cost: ");
+			damageCost = sc.nextLine();
+		}
+		claimManager.addClaim(new Claim(Integer.parseInt(carPrice), Integer
+				.parseInt(damageCost), carHistory, ClaimStatus.REGISTERED,
+				client, date));
 	}
 
     private void checkForm() {
