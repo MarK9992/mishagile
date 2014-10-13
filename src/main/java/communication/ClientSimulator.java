@@ -8,9 +8,27 @@ import java.util.Set;
 /**
  * Created by root on 13/10/14.
  */
-public class ClientSimulator {
+public final class ClientSimulator {
 
-    public static int CORRECTLY = 1, INCORRECTLY = 2;
+    // Attributes
+
+    private static int CORRECTLY = 1, INCORRECTLY = 2;
+    public static int RANGE = 3;
+
+    private static ClientSimulator instance = null;
+
+    // Constructors
+
+    private ClientSimulator() {
+
+    }
+
+    public static ClientSimulator getInstance() {
+        if(instance == null) {
+            instance = new ClientSimulator();
+        }
+        return instance;
+    }
 
     // Methods
 
@@ -20,7 +38,7 @@ public class ClientSimulator {
      * @param rand the filling pattern
      * @return the filled form
      */
-    public Form fillForm(Form form, int rand) {
+    public Form fillForm(Form form, double rand) {
         Set<String> keys = form.keySet();
         Iterator<String> it = keys.iterator();
         String key;

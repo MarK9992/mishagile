@@ -1,5 +1,6 @@
 package client;
 
+import communication.ClientSimulator;
 import communication.Form;
 import communication.FormType;
 
@@ -64,6 +65,7 @@ public class ClientManager {
     public Form checkForm(String firstname, String name, FormType formType) {
         for(Form f: formList) {
             if(f.getType() == formType && f.getClient().match(firstname, name)) {
+                ClientSimulator.getInstance().fillForm(f, Math.random()*ClientSimulator.RANGE);
                 return f;
             }
         }

@@ -59,8 +59,13 @@ public class ClientManagerTest {
 
     @Test
     public void checkFormTest() {
+        Form f;
+
         cm1.sendForm("firstname", "name", FormType.A);
-        assertEquals(form, cm1.checkForm("firstname", "name", FormType.A));
+        f = cm1.checkForm("firstname", "name", FormType.A);
+        assertEquals(FormType.A, f.getType());
+        assertEquals("firstname", f.getClient().getFirstName());
+        assertEquals("name", f.getClient().getName());
         assertNull(cm1.checkForm("firstname", "false", FormType.A));
         assertNull(cm1.checkForm("firstname", "name", FormType.B));
     }

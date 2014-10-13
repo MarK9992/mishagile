@@ -22,7 +22,7 @@ public class ClientSimulatorTest {
 
     @Before
     public void setUp() {
-        clientSim = new ClientSimulator();
+        clientSim = ClientSimulator.getInstance();
         c1 = new Client("Bob", "Sylvestre", Insurance.A, new ArrayList<Claim>());
         f1 = new Form(FormType.B, c1);
         f2 = new Form(FormType.B, c1);
