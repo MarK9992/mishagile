@@ -29,6 +29,22 @@ public class ClientManager {
 
 	// Methods
 
+	public void addClaimToClient(Client client, Claim newClaim) {
+		int index = indexClient(client.getFirstName(), client.getName());
+		if (index >= 0) {
+			clientList.set(index, client.addNewClaim(newClaim));
+		}
+	}
+
+	public int indexClient(String firstname, String name) {
+		for (Client cl : clientList) {
+			if (cl.match(firstname, name)) {
+				return clientList.indexOf(cl);
+			}
+		}
+		return -1;
+	}
+
 	public Client checkClient(String firstname, String name) {
 		for (Client cl : clientList) {
 			if (cl.match(firstname, name)) {

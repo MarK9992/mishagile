@@ -39,6 +39,11 @@ public class Client {
 		return false;
 	}
 
+	public Client addNewClaim(Claim newClaim) {
+		this.claimList.add(newClaim);
+		return this;
+	}
+
 	// Accessors
 
 	public String getFirstName() {

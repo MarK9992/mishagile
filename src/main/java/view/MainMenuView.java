@@ -338,9 +338,11 @@ public class MainMenuView extends View {
 			System.out.print("\nPlease enter a VALID cost: ");
 			damageCost = sc.nextLine();
 		}
-		claimManager.addClaim(new Claim(Integer.parseInt(carPrice), Integer
-				.parseInt(damageCost), carHistory, ClaimStatus.REGISTERED,
-				client, date));
+		Claim newClaim = new Claim(Integer.parseInt(carPrice),
+				Integer.parseInt(damageCost), carHistory,
+				ClaimStatus.REGISTERED, client, date);
+		claimManager.addClaim(newClaim);
+		cm.addClaimToClient(client, newClaim);
 	}
 
 }
