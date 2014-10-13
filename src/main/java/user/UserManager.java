@@ -8,34 +8,34 @@ import java.util.ArrayList;
 // TODO refactor singleton?
 public class UserManager {
 
-    // Attributs
+	// Attributs
 
-    private ArrayList<UserAccount> userList;
+	private ArrayList<UserAccount> userList;
 
-    // Constructeurs
+	// Constructeurs
 
-    public UserManager() {
-        this(new ArrayList<UserAccount>());
-    }
+	public UserManager() {
+		this(new ArrayList<UserAccount>());
+	}
 
-    public UserManager(ArrayList<UserAccount> userList) {
-        this.userList = userList;
-    }
+	public UserManager(ArrayList<UserAccount> userList) {
+		this.userList = userList;
+	}
 
-    // Méthode
+	// Méthode
 
-    public UserAccount login(String login, String password) {
-        for(UserAccount ua: userList) {
-            if(ua.match(login, password)) {
-                return ua;
-            }
-        }
-        return null;
-    }
+	public UserAccount login(String login, String password) {
+		for (UserAccount ua : userList) {
+			if (ua.match(login, password)) {
+				return ua;
+			}
+		}
+		return null;
+	}
 
-    // Accesseurs
+	// Accesseurs
 
-    public ArrayList<UserAccount> getUserList() {
-        return userList;
-    }
+	public ArrayList<UserAccount> getUserList() {
+		return userList;
+	}
 }

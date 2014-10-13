@@ -12,7 +12,6 @@ import java.util.Scanner;
 public class MainMenuView extends View {
 
     // Attributes
-    private Scanner sc;
     private UserAccount ua;
     private ClientManager cm;
 
@@ -127,7 +126,7 @@ public class MainMenuView extends View {
     private void menuCd() {
         System.out
                 .println("1. Check if client insured\n2. Search claim\n3. Send form to client\n0. Logout");
-        System.out.print("\nPlease choose an option:");
+        System.out.print("\nPlease choose an option: ");
         int option = sc.nextInt();
         sc.nextLine();
 

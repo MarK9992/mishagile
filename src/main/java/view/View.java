@@ -7,32 +7,32 @@ import java.util.Scanner;
  */
 public abstract class View {
 
-    // Attributes
+	// Attributes
 
-    protected Scanner sc;
+	protected Scanner sc;
 
-    // Constructors
+	// Constructors
 
-    /**
-     * Default constructor.
-     */
-    public View() {
-        sc = new Scanner(System.in);
-    }
+	/**
+	 * Default constructor.
+	 */
+	public View() {
+		sc = new Scanner(System.in);
+	}
 
-    // Methods
+	// Methods
 
-    /**
-     * Displays the view.
-     */
-    protected abstract void display();
+	/**
+	 * Displays the view.
+	 */
+	protected abstract void display();
 
-    /**
-     * Clears console.
-     */
-    protected void clear() {
-        for (int i = 0; i < 20; i++) {
-            System.out.println();
-        }
-    }
+	/**
+	 * Clears console.
+	 */
+	protected void clear() {
+		for (int i = 0; i < 20; i++) {
+			System.out.println();
+		}
+	}
 }
