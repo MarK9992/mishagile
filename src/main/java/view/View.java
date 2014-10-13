@@ -61,4 +61,26 @@ public abstract class View {
         }
         return option <= max;
     }
+
+    /**
+     * Catches a yes or no input from the user.
+     *
+     * @return true if yes, false otherwise
+     */
+    protected boolean getYesNo() {
+        do {
+            switch (sc.nextLine().charAt(0)) {
+                case 'Y':
+                    return true;
+                case 'y':
+                    return true;
+                case 'N':
+                    return false;
+                case 'n':
+                    return false;
+                default:
+                    System.out.print("Please answer correctly! (Y/N)");
+            }
+        } while(true);
+    }
 }
