@@ -15,22 +15,24 @@ public class Claim {
 	private ClaimStatus status;
 	private Client claimant;
 	private String date;
+    private Category category;
 
 	// Constructors
 
 	public Claim() {
 		this(0, 0, "previous history of accident", ClaimStatus.UNCHECKED,
-				new Client(), "01/01/2014");
+				new Client(), "01/01/2014", Category.undefined);
 	}
 
 	public Claim(int carPrice, int damageCost, String carHistory,
-			ClaimStatus status, Client claimant, String date) {
+			ClaimStatus status, Client claimant, String date, Category category) {
 		this.carPrice = carPrice;
 		this.damageCost = damageCost;
 		this.carHistory = carHistory;
 		this.status = status;
 		this.claimant = claimant;
 		this.date = date;
+        this.category = category;
 	}
 
 	// Accessors
@@ -54,6 +56,13 @@ public class Claim {
 	public Client getClaimant() {
 		return claimant;
 	}
+
+    /**
+     * Returns the category field.
+     *
+     * @return the category field
+     */
+    public Category getCategory() { return category; }
 
 	// Methods
 

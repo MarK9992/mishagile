@@ -1,5 +1,6 @@
 package view;
 
+import claim.Category;
 import claim.Claim;
 import claim.ClaimManager;
 import claim.ClaimStatus;
@@ -301,7 +302,7 @@ public class MainMenuView extends View {
 		}
 		Claim newClaim = new Claim(Integer.parseInt(carPrice),
 				Integer.parseInt(damageCost), carHistory,
-				ClaimStatus.REGISTERED, client, date);
+				ClaimStatus.REGISTERED, client, date, Category.undefined);
 		claimManager.addClaim(newClaim);
 		cm.addClaimToClient(client, newClaim);
 	}
