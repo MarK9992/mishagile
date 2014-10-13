@@ -3,6 +3,7 @@ package view;
 import java.util.ArrayList;
 
 import claim.Category;
+import claim.Decision;
 import user.UserAccount;
 import claim.Claim;
 import claim.ClaimManager;
@@ -28,7 +29,7 @@ public class SearchClaimView extends View {
 	}
 
 	protected void display() {
-        ArrayList<Claim> result= null;
+        ArrayList<Claim> classifiedClaims;
 
 		clear();
 		System.out
@@ -43,36 +44,65 @@ public class SearchClaimView extends View {
 
 		switch (Integer.parseInt(option)) {
             case 1:
-                result = claimantSearch();
+                claimantSearch();
                 break;
             case 2:
-                result = dateSearch();
+                dateSearch();
                 break;
 
             case 3:
-                result = claimantAndDateSearch();
+                claimantAndDateSearch();
                 break;
 		}
 
-        if(result != null && (ua.getRank() == UserRank.ACD || ua.getRank() == UserRank.BCD)) {
-            classifyClaim(result);
+        if(searchList != null && (ua.getRank() == UserRank.ACD || ua.getRank() == UserRank.BCD)) {
+            classifyClaim(searchList);
+            classifiedClaims = cm.lookForClassifiedClaims(searchList);
+            if(classifiedClaims != null) {
+                makeDecision(classifiedClaims);
+            }
         }
 	}
 
+    // Allows a user to make a decision about a claim.
+    private void makeDecision(ArrayList<Claim> claims) {
+        int n;
+        String decision;
 
-    //Allows a user to classify a claim.
+        System.out.print("Would you like to classify a claim? (Y/N) ");
+        if(getYesNo()) {
+            System.out.println("Here are the classified claims:");
+            printList(claims);
+            n = askNumber(0, claims.size(), "make a decision about");
+            if(n != 0) {
+                System.out.println("What decision you want to make about the claim (OK/NOK, 0 abort)");
+                decision = sc.nextLine();
+                while(!decision.equals("OK") && !decision.equals("NOK") && !decision.equals("0")) {
+                    System.out.println("Enter a valid decision! (OK/NOK, 0 abort)");
+                    decision = sc.nextLine();
+                }
+                if(!decision.equals("0")) {
+                    if(decision.equals("OK")) {
+                        cm.setClaimDecision(claims.get(n - 1), Decision.OK);
+                    }
+                    else {
+                        cm.setClaimDecision(claims.get(n - 1), Decision.NOK);
+                    }
+                }
+            }
+        }
+    }
+
+    // TODO grosse duplication dégueulasse
+
+    // Allows a user to classify a claim.
     private void classifyClaim(ArrayList<Claim> result) {
         String category;
         int n;
 
         System.out.print("Would you like to classify a claim? (Y/N) ");
         if(getYesNo()) {
-            System.out.print("Enter the number of the claim you want to classify (0 abort): ");
-            n = Integer.parseInt(sc.nextLine());
-            while(0 > n || n > result.size()) {
-                System.out.println("Enter a valid number!");
-                n = Integer.parseInt(sc.nextLine());
-            }
+            n = askNumber(0, result.size(), "classify");
             if(n != 0) {
                 System.out.println("How do you want to classify the claim (simple/complex, 0 abort)");
                 category = sc.nextLine();
@@ -92,42 +122,52 @@ public class SearchClaimView extends View {
         }
     }
 
-	private void printList() {
+    // Asks a user to give a number between the parameters for the specified action
+    private int askNumber(int a, int b, String action) {
+        int n;
+
+        System.out.print("Enter the number of the claim you want to " + action + " (0 abort): ");
+        n = Integer.parseInt(sc.nextLine());
+        while(a > n || n > b) {
+            System.out.println("Enter a valid number!");
+            n = Integer.parseInt(sc.nextLine());
+        }
+        return n;
+    }
+
+	private void printList(ArrayList<Claim> claims) {
 		int index = 1;
-		for (Claim cm : searchList) {
+		for (Claim cm : claims) {
 			System.out.println(index + ". " + cm.getDate() + " "
 					+ cm.getClaimant());
 		}
 	}
 
-	private ArrayList<Claim> claimantSearch() {
+	private void claimantSearch() {
         String[] names;
 
         clear();
         names = askClientNames();
 		searchList = cm.checkClaimByClient(names[0], names[1]);
-		printList();
+		printList(searchList);
 		printDetails();
-        return searchList;
 	}
 
-	private ArrayList<Claim> dateSearch() {
+	private void dateSearch() {
 		clear();
 		searchList = cm.checkClaimByDate(askDate());
-		printList();
+		printList(searchList);
 		printDetails();
-        return searchList;
 	}
 
-	private ArrayList<Claim> claimantAndDateSearch() {
+	private void claimantAndDateSearch() {
         String[] names;
 
         clear();
         names = askClientNames();
 		searchList = cm.checkClaimByClientAndDate(names[0], names[1], askDate());
-		printList();
+		printList(searchList);
 		printDetails();
-        return searchList;
 	}
 
 	private void printDetails() {
