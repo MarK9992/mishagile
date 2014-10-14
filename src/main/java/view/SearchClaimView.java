@@ -139,7 +139,7 @@ public class SearchClaimView extends View {
 		int index = 1;
 		for (Claim cm : claims) {
 			System.out.println(index + ". " + cm.getDate() + " "
-					+ cm.getClaimant());
+					+ cm.getClaimant().NamesToString());
 		}
 	}
 
