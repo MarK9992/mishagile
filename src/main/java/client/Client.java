@@ -44,6 +44,15 @@ public class Client {
 		return this;
 	}
 
+    /**
+     * Returns a string representation of the client's names.
+     *
+     * @return the names in a string
+     */
+    public String NamesToString() {
+        return firstName + " " + name;
+    }
+
 	// Accessors
 
 	public String getFirstName() {
@@ -92,10 +101,5 @@ public class Client {
 		result = 31 * result + (insurance != null ? insurance.hashCode() : 0);
 		result = 31 * result + claimList.hashCode();
 		return result;
-	}
-
-	@Override
-	public String toString() {
-		return firstName + " " + name;
 	}
 }

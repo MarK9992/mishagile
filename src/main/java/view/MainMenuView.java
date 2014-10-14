@@ -1,8 +1,6 @@
 package view;
 
-import claim.Claim;
-import claim.ClaimManager;
-import claim.ClaimStatus;
+import claim.*;
 import client.Client;
 import client.ClientManager;
 import communication.Form;
@@ -60,16 +58,6 @@ public class MainMenuView extends View {
 		}
 
 		mainMenuReturn();
-	}
-
-	public static boolean inputCheck(String input, int max) {
-		int option;
-		try {
-			option = Integer.parseInt(input);
-		} catch (NumberFormatException e) {
-			return false;
-		}
-		return option <= max;
 	}
 
 	private void printSharedMenu() {
@@ -241,17 +229,6 @@ public class MainMenuView extends View {
         }
 	}
 
-	// asks user to enter a name and a firstname and returns the inputs
-	private String[] askClientNames() {
-		String[] names = new String[2];
-
-		System.out.println("Enter client's name and firstname.\nname: ");
-		names[1] = sc.nextLine();
-		System.out.println("firstname");
-		names[0] = sc.nextLine();
-		return names;
-	}
-
 	private Client addClient() {
 		String[] names = askClientNames();
 
@@ -301,7 +278,7 @@ public class MainMenuView extends View {
 		}
 		Claim newClaim = new Claim(Integer.parseInt(carPrice),
 				Integer.parseInt(damageCost), carHistory,
-				ClaimStatus.REGISTERED, client, date);
+				ClaimStatus.REGISTERED, client, date, Category.undefined, Decision.undefined);
 		claimManager.addClaim(newClaim);
 		cm.addClaimToClient(client, newClaim);
 	}
