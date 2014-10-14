@@ -2,6 +2,7 @@ package view;
 
 import payment.PaymentManager;
 import user.UserAccount;
+import user.UserManager;
 import claim.Category;
 import claim.Claim;
 import claim.ClaimManager;
@@ -37,27 +38,22 @@ public class MainMenuView extends View {
 	// Methods
 	protected void display() {
 		clear();
-		System.out.println(ua.getRank());
 
 		switch (ua.getRank()) {
 
 		case ACD:
-			System.out.println("A");
 			menuAcd();
 			break;
 
 		case BCD:
-			System.out.println("B");
 			menuBcd();
 			break;
 
 		case CD:
-			System.out.println("C");
 			menuCd();
 			break;
 
 		case FIN:
-			System.out.println("F");
 			menuFin();
 			break;
 
@@ -68,7 +64,7 @@ public class MainMenuView extends View {
 
 	private void printSharedMenu() {
 		System.out
-				.println("1. Check if client insured\n2. Search claim\n3. Search client\n4. Create client\n5. Register claim\n0. Logout");
+				.println("0. Logout\n1. Check if client insured\n2. Search claim\n3. Search client\n4. Create client\n5. Register claim");
 	}
 
 	// TODO refactor?
@@ -106,7 +102,8 @@ public class MainMenuView extends View {
 			checkForm();
 			break;
 		case 0:
-			new LoginView();
+			new LoginView(new UserManager(), this.cm, this.claimManager,
+					this.paymentManager);
 		}
 	}
 
@@ -144,7 +141,8 @@ public class MainMenuView extends View {
 			checkForm();
 			break;
 		case 0:
-			new LoginView();
+			new LoginView(new UserManager(), this.cm, this.claimManager,
+					this.paymentManager);
 		}
 	}
 
@@ -175,7 +173,8 @@ public class MainMenuView extends View {
 			addClaim();
 			break;
 		case 0:
-			new LoginView();
+			new LoginView(new UserManager(), this.cm, this.claimManager,
+					this.paymentManager);
 		}
 	}
 
@@ -210,7 +209,8 @@ public class MainMenuView extends View {
 			new ProceedPaymentView(ua, paymentManager, claimManager);
 			break;
 		case 0:
-			new LoginView();
+			new LoginView(new UserManager(), this.cm, this.claimManager,
+					this.paymentManager);
 		}
 	}
 

@@ -24,7 +24,6 @@ public class ProceedPaymentView extends View {
 		this.ua = ua;
 		this.pm = pm;
 		this.cm = cm;
-		claimsToBePayedList = new ArrayList<Claim>();
 		display();
 	}
 
@@ -35,11 +34,13 @@ public class ProceedPaymentView extends View {
 		addToList();
 		printClaimList(this.claimsToBePayedList);
 
-		int choice = claimSelection();
-		PaymentMode mode = paymentModeSelection();
-		pm.setClaimStatusPayed(claimsToBePayedList.get(choice - 1));
+		if (this.claimsToBePayedList != null) {
+			int choice = claimSelection();
+			PaymentMode mode = paymentModeSelection();
+			pm.setClaimStatusPayed(claimsToBePayedList.get(choice - 1));
 
-		recordPayment(claimsToBePayedList.get(choice - 1), mode);
+			recordPayment(claimsToBePayedList.get(choice - 1), mode);
+		}
 	}
 
 	private void recordPayment(Claim cl, PaymentMode mode) {
