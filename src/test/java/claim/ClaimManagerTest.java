@@ -78,7 +78,9 @@ public class ClaimManagerTest {
 		cm.setClaimCategory(claim1, Category.complex);
 		cm.setClaimCategory(claim2, Category.simple);
 		assertEquals(Category.complex, claim1.getCategory());
+        assertEquals(ClaimStatus.CLASSIFIED, claim1.getStatus());
 		assertEquals(Category.simple, claim2.getCategory());
+        assertEquals(ClaimStatus.CLASSIFIED, claim2.getStatus());;
 		assertEquals(Category.undefined, cm1.getClaimList().get(0)
 				.getCategory());
 	}

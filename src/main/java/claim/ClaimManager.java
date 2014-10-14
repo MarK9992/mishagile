@@ -80,6 +80,9 @@ public class ClaimManager {
      */
     public void setClaimCategory(Claim claim, Category category) {
            claim.setCategory(category);
+           if(category != Category.undefined) {
+               claim.setStatus(ClaimStatus.CLASSIFIED);
+           }
     }
 
     /**
