@@ -120,7 +120,7 @@ public class Claim {
     @Override
 	public String toString() {
 		return "Car price: " + carPrice + "\nDamage cost: " + damageCost
-				+ "\nCar history: " + carHistory + "\nClaimant: " + claimant
+				+ "\nCar history: " + carHistory + "\nClaimant: " + claimant.namesToString()
 				+ "\nDate: " + date;
 	}
 

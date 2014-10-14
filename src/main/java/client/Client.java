@@ -49,7 +49,7 @@ public class Client {
      *
      * @return the names in a string
      */
-    public String NamesToString() {
+    public String namesToString() {
         return firstName + " " + name;
     }
 
@@ -99,7 +99,7 @@ public class Client {
 		int result = firstName.hashCode();
 		result = 31 * result + name.hashCode();
 		result = 31 * result + (insurance != null ? insurance.hashCode() : 0);
-		result = 31 * result + claimList.hashCode();
+		//result = 31 * result + claimList.hashCode();
 		return result;
 	}
 }
