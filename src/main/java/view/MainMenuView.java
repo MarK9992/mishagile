@@ -2,6 +2,7 @@ package view;
 
 import payment.PaymentManager;
 import user.UserAccount;
+import user.UserManager;
 import claim.Category;
 import claim.Claim;
 import claim.ClaimManager;
@@ -25,17 +26,13 @@ public class MainMenuView extends View {
 
 	// Constructors
 	public MainMenuView(UserAccount um, ClientManager cm,
-			ClaimManager claimManager) {
+			ClaimManager claimManager, PaymentManager pm) {
 		super();
 		this.ua = um;
 		this.cm = cm;
 		this.claimManager = claimManager;
-		this.paymentManager = paymentManager;
+		this.paymentManager = pm;
 		display();
-	}
-
-	public MainMenuView() {
-		this(new UserAccount(), new ClientManager(), new ClaimManager());
 	}
 
 	// Methods
@@ -69,7 +66,7 @@ public class MainMenuView extends View {
 
 	private void printSharedMenu() {
 		System.out
-				.println("1. Check if client insured\n2. Search claim\n3. Search client\n4. Create client\n5. Register claim\n0. Logout");
+				.println("0. Logout\n1. Check if client insured\n2. Search claim\n3. Search client\n4. Create client\n5. Register claim");
 	}
 
 	// TODO refactor?
@@ -107,7 +104,8 @@ public class MainMenuView extends View {
 			checkForm();
 			break;
 		case 0:
-			new LoginView();
+			new LoginView(new UserManager(), this.cm, this.claimManager,
+					this.paymentManager);
 		}
 	}
 
@@ -145,7 +143,8 @@ public class MainMenuView extends View {
 			checkForm();
 			break;
 		case 0:
-			new LoginView();
+			new LoginView(new UserManager(), this.cm, this.claimManager,
+					this.paymentManager);
 		}
 	}
 
@@ -176,7 +175,8 @@ public class MainMenuView extends View {
 			addClaim();
 			break;
 		case 0:
-			new LoginView();
+			new LoginView(new UserManager(), this.cm, this.claimManager,
+					this.paymentManager);
 		}
 	}
 
@@ -211,14 +211,16 @@ public class MainMenuView extends View {
 			new ProceedPaymentView(ua, paymentManager, claimManager);
 			break;
 		case 0:
-			new LoginView();
+			new LoginView(new UserManager(), this.cm, this.claimManager,
+					this.paymentManager);
 		}
 	}
 
 	private void mainMenuReturn() {
 		System.out.println("\n\nPress enter to get back to the main menu... ");
 		sc.nextLine();
-		new MainMenuView(this.ua, this.cm, this.claimManager);
+		new MainMenuView(this.ua, this.cm, this.claimManager,
+				this.paymentManager);
 	}
 
 	// asks user to enter a name and a firstname and checks if he's insured

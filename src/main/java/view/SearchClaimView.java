@@ -12,12 +12,12 @@ import user.UserRank;
 public class SearchClaimView extends SearchView<Claim> {
 
 	// Attributes
-	
+
 	private UserAccount ua;
 	private ClaimManager cm;
 
 	// Constructors
-	
+
 	public SearchClaimView(UserAccount um, ClaimManager cm) {
 		super();
 		this.ua = um;
@@ -72,7 +72,8 @@ public class SearchClaimView extends SearchView<Claim> {
 		int n;
 		String decision;
 
-		System.out.print("Would you like to classify a claim? (Y/N) ");
+		System.out
+				.print("Would you like to make a decision about a claim? (Y/N) ");
 		if (getYesNo()) {
 			System.out.println("Here are the classified claims:");
 			printClaimList(claims);

@@ -1,5 +1,6 @@
 package view;
 
+import payment.PaymentManager;
 import user.UserAccount;
 import user.UserManager;
 import claim.ClaimManager;
@@ -11,16 +12,33 @@ import client.ClientManager;
 public class LoginView extends View {
 
 	private UserManager um;
+	private ClientManager cm;
+	private ClaimManager claimManager;
+	private PaymentManager paymentManager;
 
-	// Constructor
-	public LoginView(UserManager um) {
+	// Constructors
+
+	public LoginView(UserManager um, ClientManager cm,
+			ClaimManager claimManager, PaymentManager pm) {
 		super();
 		this.um = um;
+		this.cm = cm;
+		this.claimManager = claimManager;
+		this.paymentManager = pm;
+		display();
+	}
+
+	public LoginView(UserManager um, ClientManager cm, ClaimManager claimManager) {
+		super();
+		this.um = um;
+		this.cm = cm;
+		this.claimManager = claimManager;
+		this.paymentManager = new PaymentManager(this.claimManager);
 		display();
 	}
 
 	public LoginView() {
-		this(new UserManager());
+		this(new UserManager(), new ClientManager(), new ClaimManager());
 	}
 
 	// Methods
@@ -45,7 +63,6 @@ public class LoginView extends View {
 			System.out
 					.println("LOGIN and/or PASSWORD incorrect. Please try again.\n");
 		}
-
-		new MainMenuView(ua, new ClientManager(), new ClaimManager());
+		new MainMenuView(ua, cm, claimManager, paymentManager);
 	}
 }
