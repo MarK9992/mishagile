@@ -82,7 +82,7 @@ public class SearchClientView extends View {
         int index = 1;
 
         for (Client client : clients) {
-            System.out.println(index + ". " + client.NamesToString() + " " + client.getInsurance());
+            System.out.println(index + ". " + client.namesToString() + " " + client.getInsurance());
         }
     }
 

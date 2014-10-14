@@ -16,17 +16,16 @@ public class Claim {
 	private Client claimant;
 	private String date;
     private Category category;
-    private Decision decision;
 
 	// Constructors
 
 	public Claim() {
 		this(0, 0, "previous history of accident", ClaimStatus.REGISTERED,
-				new Client(), "01/01/2014", Category.undefined, Decision.undefined);
+				new Client(), "01/01/2014", Category.undefined);
 	}
 
     public Claim(int carPrice, int damageCost, String carHistory,
-			ClaimStatus status, Client claimant, String date, Category category, Decision decision) {
+			ClaimStatus status, Client claimant, String date, Category category) {
 		this.carPrice = carPrice;
 		this.damageCost = damageCost;
 		this.carHistory = carHistory;
@@ -34,7 +33,6 @@ public class Claim {
 		this.claimant = claimant;
 		this.date = date;
         this.category = category;
-        this.decision = decision;
 	}
 
 	// Accessors
@@ -51,6 +49,11 @@ public class Claim {
 		return carHistory;
 	}
 
+    /**
+     * Returns the status of a claim.
+     *
+     * @return the status field
+     */
 	public ClaimStatus getStatus() {
 		return status;
 	}
@@ -66,15 +69,6 @@ public class Claim {
      */
     public Category getCategory() { return category; }
 
-    /**
-     * Returns the decision field.
-     *
-     * @return the decision field
-     */
-    public Decision getDecision() {
-        return decision;
-    }
-
     // Mutators
 
     /**
@@ -87,12 +81,12 @@ public class Claim {
     }
 
     /**
-     * Sets the decision.
+     * Sets the status of a claim.
      *
-     * @param decision the decision to apply
+     * @param status the status to apply
      */
-    void setDecision(Decision decision) {
-        this.decision = decision;
+    void setStatus(ClaimStatus status) {
+        this.status = status;
     }
 
 	// Methods
@@ -137,7 +131,6 @@ public class Claim {
         if (category != claim.category) return false;
         if (!claimant.equals(claim.claimant)) return false;
         if (!date.equals(claim.date)) return false;
-        if (decision != claim.decision) return false;
         if (status != claim.status) return false;
 
         return true;
@@ -152,7 +145,6 @@ public class Claim {
         result = 31 * result + claimant.hashCode();
         result = 31 * result + date.hashCode();
         result = 31 * result + category.hashCode();
-        result = 31 * result + decision.hashCode();
         return result;
     }
 }

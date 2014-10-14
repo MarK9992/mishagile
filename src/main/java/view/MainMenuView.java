@@ -286,7 +286,7 @@ public class MainMenuView extends View {
 		}
 		Claim newClaim = new Claim(Integer.parseInt(carPrice),
 				Integer.parseInt(damageCost), carHistory,
-				ClaimStatus.REGISTERED, client, date, Category.undefined, Decision.undefined);
+				ClaimStatus.REGISTERED, client, date, Category.undefined);
 		claimManager.addClaim(newClaim);
 		cm.addClaimToClient(client, newClaim);
 	}
