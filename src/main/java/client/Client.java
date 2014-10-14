@@ -102,4 +102,14 @@ public class Client {
 		result = 31 * result + claimList.hashCode();
 		return result;
 	}
+
+    @Override
+    public String toString() {
+        return "Client{" +
+                "firstName='" + firstName + '\'' +
+                ", name='" + name + '\'' +
+                ", insurance=" + insurance +
+                ", claimList=" + claimList +
+                '}';
+    }
 }

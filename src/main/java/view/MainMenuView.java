@@ -62,78 +62,86 @@ public class MainMenuView extends View {
 
 	private void printSharedMenu() {
 		System.out
-				.println("1. Check if client insured\n2. Search claim\n3. Send form to client\n4. Create client\n5. Register claim\n0. Logout");
+				.println("1. Check if client insured\n2. Search claim\n3. Search client\n4. Create client\n5. Register claim\n0. Logout");
 	}
 
 	// TODO refactor?
 	private void menuAcd() {
 		printSharedMenu();
+        System.out.println("6. Send a form to a client\n7. Check a form");
 		System.out.print("\nPlease choose an option:");
 		String option = sc.nextLine();
 
 		// TODO: Remplacer 4 par le nombre de choix
-		while (!inputCheck(option, 6)) {
+		while (!inputCheck(option, 7)) {
 			System.out.print("\nPlease choose a VALID option: ");
 			option = sc.nextLine();
 		}
 
 		switch (Integer.parseInt(option)) {
-		case 1:
-			checkClient();
-			break;
-		case 2:
-			new SearchClaimView(ua, claimManager);
-			break;
-		case 3:
-			sendForm();
-			break;
-		case 4:
-			addClient();
-			break;
-		case 5:
-			addClaim();
-			break;
-        case 6:
-            checkForm();
-            break;
-		case 0:
-			new LoginView();
+            case 1:
+                checkClient();
+                break;
+            case 2:
+                new SearchClaimView(ua, claimManager);
+                break;
+            case 3:
+                new SearchClientView();
+                break;
+            case 4:
+                addClient();
+                break;
+            case 5:
+                addClaim();
+                break;
+            case 6:
+                sendForm();
+                break;
+            case 7:
+                checkForm();
+                break;
+            case 0:
+                new LoginView();
 		}
 	}
 
 	private void menuBcd() {
 		printSharedMenu();
+        System.out.println("6. Send a form to a client\n7. Check a form");
 		System.out.print("\nPlease choose an option:");
 		String option = sc.nextLine();
 
 		// TODO: Remplacer 4 par le nombre de choix
-		while (!inputCheck(option, 6)) {
+		while (!inputCheck(option, 7)) {
 			System.out.print("\nPlease choose a VALID option: ");
 			option = sc.nextLine();
 		}
 
 		switch (Integer.parseInt(option)) {
-		case 1:
-			checkClient();
-			break;
-		case 2:
-			new SearchClaimView(ua, claimManager);
-			break;
-		case 3:
-			sendForm();
-			break;
-		case 4:
-			addClient();
-			break;
-		case 5:
-			addClaim();
-			break;
-        case 6:
-            checkForm();
-            break;
-		case 0:
-			new LoginView();
-		}
+            case 1:
+                checkClient();
+                break;
+            case 2:
+                new SearchClaimView(ua, claimManager);
+                break;
+            case 3:
+                new SearchClientView();
+                break;
+            case 4:
+                addClient();
+                break;
+            case 5:
+                addClaim();
+                break;
+            case 6:
+                sendForm();
+                break;
+            case 7:
+                checkForm();
+                break;
+            case 0:
+                new LoginView();
+            }
 	}
 
 	private void menuCd() {
@@ -148,23 +156,23 @@ public class MainMenuView extends View {
 		}
 
 		switch (Integer.parseInt(option)) {
-		case 1:
-			checkClient();
-			break;
-		case 2:
-			new SearchClaimView(ua, claimManager);
-			break;
-		case 3:
-			sendForm();
-			break;
-		case 4:
-			addClient();
-			break;
-		case 5:
-			addClaim();
-			break;
-		case 0:
-			new LoginView();
+            case 1:
+                checkClient();
+                break;
+            case 2:
+                new SearchClaimView(ua, claimManager);
+                break;
+            case 3:
+                new SearchClientView();
+                break;
+            case 4:
+                addClient();
+                break;
+            case 5:
+                addClaim();
+                break;
+            case 0:
+                new LoginView();
 		}
 	}
 
@@ -180,23 +188,23 @@ public class MainMenuView extends View {
 		}
 
 		switch (Integer.parseInt(option)) {
-		case 1:
-			checkClient();
-			break;
-		case 2:
-			new SearchClaimView(ua, claimManager);
-			break;
-		case 3:
-			sendForm();
-			break;
-		case 4:
-			addClient();
-			break;
-		case 5:
-			addClaim();
-			break;
-		case 0:
-			new LoginView();
+            case 1:
+                checkClient();
+                break;
+            case 2:
+                new SearchClaimView(ua, claimManager);
+                break;
+            case 3:
+                new SearchClientView();
+                break;
+            case 4:
+                addClient();
+                break;
+            case 5:
+                addClaim();
+                break;
+            case 0:
+                new LoginView();
 		}
 	}
 
