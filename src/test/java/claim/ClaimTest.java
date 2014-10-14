@@ -26,7 +26,7 @@ public class ClaimTest {
 				10,
 				5,
 				"09/09/1992 accident",
-				ClaimStatus.CHECKED,
+				ClaimStatus.REGISTERED,
 				new Client("Bob", "Agile", Insurance.D, new ArrayList<Claim>()),
 				"09/09/1992", Category.complex, Decision.NOK);
 	}
@@ -41,7 +41,7 @@ public class ClaimTest {
 		assertEquals(10, c1.getCarPrice());
 		assertEquals(5, c1.getDamageCost());
 		assertEquals("09/09/1992 accident", c1.getCarHistory());
-		assertEquals(ClaimStatus.CHECKED, c1.getStatus());
+		assertEquals(ClaimStatus.REGISTERED, c1.getStatus());
         assertEquals(Category.complex, c1.getCategory());
         assertEquals(Decision.NOK, c1.getDecision());
 	}
