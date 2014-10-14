@@ -113,6 +113,58 @@ public class ClientManager {
 		return true;
 	}
 
+    /**
+     * Search clients by their names.
+     *
+     * @param firstname client's firstname
+     * @param name client's name
+     * @return a list of matching clients
+     */
+    public ArrayList<Client> searchClient(String firstname, String name) {
+        ArrayList<Client> results = new ArrayList<Client>();
+
+        for(Client client: clientList) {
+            if(client.match(firstname, name)) {
+                results.add(client);
+            }
+        }
+        return results;
+    }
+
+    /**
+     * Search clients by their insurance.
+     *
+     * @param insurance client's insurance
+     * @return a list of matching clients
+     */
+    public ArrayList<Client> searchClient(Insurance insurance) {
+        ArrayList<Client> results = new ArrayList<Client>();
+
+        for(Client client: clientList) {
+            if(client.getInsurance() == insurance) {
+                results.add(client);
+            }
+        }
+        return results;
+    }
+
+    /**
+     * Search a client by a claim.
+     *
+     * @param claim the client's claim
+     * @return the matching client
+     */
+    public Client searchClient(Claim claim) {
+        for(Client client: clientList) {
+            for(Claim currentClaim: client.getClaimList()) {
+                if(currentClaim.equals(claim)) {
+                    return client;
+                }
+            }
+        }
+        return null;
+    }
+
 	// Accessors
 
 	public ArrayList<Client> getClientList() {
