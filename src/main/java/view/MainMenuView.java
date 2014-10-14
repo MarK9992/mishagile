@@ -25,38 +25,39 @@ public class MainMenuView extends View {
 
 	// Constructors
 	public MainMenuView(UserAccount um, ClientManager cm,
-			ClaimManager claimManager) {
+			ClaimManager claimManager, PaymentManager pm) {
 		super();
 		this.ua = um;
 		this.cm = cm;
 		this.claimManager = claimManager;
-		this.paymentManager = paymentManager;
+		this.paymentManager = pm;
 		display();
-	}
-
-	public MainMenuView() {
-		this(new UserAccount(), new ClientManager(), new ClaimManager());
 	}
 
 	// Methods
 	protected void display() {
 		clear();
+		System.out.println(ua.getRank());
 
 		switch (ua.getRank()) {
 
 		case ACD:
+			System.out.println("A");
 			menuAcd();
 			break;
 
 		case BCD:
+			System.out.println("B");
 			menuBcd();
 			break;
 
 		case CD:
+			System.out.println("C");
 			menuCd();
 			break;
 
 		case FIN:
+			System.out.println("F");
 			menuFin();
 			break;
 
@@ -216,7 +217,8 @@ public class MainMenuView extends View {
 	private void mainMenuReturn() {
 		System.out.println("\n\nPress enter to get back to the main menu... ");
 		sc.nextLine();
-		new MainMenuView(this.ua, this.cm, this.claimManager);
+		new MainMenuView(this.ua, this.cm, this.claimManager,
+				this.paymentManager);
 	}
 
 	// asks user to enter a name and a firstname and checks if he's insured

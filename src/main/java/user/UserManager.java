@@ -20,7 +20,10 @@ public class UserManager {
 
 	public UserManager(ArrayList<UserAccount> userList) {
 		this.userList = userList;
-		this.userList.add(new UserAccount());
+		this.userList.add(new UserAccount("acd", "acd", UserRank.ACD));
+		this.userList.add(new UserAccount("bcd", "bcd", UserRank.BCD));
+		this.userList.add(new UserAccount("cd", "cd", UserRank.CD));
+		this.userList.add(new UserAccount("fin", "fin", UserRank.FIN));
 	}
 
 	// Method

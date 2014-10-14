@@ -85,7 +85,7 @@ public class Claim {
      *
      * @param status the status to apply
      */
-    void setStatus(ClaimStatus status) {
+    public void setStatus(ClaimStatus status) {
         this.status = status;
     }
 
