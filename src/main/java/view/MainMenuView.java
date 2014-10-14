@@ -1,13 +1,16 @@
 package view;
 
-import claim.*;
+import payment.PaymentManager;
+import user.UserAccount;
+import claim.Category;
+import claim.Claim;
+import claim.ClaimManager;
+import claim.ClaimStatus;
 import client.Client;
 import client.ClientManager;
+
 import communication.Form;
 import communication.FormType;
-import user.UserAccount;
-
-import java.util.Scanner;
 
 /**
  * Created by root on 11/10/14.
@@ -18,6 +21,7 @@ public class MainMenuView extends View {
 	private UserAccount ua;
 	private ClientManager cm;
 	private ClaimManager claimManager;
+	private PaymentManager paymentManager;
 
 	// Constructors
 	public MainMenuView(UserAccount um, ClientManager cm,
@@ -26,6 +30,7 @@ public class MainMenuView extends View {
 		this.ua = um;
 		this.cm = cm;
 		this.claimManager = claimManager;
+		this.paymentManager = paymentManager;
 		display();
 	}
 
@@ -68,80 +73,78 @@ public class MainMenuView extends View {
 	// TODO refactor?
 	private void menuAcd() {
 		printSharedMenu();
-        System.out.println("6. Send a form to a client\n7. Check a form");
+		System.out.println("6. Send a form to a client\n7. Check a form");
 		System.out.print("\nPlease choose an option:");
 		String option = sc.nextLine();
 
-		// TODO: Remplacer 4 par le nombre de choix
 		while (!inputCheck(option, 7)) {
 			System.out.print("\nPlease choose a VALID option: ");
 			option = sc.nextLine();
 		}
 
 		switch (Integer.parseInt(option)) {
-            case 1:
-                checkClient();
-                break;
-            case 2:
-                new SearchClaimView(ua, claimManager);
-                break;
-            case 3:
-                new SearchClientView();
-                break;
-            case 4:
-                addClient();
-                break;
-            case 5:
-                addClaim();
-                break;
-            case 6:
-                sendForm();
-                break;
-            case 7:
-                checkForm();
-                break;
-            case 0:
-                new LoginView();
+		case 1:
+			checkClient();
+			break;
+		case 2:
+			new SearchClaimView(ua, claimManager);
+			break;
+		case 3:
+			new SearchClientView();
+			break;
+		case 4:
+			addClient();
+			break;
+		case 5:
+			addClaim();
+			break;
+		case 6:
+			sendForm();
+			break;
+		case 7:
+			checkForm();
+			break;
+		case 0:
+			new LoginView();
 		}
 	}
 
 	private void menuBcd() {
 		printSharedMenu();
-        System.out.println("6. Send a form to a client\n7. Check a form");
+		System.out.println("6. Send a form to a client\n7. Check a form");
 		System.out.print("\nPlease choose an option:");
 		String option = sc.nextLine();
 
-		// TODO: Remplacer 4 par le nombre de choix
 		while (!inputCheck(option, 7)) {
 			System.out.print("\nPlease choose a VALID option: ");
 			option = sc.nextLine();
 		}
 
 		switch (Integer.parseInt(option)) {
-            case 1:
-                checkClient();
-                break;
-            case 2:
-                new SearchClaimView(ua, claimManager);
-                break;
-            case 3:
-                new SearchClientView();
-                break;
-            case 4:
-                addClient();
-                break;
-            case 5:
-                addClaim();
-                break;
-            case 6:
-                sendForm();
-                break;
-            case 7:
-                checkForm();
-                break;
-            case 0:
-                new LoginView();
-            }
+		case 1:
+			checkClient();
+			break;
+		case 2:
+			new SearchClaimView(ua, claimManager);
+			break;
+		case 3:
+			new SearchClientView();
+			break;
+		case 4:
+			addClient();
+			break;
+		case 5:
+			addClaim();
+			break;
+		case 6:
+			sendForm();
+			break;
+		case 7:
+			checkForm();
+			break;
+		case 0:
+			new LoginView();
+		}
 	}
 
 	private void menuCd() {
@@ -149,62 +152,64 @@ public class MainMenuView extends View {
 		System.out.print("\nPlease choose an option:");
 		String option = sc.nextLine();
 
-		// TODO: Remplacer 4 par le nombre de choix
 		while (!inputCheck(option, 5)) {
 			System.out.print("\nPlease choose a VALID option: ");
 			option = sc.nextLine();
 		}
 
 		switch (Integer.parseInt(option)) {
-            case 1:
-                checkClient();
-                break;
-            case 2:
-                new SearchClaimView(ua, claimManager);
-                break;
-            case 3:
-                new SearchClientView();
-                break;
-            case 4:
-                addClient();
-                break;
-            case 5:
-                addClaim();
-                break;
-            case 0:
-                new LoginView();
+		case 1:
+			checkClient();
+			break;
+		case 2:
+			new SearchClaimView(ua, claimManager);
+			break;
+		case 3:
+			new SearchClientView();
+			break;
+		case 4:
+			addClient();
+			break;
+		case 5:
+			addClaim();
+			break;
+		case 0:
+			new LoginView();
 		}
 	}
 
 	private void menuFin() {
 		printSharedMenu();
+		System.out.println("6. Proceed payment");
 		System.out.print("\nPlease choose an option:");
 		String option = sc.nextLine();
 
-		// TODO: Remplacer 4 par le nombre de choix
-		while (!inputCheck(option, 5)) {
+		while (!inputCheck(option, 6)) {
 			System.out.print("\nPlease choose a VALID option: ");
 			option = sc.nextLine();
 		}
 
 		switch (Integer.parseInt(option)) {
-            case 1:
-                checkClient();
-                break;
-            case 2:
-                new SearchClaimView(ua, claimManager);
-                break;
-            case 3:
-                new SearchClientView();
-                break;
-            case 4:
-                addClient();
-                break;
-            case 5:
-                addClaim();
-                break;
-            case 0:
-                new LoginView();
+		case 1:
+			checkClient();
+			break;
+		case 2:
+			new SearchClaimView(ua, claimManager);
+			break;
+		case 3:
+			new SearchClientView();
+			break;
+		case 4:
+			addClient();
+			break;
+		case 5:
+			addClaim();
+			break;
+		case 6:
+			new ProceedPaymentView(ua, paymentManager, claimManager);
+			break;
+		case 0:
+			new LoginView();
 		}
 	}
 
@@ -228,13 +233,13 @@ public class MainMenuView extends View {
 	// sends a form to a given client
 	private void sendForm() {
 		String[] names = askClientNames();
-        FormType type = askFormType();
+		FormType type = askFormType();
 
-        if (cm.sendForm(names[0], names[1], type)) {
-            System.out.println("Sending successfull");
-        } else {
-            System.out.println("Error client does not exist.");
-        }
+		if (cm.sendForm(names[0], names[1], type)) {
+			System.out.println("Sending successfull");
+		} else {
+			System.out.println("Error client does not exist.");
+		}
 	}
 
 	private Client addClient() {
@@ -291,33 +296,32 @@ public class MainMenuView extends View {
 		cm.addClaimToClient(client, newClaim);
 	}
 
-    private void checkForm() {
-        String[] names = askClientNames();
-        Form form = cm.checkForm(names[0], names[1], askFormType());
+	private void checkForm() {
+		String[] names = askClientNames();
+		Form form = cm.checkForm(names[0], names[1], askFormType());
 
-        System.out.println(form);
-    }
+		System.out.println(form);
+	}
 
-    private FormType askFormType() {
-        System.out.println("What kind of form ? (A, B, or C)");
-        do {
-            switch (sc.nextLine().charAt(0)) {
-                case 'A':
-                    return FormType.A;
-                case 'a':
-                    return FormType.A;
-                case 'B':
-                    return FormType.B;
-                case 'b':
-                    return FormType.B;
-                case 'C':
-                    return FormType.C;
-                case 'c':
-                    return FormType.C;
-                default:
-                    System.out
-                            .println("Please enter a correct input. (A, B or C)");
-            }
-        } while (true);
-    }
+	private FormType askFormType() {
+		System.out.println("What kind of form ? (A, B, or C)");
+		do {
+			switch (sc.nextLine().charAt(0)) {
+			case 'A':
+				return FormType.A;
+			case 'a':
+				return FormType.A;
+			case 'B':
+				return FormType.B;
+			case 'b':
+				return FormType.B;
+			case 'C':
+				return FormType.C;
+			case 'c':
+				return FormType.C;
+			default:
+				System.out.println("Please enter a correct input. (A, B or C)");
+			}
+		} while (true);
+	}
 }

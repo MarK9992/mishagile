@@ -1,7 +1,9 @@
 package view;
 
+import claim.Claim;
 import client.Insurance;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -119,4 +121,13 @@ public abstract class View {
         System.out.print("Enter a date dd/mm/yyyy format: ");
         return sc.nextLine();
     }
+
+	protected void printClaimList(ArrayList<Claim> claims) {
+		int index = 1;
+		for (Claim cm : claims) {
+			System.out.println(index + ". " + cm.getDate() + " "
+					+ cm.getClaimant().namesToString() + " "
+					+ cm.getStatus().toString());
+		}
+	}
 }
