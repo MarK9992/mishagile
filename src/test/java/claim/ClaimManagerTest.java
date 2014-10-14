@@ -2,15 +2,13 @@ package claim;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import client.Client;
-import client.Insurance;
 
 /**
  * Created by root on 11/10/14.
@@ -52,6 +50,15 @@ public class ClaimManagerTest {
 				"01/01/2014"));
 		assertEquals(claimList, cm1.checkClaimByClientAndDate("firstname",
 				"name", "01/01/2014"));
+	}
+
+	@Test
+	public void testAddClaim() {
+		Claim claimAdd = new Claim();
+		assertEquals(0, cm.getClaimList().size());
+		cm.addClaim(claimAdd);
+		assertEquals(1, cm.getClaimList().size());
+		assertTrue(cm.getClaimList().contains(claimAdd));
 	}
 
 	@After
