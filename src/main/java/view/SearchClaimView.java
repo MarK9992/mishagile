@@ -12,11 +12,13 @@ import user.UserRank;
 public class SearchClaimView extends View {
 
 	// Attributes
+	
 	private UserAccount ua;
 	private ClaimManager cm;
 	private ArrayList<Claim> searchList;
 
 	// Constructors
+	
 	public SearchClaimView(UserAccount um, ClaimManager cm) {
 		super();
 		this.ua = um;
