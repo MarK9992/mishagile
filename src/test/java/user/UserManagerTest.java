@@ -18,19 +18,28 @@ import static org.junit.Assert.assertNull;
 public class UserManagerTest {
 
     private UserManager um, um1;
-    private ArrayList<UserAccount> ual;
+    private ArrayList<UserAccount> ual, ual2;
 
     @Before
     public void setUp() {
         um = new UserManager();
         ual = new ArrayList<UserAccount>();
+        ual2 = new ArrayList<UserAccount>();
         ual.add(new UserAccount());
+        ual.add(new UserAccount("acd", "acd", UserRank.ACD));
+        ual.add(new UserAccount("bcd", "bcd", UserRank.BCD));
+        ual.add(new UserAccount("cd", "cd", UserRank.CD));
+        ual.add(new UserAccount("fin", "fin", UserRank.FIN));
+        ual2.add(new UserAccount("acd", "acd", UserRank.ACD));
+        ual2.add(new UserAccount("bcd", "bcd", UserRank.BCD));
+        ual2.add(new UserAccount("cd", "cd", UserRank.CD));
+        ual2.add(new UserAccount("fin", "fin", UserRank.FIN));
         um1 = new UserManager(ual);
     }
 
     @Test
     public void UserManagerTest() {
-        assertEquals(new ArrayList<UserAccount>(), um.getUserList());
+        assertEquals(ual2, um.getUserList());
         assertEquals(ual, um1.getUserList());
     }
 
@@ -46,5 +55,6 @@ public class UserManagerTest {
         um = null;
         um1 = null;
         ual = null;
+        ual2 = null;
     }
 }

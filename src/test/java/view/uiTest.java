@@ -1,5 +1,6 @@
 package view;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import claim.Claim;
@@ -10,7 +11,7 @@ import claim.ClaimStatus;
  */
 public class uiTest {
 
-	@Test
+	@Ignore
 	public void uiTest() {
 		new LoginView();
 	}

@@ -47,27 +47,6 @@ public class ClientTest {
         assertTrue(!c1.match("Bob", "false"));
     }
 
-    @Test
-    public void equalsTest() {
-        assertTrue(c1.equals(c1));
-        assertTrue(!c1.equals(new Integer(1)));
-        assertTrue(!c1.equals(new Client("false", "Sylvestre", Insurance.B, clist)));
-        assertTrue(!c1.equals(new Client("Bob", "false", Insurance.B, clist)));
-        assertTrue(!c1.equals(new Client("Bob", "Sylvestre", null, clist)));
-        assertTrue(!c1.equals(new Client("Bob", "Sylvestre", Insurance.B, new ArrayList<Claim>())));
-        assertTrue(c.equals(new Client()));
-    }
-
-    @Test
-    public void hashCodeTest() {
-        int result = c1.getFirstName().hashCode();
-        result = 31 * result + c1.getName().hashCode();
-        result = 31 * result + (c1.getInsurance() != null ? c1.getInsurance().hashCode() : 0);
-        result = 31 * result + (c1.getClaimList() != null ? c1.getClaimList().hashCode() : 0);
-
-        assertEquals(result, c1.hashCode());
-    }
-
     @After
     public void tearDown() {
         c = null;
