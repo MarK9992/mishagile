@@ -86,6 +86,7 @@ public abstract class View {
         } while(true);
     }
 
+    // Asks the user to enter an insurance
     protected Insurance askInsurance() {
         System.out.println("What kind of insurance? (A, B, C, or D)");
 
@@ -111,5 +112,11 @@ public abstract class View {
                     System.out.print("Please answer correctly! (A, B, C, or D)");
             }
         } while(true);
+    }
+
+    // asks the user to enter a date
+    protected String askDate() {
+        System.out.print("Enter a date dd/mm/yyyy format: ");
+        return sc.nextLine();
     }
 }
