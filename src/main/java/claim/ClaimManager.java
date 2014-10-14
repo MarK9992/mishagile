@@ -72,46 +72,54 @@ public class ClaimManager {
 		claimList.add(claim);
 	}
 
-    /**
-     * Sets the category of a given claim.
-     *
-     * @param claim the claim to set its category
-     * @param category the category to apply to the claim
-     */
-    public void setClaimCategory(Claim claim, Category category) {
-           claim.setCategory(category);
-           if(category != Category.undefined) {
-               claim.setStatus(ClaimStatus.CLASSIFIED);
-           }
-    }
+	/**
+	 * Sets the category of a given claim.
+	 * 
+	 * @param claim
+	 *            the claim to set its category
+	 * @param category
+	 *            the category to apply to the claim
+	 */
+	public void setClaimCategory(Claim claim, Category category) {
+		claim.setCategory(category);
+		if (category != Category.undefined) {
+			claim.setStatus(ClaimStatus.CLASSIFIED);
+		}
+	}
 
-    /**
-     * Sets the status of a claim.
-     *
-     * @param claim the claim to set its decision
-     * @param status the status to apply to the claim
-     */
-    public void setClaimStatus(Claim claim, ClaimStatus status) {
-        claim.setStatus(status);
-    }
+	/**
+	 * Sets the status of a claim.
+	 * 
+	 * @param claim
+	 *            the claim to set its decision
+	 * @param status
+	 *            the status to apply to the claim
+	 */
+	public void setClaimStatus(Claim claim, ClaimStatus status) {
+		claim.setStatus(status);
+	}
 
-    /**
-     * Given a list of claims, filters the claims that are classified.
-     *
-     * @param claims the claim list
-     * @return the classified claims, null if none
-     */
-    public ArrayList<Claim> lookForClassifiedClaims(ArrayList<Claim> claims) {
-        ArrayList<Claim> classified = new ArrayList<Claim>();
+	/**
+	 * Given a list of claims, filters the claims according to the parameter.
+	 * 
+	 * @param claims
+	 *            the claim list
+	 * @param status
+	 *            the claim status
+	 * @return the classified claims, null if none
+	 */
+	public ArrayList<Claim> lookForSpecificClaims(ArrayList<Claim> claims,
+			ClaimStatus status) {
+		ArrayList<Claim> classified = new ArrayList<Claim>();
 
-        for(Claim claim: claims) {
-            if(claim.getStatus() != ClaimStatus.REGISTERED) {
-                classified.add(claim);
-            }
-        }
-        if (classified.size() == 0) {
-            return null;
-        }
-        return classified;
-    }
+		for (Claim claim : claims) {
+			if (claim.getStatus() == status) {
+				classified.add(claim);
+			}
+		}
+		if (classified.size() == 0) {
+			return null;
+		}
+		return classified;
+	}
 }

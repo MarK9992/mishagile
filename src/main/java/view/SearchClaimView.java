@@ -60,7 +60,7 @@ public class SearchClaimView extends View {
 		if (searchList != null
 				&& (ua.getRank() == UserRank.ACD || ua.getRank() == UserRank.BCD)) {
 			classifyClaim(searchList);
-			classifiedClaims = cm.lookForClassifiedClaims(searchList);
+			classifiedClaims = cm.lookForSpecificClaims(searchList,ClaimStatus.CLASSIFIED);
 			if (classifiedClaims != null) {
 				makeDecision(classifiedClaims);
 			}
@@ -75,7 +75,7 @@ public class SearchClaimView extends View {
 		System.out.print("Would you like to classify a claim? (Y/N) ");
 		if (getYesNo()) {
 			System.out.println("Here are the classified claims:");
-			printList(claims);
+			printClaimList(claims);
 			n = askNumber(0, claims.size(), "make a decision about");
 			if (n != 0) {
 				System.out
@@ -144,29 +144,20 @@ public class SearchClaimView extends View {
 		return n;
 	}
 
-	private void printList(ArrayList<Claim> claims) {
-		int index = 1;
-		for (Claim cm : claims) {
-			System.out.println(index + ". " + cm.getDate() + " "
-					+ cm.getClaimant().namesToString() + " "
-					+ cm.getStatus().toString());
-		}
-	}
-
 	private void claimantSearch() {
 		String[] names;
 
 		clear();
 		names = askClientNames();
 		searchList = cm.checkClaimByClient(names[0], names[1]);
-		printList(searchList);
+		printClaimList(searchList);
 		printDetails();
 	}
 
 	private void dateSearch() {
 		clear();
 		searchList = cm.checkClaimByDate(askDate());
-		printList(searchList);
+		printClaimList(searchList);
 		printDetails();
 	}
 
@@ -177,7 +168,7 @@ public class SearchClaimView extends View {
 		names = askClientNames();
 		searchList = cm
 				.checkClaimByClientAndDate(names[0], names[1], askDate());
-		printList(searchList);
+		printClaimList(searchList);
 		printDetails();
 	}
 

@@ -206,7 +206,7 @@ public class MainMenuView extends View {
 			addClaim();
 			break;
 		case 6:
-			new ProceedPaymentView(ua, paymentManager);
+			new ProceedPaymentView(ua, paymentManager, claimManager);
 			break;
 		case 0:
 			new LoginView();

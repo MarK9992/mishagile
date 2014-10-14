@@ -1,7 +1,9 @@
 package view;
 
+import claim.Claim;
 import client.Insurance;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -38,78 +40,88 @@ public abstract class View {
 		}
 	}
 
-    /**
-     *  Asks user to enter a name and a firstname and returns the inputs.
-     *
-      * @return a String[2] containing the firstname at index 0 and the name at index 1
-     */
-    protected String[] askClientNames() {
-        String[] names = new String[2];
+	/**
+	 * Asks user to enter a name and a firstname and returns the inputs.
+	 * 
+	 * @return a String[2] containing the firstname at index 0 and the name at
+	 *         index 1
+	 */
+	protected String[] askClientNames() {
+		String[] names = new String[2];
 
-        System.out.print("Enter client's name and firstname.\nname: ");
-        names[1] = sc.nextLine();
-        System.out.print("firstname");
-        names[0] = sc.nextLine();
-        return names;
-    }
+		System.out.print("Enter client's name and firstname.\nname: ");
+		names[1] = sc.nextLine();
+		System.out.print("firstname");
+		names[0] = sc.nextLine();
+		return names;
+	}
 
-    protected boolean inputCheck(String input, int max) {
-        int option;
+	protected void printClaimList(ArrayList<Claim> claims) {
+		int index = 1;
+		for (Claim cm : claims) {
+			System.out.println(index + ". " + cm.getDate() + " "
+					+ cm.getClaimant().namesToString() + " "
+					+ cm.getStatus().toString());
+		}
+	}
 
-        try {
-            option = Integer.parseInt(input);
-        } catch (NumberFormatException e) {
-            return false;
-        }
-        return option <= max;
-    }
+	protected boolean inputCheck(String input, int max) {
+		int option;
 
-    /**
-     * Catches a yes or no input from the user.
-     *
-     * @return true if yes, false otherwise
-     */
-    protected boolean getYesNo() {
-        do {
-            switch (sc.nextLine().charAt(0)) {
-                case 'Y':
-                    return true;
-                case 'y':
-                    return true;
-                case 'N':
-                    return false;
-                case 'n':
-                    return false;
-                default:
-                    System.out.print("Please answer correctly! (Y/N)");
-            }
-        } while(true);
-    }
+		try {
+			option = Integer.parseInt(input);
+		} catch (NumberFormatException e) {
+			return false;
+		}
+		return option <= max;
+	}
 
-    protected Insurance askInsurance() {
-        System.out.println("What kind of insurance? (A, B, C, or D)");
+	/**
+	 * Catches a yes or no input from the user.
+	 * 
+	 * @return true if yes, false otherwise
+	 */
+	protected boolean getYesNo() {
+		do {
+			switch (sc.nextLine().charAt(0)) {
+			case 'Y':
+				return true;
+			case 'y':
+				return true;
+			case 'N':
+				return false;
+			case 'n':
+				return false;
+			default:
+				System.out.print("Please answer correctly! (Y/N)");
+			}
+		} while (true);
+	}
 
-        do {
-            switch (sc.nextLine().charAt(0)) {
-                case 'A':
-                    return Insurance.A;
-                case 'a':
-                    return Insurance.A;
-                case 'B':
-                    return Insurance.B;
-                case 'b':
-                    return Insurance.B;
-                case 'C':
-                    return Insurance.C;
-                case 'c':
-                    return Insurance.C;
-                case 'D':
-                    return Insurance.D;
-                case 'd':
-                    return Insurance.D;
-                default:
-                    System.out.print("Please answer correctly! (A, B, C, or D)");
-            }
-        } while(true);
-    }
+	protected Insurance askInsurance() {
+		System.out.println("What kind of insurance? (A, B, C, or D)");
+
+		do {
+			switch (sc.nextLine().charAt(0)) {
+			case 'A':
+				return Insurance.A;
+			case 'a':
+				return Insurance.A;
+			case 'B':
+				return Insurance.B;
+			case 'b':
+				return Insurance.B;
+			case 'C':
+				return Insurance.C;
+			case 'c':
+				return Insurance.C;
+			case 'D':
+				return Insurance.D;
+			case 'd':
+				return Insurance.D;
+			default:
+				System.out.print("Please answer correctly! (A, B, C, or D)");
+			}
+		} while (true);
+	}
 }

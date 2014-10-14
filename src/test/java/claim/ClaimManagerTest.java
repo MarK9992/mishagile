@@ -28,9 +28,9 @@ public class ClaimManagerTest {
 		claim1 = new Claim();
 		claim2 = new Claim();
 		claim3 = new Claim();
-        claim3.setStatus(ClaimStatus.CLASSIFIED);
+		claim3.setStatus(ClaimStatus.CLASSIFIED);
 		claim4 = new Claim();
-        claim4.setStatus(ClaimStatus.OK);
+		claim4.setStatus(ClaimStatus.OK);
 		claimList1 = new ArrayList<Claim>();
 		claimList1.add(claim1);
 		claimList1.add(claim2);
@@ -78,33 +78,48 @@ public class ClaimManagerTest {
 		cm.setClaimCategory(claim1, Category.complex);
 		cm.setClaimCategory(claim2, Category.simple);
 		assertEquals(Category.complex, claim1.getCategory());
-        assertEquals(ClaimStatus.CLASSIFIED, claim1.getStatus());
+		assertEquals(ClaimStatus.CLASSIFIED, claim1.getStatus());
 		assertEquals(Category.simple, claim2.getCategory());
-        assertEquals(ClaimStatus.CLASSIFIED, claim2.getStatus());;
+		assertEquals(ClaimStatus.CLASSIFIED, claim2.getStatus());
+		;
 		assertEquals(Category.undefined, cm1.getClaimList().get(0)
 				.getCategory());
 	}
 
-    @Test
-    public void testSetClaimStatus() {
-        cm.setClaimStatus(claim1, ClaimStatus.NOK);
-        cm.setClaimStatus(claim2, ClaimStatus.PAYED);
-        assertEquals(ClaimStatus.NOK, claim1.getStatus());
-        assertEquals(ClaimStatus.PAYED, claim2.getStatus());
-        assertEquals(ClaimStatus.REGISTERED, cm1.getClaimList().get(0)
-                .getStatus());
-    }
+	@Test
+	public void testSetClaimStatus() {
+		cm.setClaimStatus(claim1, ClaimStatus.NOK);
+		cm.setClaimStatus(claim2, ClaimStatus.PAYED);
+		assertEquals(ClaimStatus.NOK, claim1.getStatus());
+		assertEquals(ClaimStatus.PAYED, claim2.getStatus());
+		assertEquals(ClaimStatus.REGISTERED, cm1.getClaimList().get(0)
+				.getStatus());
+	}
 
 	@Test
-	public void lookForClassifiedClaimsTest() {
-		ArrayList<Claim> classClaims = cm.lookForClassifiedClaims(claimList1);
-
+	public void lookForSpecificClaimsTest() {
+		ArrayList<Claim> classClaims = cm.lookForSpecificClaims(claimList1,
+				ClaimStatus.REGISTERED);
 		assertTrue(classClaims.size() == 2);
+		assertTrue(!classClaims.contains(claim3));
+		assertTrue(!classClaims.contains(claim4));
+		assertTrue(classClaims.contains(claim1));
+		assertTrue(classClaims.contains(claim2));
+
+		classClaims = cm.lookForSpecificClaims(claimList1,
+				ClaimStatus.CLASSIFIED);
+		assertTrue(classClaims.size() == 1);
 		assertTrue(classClaims.contains(claim3));
+		assertTrue(!classClaims.contains(claim4));
+		assertTrue(!classClaims.contains(claim1));
+		assertTrue(!classClaims.contains(claim2));
+
+		classClaims = cm.lookForSpecificClaims(claimList1, ClaimStatus.OK);
+		assertTrue(classClaims.size() == 1);
+		assertTrue(!classClaims.contains(claim3));
 		assertTrue(classClaims.contains(claim4));
 		assertTrue(!classClaims.contains(claim1));
 		assertTrue(!classClaims.contains(claim2));
-		assertNull(cm.lookForClassifiedClaims(claimList));
 	}
 
 	@After
