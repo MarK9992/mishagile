@@ -190,10 +190,4 @@ public class SearchClaimView extends View {
 
 		System.out.println(searchList.get(choiceInt - 1));
 	}
-
-	// asks the user to enter a date
-	private String askDate() {
-		System.out.print("Enter a date dd/mm/yyyy format: ");
-		return sc.nextLine();
-	}
 }

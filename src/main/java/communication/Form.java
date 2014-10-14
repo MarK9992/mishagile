@@ -79,11 +79,16 @@ public class Form extends HashMap<String, String> {
 
     /**
      * Returns a string representation of the object.
+     *
      * @return the string representation of the object
      */
-    /*public String toString() {
-        return "type: " + type + ", client: " + client + ", field values: " + values();
-    }*/
+    @Override
+    public String toString() {
+        return "Form{" +
+                "type=" + type +
+                ", client=" + client +
+                "} " + super.toString();
+    }
 
     // Accessors
 
