@@ -21,7 +21,7 @@ public class Claim {
 	// Constructors
 
 	public Claim() {
-		this(0, 0, "previous history of accident", ClaimStatus.UNCHECKED,
+		this(0, 0, "previous history of accident", ClaimStatus.REGISTERED,
 				new Client(), "01/01/2014", Category.undefined, Decision.undefined);
 	}
 
@@ -120,7 +120,7 @@ public class Claim {
     @Override
 	public String toString() {
 		return "Car price: " + carPrice + "\nDamage cost: " + damageCost
-				+ "\nCar history: " + carHistory + "\nClaimant: " + claimant
+				+ "\nCar history: " + carHistory + "\nClaimant: " + claimant.namesToString()
 				+ "\nDate: " + date;
 	}
 

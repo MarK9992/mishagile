@@ -55,15 +55,19 @@ public class ClientManager {
 		return null;
 	}
 
-    /**
-     * Send a form to a client.
-     * @param firstname the firstname of the client
-     * @param name the surname of the client
-     * @param formType the form type to send
-     * @return true if succesfull, false otherwise
-     */
-    public boolean sendForm(String firstname, String name, FormType formType) {
-        Client cl = checkClient(firstname, name);
+	/**
+	 * Send a form to a client.
+	 * 
+	 * @param firstname
+	 *            the firstname of the client
+	 * @param name
+	 *            the surname of the client
+	 * @param formType
+	 *            the form type to send
+	 * @return true if succesfull, false otherwise
+	 */
+	public boolean sendForm(String firstname, String name, FormType formType) {
+		Client cl = checkClient(firstname, name);
 
 		if (cl != null) {
 			formList.add(new Form(formType, cl));
@@ -72,23 +76,28 @@ public class ClientManager {
 		return false;
 	}
 
-    /**
-     * Retrieves a form send to the client.
-     * @param firstname the firstname of the client
-     * @param name the surname of the client
-     * @param formType the form type to send
-     * @return the form if exists, null otherwise
-     */
-    public Form checkForm(String firstname, String name, FormType formType) {
-        for(Form f: formList) {
-            if(f.getType() == formType && f.getClient().match(firstname, name)) {
-                ClientSimulator.getInstance().fillForm(f, Math.random()*ClientSimulator.RANGE);
-                formList.remove(f);
-                return f;
-            }
-        }
-        return null;
-    }
+	/**
+	 * Retrieves a form send to the client.
+	 * 
+	 * @param firstname
+	 *            the firstname of the client
+	 * @param name
+	 *            the surname of the client
+	 * @param formType
+	 *            the form type to send
+	 * @return the form if exists, null otherwise
+	 */
+	public Form checkForm(String firstname, String name, FormType formType) {
+		for (Form f : formList) {
+			if (f.getType() == formType && f.getClient().match(firstname, name)) {
+				ClientSimulator.getInstance().fillForm(f,
+						Math.random() * ClientSimulator.RANGE);
+				formList.remove(f);
+				return f;
+			}
+		}
+		return null;
+	}
 
 	public boolean addClient(String firstname, String name, char insurance) {
 		Insurance finalInsurance;

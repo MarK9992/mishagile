@@ -7,8 +7,8 @@ import org.junit.Test;
  */
 public class uiTest {
 
-    @Test
-    public void uiTest() {
-        new LoginView();
-    }
+	@Test
+	public void uiTest() {
+		new LoginView();
+	}
 }
