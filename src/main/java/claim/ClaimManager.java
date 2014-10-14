@@ -80,16 +80,19 @@ public class ClaimManager {
      */
     public void setClaimCategory(Claim claim, Category category) {
            claim.setCategory(category);
+           if(category != Category.undefined) {
+               claim.setStatus(ClaimStatus.CLASSIFIED);
+           }
     }
 
     /**
-     * Sets the decision about a claim.
+     * Sets the status of a claim.
      *
      * @param claim the claim to set its decision
-     * @param decision the decision to apply to the claim
+     * @param status the status to apply to the claim
      */
-    public void setClaimDecision(Claim claim, Decision decision) {
-        claim.setDecision(decision);
+    public void setClaimStatus(Claim claim, ClaimStatus status) {
+        claim.setStatus(status);
     }
 
     /**
@@ -102,7 +105,7 @@ public class ClaimManager {
         ArrayList<Claim> classified = new ArrayList<Claim>();
 
         for(Claim claim: claims) {
-            if(claim.getDecision() != Decision.undefined) {
+            if(claim.getStatus() != ClaimStatus.REGISTERED) {
                 classified.add(claim);
             }
         }

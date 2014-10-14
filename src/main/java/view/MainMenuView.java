@@ -6,7 +6,6 @@ import claim.Category;
 import claim.Claim;
 import claim.ClaimManager;
 import claim.ClaimStatus;
-import claim.Decision;
 import client.Client;
 import client.ClientManager;
 
@@ -68,16 +67,17 @@ public class MainMenuView extends View {
 
 	private void printSharedMenu() {
 		System.out
-				.println("1. Check if client insured\n2. Search claim\n3. Send form to client\n4. Create client\n5. Register claim\n0. Logout");
+				.println("1. Check if client insured\n2. Search claim\n3. Search client\n4. Create client\n5. Register claim\n0. Logout");
 	}
 
 	// TODO refactor?
 	private void menuAcd() {
 		printSharedMenu();
+		System.out.println("6. Send a form to a client\n7. Check a form");
 		System.out.print("\nPlease choose an option:");
 		String option = sc.nextLine();
 
-		while (!inputCheck(option, 6)) {
+		while (!inputCheck(option, 7)) {
 			System.out.print("\nPlease choose a VALID option: ");
 			option = sc.nextLine();
 		}
@@ -90,7 +90,7 @@ public class MainMenuView extends View {
 			new SearchClaimView(ua, claimManager);
 			break;
 		case 3:
-			sendForm();
+			new SearchClientView();
 			break;
 		case 4:
 			addClient();
@@ -99,6 +99,9 @@ public class MainMenuView extends View {
 			addClaim();
 			break;
 		case 6:
+			sendForm();
+			break;
+		case 7:
 			checkForm();
 			break;
 		case 0:
@@ -108,10 +111,11 @@ public class MainMenuView extends View {
 
 	private void menuBcd() {
 		printSharedMenu();
+		System.out.println("6. Send a form to a client\n7. Check a form");
 		System.out.print("\nPlease choose an option:");
 		String option = sc.nextLine();
 
-		while (!inputCheck(option, 6)) {
+		while (!inputCheck(option, 7)) {
 			System.out.print("\nPlease choose a VALID option: ");
 			option = sc.nextLine();
 		}
@@ -124,7 +128,7 @@ public class MainMenuView extends View {
 			new SearchClaimView(ua, claimManager);
 			break;
 		case 3:
-			sendForm();
+			new SearchClientView();
 			break;
 		case 4:
 			addClient();
@@ -133,6 +137,9 @@ public class MainMenuView extends View {
 			addClaim();
 			break;
 		case 6:
+			sendForm();
+			break;
+		case 7:
 			checkForm();
 			break;
 		case 0:
@@ -158,7 +165,7 @@ public class MainMenuView extends View {
 			new SearchClaimView(ua, claimManager);
 			break;
 		case 3:
-			sendForm();
+			new SearchClientView();
 			break;
 		case 4:
 			addClient();
@@ -190,7 +197,7 @@ public class MainMenuView extends View {
 			new SearchClaimView(ua, claimManager);
 			break;
 		case 3:
-			sendForm();
+			new SearchClientView();
 			break;
 		case 4:
 			addClient();
@@ -284,8 +291,7 @@ public class MainMenuView extends View {
 		}
 		Claim newClaim = new Claim(Integer.parseInt(carPrice),
 				Integer.parseInt(damageCost), carHistory,
-				ClaimStatus.REGISTERED, client, date, Category.undefined,
-				Decision.undefined);
+				ClaimStatus.REGISTERED, client, date, Category.undefined);
 		claimManager.addClaim(newClaim);
 		cm.addClaimToClient(client, newClaim);
 	}

@@ -1,5 +1,7 @@
 package view;
 
+import client.Insurance;
+
 import java.util.Scanner;
 
 /**
@@ -80,6 +82,33 @@ public abstract class View {
                     return false;
                 default:
                     System.out.print("Please answer correctly! (Y/N)");
+            }
+        } while(true);
+    }
+
+    protected Insurance askInsurance() {
+        System.out.println("What kind of insurance? (A, B, C, or D)");
+
+        do {
+            switch (sc.nextLine().charAt(0)) {
+                case 'A':
+                    return Insurance.A;
+                case 'a':
+                    return Insurance.A;
+                case 'B':
+                    return Insurance.B;
+                case 'b':
+                    return Insurance.B;
+                case 'C':
+                    return Insurance.C;
+                case 'c':
+                    return Insurance.C;
+                case 'D':
+                    return Insurance.D;
+                case 'd':
+                    return Insurance.D;
+                default:
+                    System.out.print("Please answer correctly! (A, B, C, or D)");
             }
         } while(true);
     }

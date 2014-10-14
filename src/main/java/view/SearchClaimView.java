@@ -3,7 +3,7 @@ package view;
 import java.util.ArrayList;
 
 import claim.Category;
-import claim.Decision;
+import claim.ClaimStatus;
 import user.UserAccount;
 import claim.Claim;
 import claim.ClaimManager;
@@ -89,9 +89,9 @@ public class SearchClaimView extends View {
 				}
 				if (!decision.equals("0")) {
 					if (decision.equals("OK")) {
-						cm.setClaimDecision(claims.get(n - 1), Decision.OK);
+						cm.setClaimStatus(claims.get(n - 1), ClaimStatus.OK);
 					} else {
-						cm.setClaimDecision(claims.get(n - 1), Decision.NOK);
+						cm.setClaimStatus(claims.get(n - 1), ClaimStatus.NOK);
 					}
 				}
 			}
