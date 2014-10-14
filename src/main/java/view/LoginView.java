@@ -34,6 +34,7 @@ public class LoginView extends View {
 		return sc.nextLine();
 	}
 
+    @Override
 	public void display() {
 		System.out
 				.println("Welcome to INSERT METAPHOR\n\nPlease enter your login and password.\n");

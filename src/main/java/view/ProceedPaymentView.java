@@ -27,6 +27,7 @@ public class ProceedPaymentView extends View {
 		display();
 	}
 
+    @Override
 	protected void display() {
 		clear();
 		addToList();

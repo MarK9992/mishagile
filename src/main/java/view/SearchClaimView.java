@@ -9,13 +9,12 @@ import claim.Claim;
 import claim.ClaimManager;
 import user.UserRank;
 
-public class SearchClaimView extends View {
+public class SearchClaimView extends SearchView<Claim> {
 
 	// Attributes
 	
 	private UserAccount ua;
 	private ClaimManager cm;
-	private ArrayList<Claim> searchList;
 
 	// Constructors
 	
@@ -30,6 +29,7 @@ public class SearchClaimView extends View {
 		this(new UserAccount(), new ClaimManager());
 	}
 
+    @Override
 	protected void display() {
 		ArrayList<Claim> classifiedClaims;
 
@@ -57,10 +57,10 @@ public class SearchClaimView extends View {
 			break;
 		}
 
-		if (searchList != null
+		if (results != null
 				&& (ua.getRank() == UserRank.ACD || ua.getRank() == UserRank.BCD)) {
-			classifyClaim(searchList);
-			classifiedClaims = cm.lookForSpecificClaims(searchList,ClaimStatus.CLASSIFIED);
+			classifyClaim(results);
+			classifiedClaims = cm.lookForSpecificClaims(results,ClaimStatus.CLASSIFIED);
 			if (classifiedClaims != null) {
 				makeDecision(classifiedClaims);
 			}
@@ -149,15 +149,15 @@ public class SearchClaimView extends View {
 
 		clear();
 		names = askClientNames();
-		searchList = cm.checkClaimByClient(names[0], names[1]);
-		printClaimList(searchList);
+		results = cm.checkClaimByClient(names[0], names[1]);
+		printClaimList(results);
 		printDetails();
 	}
 
 	private void dateSearch() {
 		clear();
-		searchList = cm.checkClaimByDate(askDate());
-		printClaimList(searchList);
+		results = cm.checkClaimByDate(askDate());
+		printClaimList(results);
 		printDetails();
 	}
 
@@ -166,18 +166,19 @@ public class SearchClaimView extends View {
 
 		clear();
 		names = askClientNames();
-		searchList = cm
+		results = cm
 				.checkClaimByClientAndDate(names[0], names[1], askDate());
-		printClaimList(searchList);
+		printClaimList(results);
 		printDetails();
 	}
 
-	private void printDetails() {
+    @Override
+	protected void printDetails() {
 		System.out
 				.print("\nEnter the index of the claim you want to see detailed: ");
 		String choice = sc.nextLine();
 
-		while (!inputCheck(choice, searchList.size())) {
+		while (!inputCheck(choice, results.size())) {
 			System.out.print("\nPlease choose a VALID index: ");
 			choice = sc.nextLine();
 		}
@@ -188,6 +189,6 @@ public class SearchClaimView extends View {
 			choiceInt = Integer.parseInt(choice);
 		}
 
-		System.out.println(searchList.get(choiceInt - 1));
+		System.out.println(results.get(choiceInt - 1));
 	}
 }

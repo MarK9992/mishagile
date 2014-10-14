@@ -39,6 +39,8 @@ public class MainMenuView extends View {
 	}
 
 	// Methods
+
+    @Override
 	protected void display() {
 		clear();
 
@@ -90,7 +92,7 @@ public class MainMenuView extends View {
 			new SearchClaimView(ua, claimManager);
 			break;
 		case 3:
-			new SearchClientView();
+			new SearchClientView(cm);
 			break;
 		case 4:
 			addClient();

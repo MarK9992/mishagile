@@ -10,12 +10,11 @@ import java.util.ArrayList;
  * 
  * Created by marc on 14/10/14.
  */
-public class SearchClientView extends View {
+public class SearchClientView extends SearchView<Client> {
 
 	// Attributes
 
 	private ClientManager clientManager;
-	private ArrayList<Client> results;
 
 	// Constructors
 
@@ -88,8 +87,8 @@ public class SearchClientView extends View {
 		}
 	}
 
-	// Prints the details of an entry of a resulting list
-	private void printDetails() {
+    @Override
+	protected void printDetails() {
 		int choiceInt;
 
 		System.out
