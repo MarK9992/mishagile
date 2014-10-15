@@ -30,4 +30,14 @@ public class PaymentManager {
 		cm.setClaimStatus(cl, ClaimStatus.PAYED);
 	}
 
+	// Accessors
+
+	public ArrayList<Payment> getPaymentsList() {
+		return paymentsList;
+	}
+
+	public ClaimManager getCm() {
+		return cm;
+	}
+
 }
