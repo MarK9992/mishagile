@@ -1,16 +1,18 @@
 package claim;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
 import java.util.ArrayList;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
-import claim.Claim;
 import client.Client;
 import client.Insurance;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 /**
  * Created by root on 11/10/14.
@@ -31,17 +33,23 @@ public class ClaimTest {
 				"09/09/1992", Category.complex);
 	}
 
+	@Ignore
+	@Test
+	public void testGetDate() {
+		fail("Not yet implemented"); // TODO
+	}
+
 	@Test
 	public void testClaim() {
 		assertEquals(0, c.getCarPrice());
 		assertEquals(0, c.getDamageCost());
 		assertEquals("previous history of accident", c.getCarHistory());
-        assertEquals(Category.undefined, c.getCategory());
+		assertEquals(Category.undefined, c.getCategory());
 		assertEquals(10, c1.getCarPrice());
 		assertEquals(5, c1.getDamageCost());
 		assertEquals("09/09/1992 accident", c1.getCarHistory());
 		assertEquals(ClaimStatus.REGISTERED, c1.getStatus());
-        assertEquals(Category.complex, c1.getCategory());
+		assertEquals(Category.complex, c1.getCategory());
 	}
 
 	@Test
