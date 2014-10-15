@@ -84,7 +84,7 @@ public class MainMenuView extends View {
                 checkClient();
                 break;
             case 2:
-                new SearchClaimView(ua, claimManager);
+                new SearchClaimView(ua, claimManager, ClaimAction.UNDEFINED);
                 break;
             case 3:
                 new SearchClientView(cm);
@@ -105,10 +105,10 @@ public class MainMenuView extends View {
                 checkForm();
                 break;
             case 9:
-                new SearchClaimView(ua, claimManager);
+                new SearchClaimView(ua, claimManager, ClaimAction.CLASSIFY);
                 break;
             case 10:
-                new SearchClaimView(ua, claimManager);
+                new SearchClaimView(ua, claimManager, ClaimAction.MAKEDECISION);
                 break;
             case 0:
                 new LoginView(new UserManager(), this.cm, this.claimManager,
@@ -125,7 +125,7 @@ public class MainMenuView extends View {
 			checkClient();
 			break;
 		case 2:
-			new SearchClaimView(ua, claimManager);
+			new SearchClaimView(ua, claimManager, ClaimAction.UNDEFINED);
 			break;
 		case 3:
 			new SearchClientView();
@@ -154,7 +154,7 @@ public class MainMenuView extends View {
 			checkClient();
 			break;
 		case 2:
-			new SearchClaimView(ua, claimManager);
+			new SearchClaimView(ua, claimManager, ClaimAction.UNDEFINED);
 			break;
 		case 3:
 			new SearchClientView();
@@ -174,7 +174,7 @@ public class MainMenuView extends View {
     // Allows the user to send a letter to a client about his claim's status
     private void sendLetter() {
         System.out.println("First find the claim you want to send a letter about.");
-        new SearchClaimView(ua, claimManager);
+        new SearchClaimView(ua, claimManager, ClaimAction.SENDLETTER);
     }
 
 	private void mainMenuReturn() {

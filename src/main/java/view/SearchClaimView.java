@@ -15,23 +15,25 @@ public class SearchClaimView extends SearchView<Claim> {
 
 	private UserAccount ua;
 	private ClaimManager cm;
+    private ClaimAction action;
 
 	// Constructors
 
-	public SearchClaimView(UserAccount um, ClaimManager cm) {
+	public SearchClaimView(UserAccount um, ClaimManager cm, ClaimAction action) {
 		super();
 		this.ua = um;
 		this.cm = cm;
+        this.action = action;
 		display();
 	}
 
 	public SearchClaimView() {
-		this(new UserAccount(), new ClaimManager());
+		this(new UserAccount(), new ClaimManager(), ClaimAction.UNDEFINED);
 	}
 
     @Override
 	protected void display() {
-		ArrayList<Claim> classifiedClaims;
+		ArrayList<Claim> classifiedClaims, decidedClaims;
 
 		clear();
 		System.out
@@ -44,21 +46,42 @@ public class SearchClaimView extends SearchView<Claim> {
 		case 2:
 			dateSearch();
 			break;
-
 		case 3:
 			claimantAndDateSearch();
 			break;
 		}
 
-		if (results != null
-				&& (ua.getRank() == UserRank.ACD || ua.getRank() == UserRank.BCD)) {
-			classifyClaim(results);
-			classifiedClaims = cm.lookForSpecificClaims(results,ClaimStatus.CLASSIFIED);
-			if (classifiedClaims != null) {
-				makeDecision(classifiedClaims);
-			}
+		if (results != null) {
+		    if (ua.getRank() == UserRank.ACD || ua.getRank() == UserRank.BCD) {
+                if(action == ClaimAction.CLASSIFY) {
+                    classifyClaim(results);
+                }
+                else if(action == ClaimAction.MAKEDECISION) {
+                    classifiedClaims = cm.lookForSpecificClaims(results, ClaimStatus.CLASSIFIED);
+                    if (classifiedClaims != null) {
+                        makeDecision(classifiedClaims);
+                    } else {
+                        System.out.println("No classified claims were found.");
+                    }
+                }
+            }
+            if(ua.getRank() == UserRank.CD && action == ClaimAction.SENDLETTER) {
+                decidedClaims = cm.lookForSpecificClaims(results, ClaimStatus.OK);
+                decidedClaims.addAll(cm.lookForSpecificClaims(results, ClaimStatus.NOK));
+                if(decidedClaims != null) {
+                    sendLetter();
+                }
+                else {
+                    System.out.println("No claims which a decision was made about were found.");
+                }
+            }
 		}
 	}
+
+    // Allows the user to send a letter about a claim
+    private void sendLetter() {
+
+    }
 
 	// Allows a user to make a decision about a claim.
 	private void makeDecision(ArrayList<Claim> claims) {
