@@ -84,4 +84,9 @@ public class Payment {
     public PaymentMode getPayment() {
 	return payment;
     }
+
+    @Override
+    public String toString() {
+	return claimHandled.toString();
+    }
 }
