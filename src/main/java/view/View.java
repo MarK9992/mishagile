@@ -189,4 +189,13 @@ public abstract class View {
             }
         } while (true);
     }
+
+    protected boolean isInt(String input) {
+        try {
+            Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+        return true;
+    }
 }

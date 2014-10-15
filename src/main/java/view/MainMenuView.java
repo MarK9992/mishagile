@@ -216,15 +216,6 @@ public class MainMenuView extends View {
 		return cm.checkClient(names[0], names[1]);
 	}
 
-	private boolean isInt(String input) {
-		try {
-			int test = Integer.parseInt(input);
-		} catch (NumberFormatException e) {
-			return false;
-		}
-		return true;
-	}
-
 	private void addClaim() {
 		Client client = addClient();
 		String date, carHistory, carPrice, damageCost;
