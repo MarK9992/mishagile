@@ -39,8 +39,7 @@ public class ClientManagerTest {
 		cm1 = new ClientManager(clientList, formList);
 		form = new Form();
 		cl1 = new Client("Bob", "Sinclar", Insurance.D, new ArrayList<Claim>());
-		cl2 = new Client("Pierre", "Ménès", Insurance.A,
-				new ArrayList<Claim>());
+		cl2 = new Client("Pierre", "Menes", Insurance.A, new ArrayList<Claim>());
 		claim = new Claim();
 		cl2.getClaimList().add(claim);
 		list = new ArrayList<Client>();
@@ -58,22 +57,27 @@ public class ClientManagerTest {
 		assertTrue(results.contains(cl1));
 	}
 
-	@Ignore
 	@Test
 	public void testAddClaimToClient() {
-		fail("Not yet implemented"); // TODO
+		assertEquals(0, cm2.getClientList().get(0).getClaimList().size());
+		cm2.addClaimToClient(cm2.getClientList().get(0), new Claim());
+		assertEquals(1, cm2.getClientList().get(0).getClaimList().size());
+		assertEquals(new Claim(), cm2.getClientList().get(0).getClaimList()
+				.get(0));
 	}
 
-	@Ignore
 	@Test
 	public void testIndexClient() {
-		fail("Not yet implemented"); // TODO
+		assertEquals(1, cm2.indexClient("Pierre", "Menes"));
 	}
 
-	@Ignore
 	@Test
 	public void testAddClient() {
-		fail("Not yet implemented"); // TODO
+		assertEquals(0, cm.getClientList().size());
+		cm.addClient("Yassine", "Tijani", 'A');
+		assertEquals(1, cm.getClientList().size());
+		assertEquals(new Client("Yassine", "Tijani", Insurance.A,
+				new ArrayList<Claim>()), cm.getClientList().get(0));
 	}
 
 	@Test

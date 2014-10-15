@@ -29,16 +29,17 @@ public class ClientTest {
 		c1 = new Client("Bob", "Sylvestre", Insurance.B, clist);
 	}
 
-	@Ignore
 	@Test
 	public void testAddNewClaim() {
-		fail("Not yet implemented"); // TODO
+		assertEquals(0, c.getClaimList().size());
+		c.addNewClaim(new Claim());
+		assertEquals(1, c.getClaimList().size());
+		assertEquals(new Claim(), c.getClaimList().get(0));
 	}
 
-	@Ignore
 	@Test
 	public void testNamesToString() {
-		fail("Not yet implemented"); // TODO
+		assertEquals("Bob Sylvestre", c1.namesToString());
 	}
 
 	@Test
