@@ -24,6 +24,10 @@ public class MainMenuView extends View {
 	private ClaimManager claimManager;
 	private PaymentManager paymentManager;
 
+    private static int ABCDOPTIONSNUMBER = 9;
+    private static int CDOPTIONSNUMBER = 5;
+    private static int FINOPTIONSNUMBER = 5;
+
 	// Constructors
 	public MainMenuView(UserAccount um, ClientManager cm,
 			ClaimManager claimManager, PaymentManager pm) {
@@ -44,11 +48,11 @@ public class MainMenuView extends View {
 		switch (ua.getRank()) {
 
 		case ACD:
-			menuAcd();
+			menuABcd();
 			break;
 
 		case BCD:
-			menuBcd();
+			menuABcd();
 			break;
 
 		case CD:
@@ -66,94 +70,67 @@ public class MainMenuView extends View {
 
 	private void printSharedMenu() {
 		System.out
-				.println("0. Logout\n1. Check if client insured\n2. Search claim\n3. Search client\n4. Create client\n5. Register claim");
+				.println("0. Logout\n1. Check if client insured\n2. Search claim\n3. Search client\n4. Create client");
 	}
+
+    private void printCDSharedMenu() {
+        System.out.println("5. Register claim");
+    }
 
 	// TODO refactor?
-	private void menuAcd() {
+	private void menuABcd() {
 		printSharedMenu();
-		System.out.println("6. Send a form to a client\n7. Check a form");
+        printCDSharedMenu();
+		System.out.println("6. Send a form to a client\n7. Check a form\n8. Classify a claim\n9. Make a decision about a claim");
 		System.out.print("\nPlease choose an option:");
 		String option = sc.nextLine();
 
-		while (!inputCheck(option, 7)) {
+		while (!inputCheck(option, ABCDOPTIONSNUMBER)) {
 			System.out.print("\nPlease choose a VALID option: ");
 			option = sc.nextLine();
 		}
 
 		switch (Integer.parseInt(option)) {
-		case 1:
-			checkClient();
-			break;
-		case 2:
-			new SearchClaimView(ua, claimManager);
-			break;
-		case 3:
-			new SearchClientView(cm);
-			break;
-		case 4:
-			addClient();
-			break;
-		case 5:
-			addClaim();
-			break;
-		case 6:
-			sendForm();
-			break;
-		case 7:
-			checkForm();
-			break;
-		case 0:
-			new LoginView(new UserManager(), this.cm, this.claimManager,
-					this.paymentManager);
-		}
-	}
-
-	private void menuBcd() {
-		printSharedMenu();
-		System.out.println("6. Send a form to a client\n7. Check a form");
-		System.out.print("\nPlease choose an option:");
-		String option = sc.nextLine();
-
-		while (!inputCheck(option, 7)) {
-			System.out.print("\nPlease choose a VALID option: ");
-			option = sc.nextLine();
-		}
-
-		switch (Integer.parseInt(option)) {
-		case 1:
-			checkClient();
-			break;
-		case 2:
-			new SearchClaimView(ua, claimManager);
-			break;
-		case 3:
-			new SearchClientView();
-			break;
-		case 4:
-			addClient();
-			break;
-		case 5:
-			addClaim();
-			break;
-		case 6:
-			sendForm();
-			break;
-		case 7:
-			checkForm();
-			break;
-		case 0:
-			new LoginView(new UserManager(), this.cm, this.claimManager,
-					this.paymentManager);
+            case 1:
+                checkClient();
+                break;
+            case 2:
+                new SearchClaimView(ua, claimManager);
+                break;
+            case 3:
+                new SearchClientView(cm);
+                break;
+            case 4:
+                addClient();
+                break;
+            case 5:
+                addClaim();
+                break;
+            case 6:
+                sendForm();
+                break;
+            case 7:
+                checkForm();
+                break;
+            case 8:
+                new SearchClaimView(ua, claimManager);
+                break;
+            case 9:
+                new SearchClaimView(ua, claimManager);
+                break;
+            case 0:
+                new LoginView(new UserManager(), this.cm, this.claimManager,
+                        this.paymentManager);
 		}
 	}
 
 	private void menuCd() {
 		printSharedMenu();
+        printCDSharedMenu();
 		System.out.print("\nPlease choose an option:");
 		String option = sc.nextLine();
 
-		while (!inputCheck(option, 5)) {
+		while (!inputCheck(option, CDOPTIONSNUMBER)) {
 			System.out.print("\nPlease choose a VALID option: ");
 			option = sc.nextLine();
 		}
@@ -182,11 +159,11 @@ public class MainMenuView extends View {
 
 	private void menuFin() {
 		printSharedMenu();
-		System.out.println("6. Proceed payment");
+		System.out.println("5. Proceed payment");
 		System.out.print("\nPlease choose an option:");
 		String option = sc.nextLine();
 
-		while (!inputCheck(option, 6)) {
+		while (!inputCheck(option, FINOPTIONSNUMBER)) {
 			System.out.print("\nPlease choose a VALID option: ");
 			option = sc.nextLine();
 		}
@@ -205,9 +182,6 @@ public class MainMenuView extends View {
 			addClient();
 			break;
 		case 5:
-			addClaim();
-			break;
-		case 6:
 			new ProceedPaymentView(ua, paymentManager, claimManager);
 			break;
 		case 0:
