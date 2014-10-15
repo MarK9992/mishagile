@@ -64,89 +64,104 @@ public class SearchClaimView extends SearchView<Claim> {
 			System.out.println("No classified claims were found.");
 		    }
 		}
-	    }
-	    if (ua.getRank() == UserRank.CD && action == ClaimAction.SENDLETTER) {
-		decidedClaims = cm.lookForSpecificClaims(results,
-			ClaimStatus.OK);
-		decidedClaims.addAll(cm.lookForSpecificClaims(results,
-			ClaimStatus.NOK));
-		if (decidedClaims != null) {
-		    sendLetter();
-		} else {
-		    System.out
-			    .println("No claims which a decision was made about were found.");
+
+		if (results != null) {
+		    if (ua.getRank() == UserRank.ACD || ua.getRank() == UserRank.BCD) {
+                if(action == ClaimAction.CLASSIFY) {
+                    classifyClaim(results);
+                }
+                else if(action == ClaimAction.MAKEDECISION) {
+                    classifiedClaims = cm.lookForSpecificClaims(results, ClaimStatus.CLASSIFIED);
+                    if (classifiedClaims != null) {
+                        makeDecision(classifiedClaims);
+                    } else {
+                        System.out.println("No classified claims were found.");
+                    }
+                }
+            }
+            if(ua.getRank() == UserRank.CD && action == ClaimAction.SENDLETTER) {
+                decidedClaims = cm.lookForSpecificClaims(results, ClaimStatus.OK);
+                decidedClaims.addAll(cm.lookForSpecificClaims(results, ClaimStatus.NOK));
+                if(decidedClaims != null) {
+                    sendLetter(decidedClaims);
+                }
+                else {
+                    System.out.println("No claims which a decision was made about were found.");
+                }
+            }
 		}
 	    }
 	}
     }
 
     // Allows the user to send a letter about a claim
-    private void sendLetter() {
+    private void sendLetter(ArrayList<Claim> claims) {
+        int n;
+        String decision;
 
+        System.out.println("Here are the claims that a decision was made about:");
+        printClaimList(claims);
+        n = askNumber(0, claims.size(), "send a letter for");
+        if (n != 0) {
+            System.out.println("Letter send.");
+        }
     }
 
-    // Allows a user to make a decision about a claim.
-    private void makeDecision(ArrayList<Claim> claims) {
-	int n;
-	String decision;
+	// Allows a user to make a decision about a claim.
+	private void makeDecision(ArrayList<Claim> claims) {
+		int n;
+		String decision;
 
-	System.out
-		.print("Would you like to make a decision about a claim? (Y/N) ");
-	if (getYesNo()) {
-	    System.out.println("Here are the classified claims:");
-	    printClaimList(claims);
-	    n = askNumber(0, claims.size(), "make a decision about");
-	    if (n != 0) {
-		System.out
-			.println("What decision you want to make about the claim (OK/NOK, 0 abort)");
-		decision = sc.nextLine();
-		while (!decision.equals("OK") && !decision.equals("NOK")
-			&& !decision.equals("0")) {
-		    System.out
-			    .println("Enter a valid decision! (OK/NOK, 0 abort)");
-		    decision = sc.nextLine();
-		}
-		if (!decision.equals("0")) {
-		    if (decision.equals("OK")) {
-			cm.setClaimStatus(claims.get(n - 1), ClaimStatus.OK);
-		    } else {
-			cm.setClaimStatus(claims.get(n - 1), ClaimStatus.NOK);
-		    }
-		}
-	    }
+        System.out.println("Here are the classified claims:");
+        printClaimList(claims);
+        n = askNumber(0, claims.size(), "make a decision about");
+        if (n != 0) {
+            System.out
+                    .println("What decision you want to make about the claim (OK/NOK, 0 abort)");
+            decision = sc.nextLine();
+            while (!decision.equals("OK") && !decision.equals("NOK")
+                    && !decision.equals("0")) {
+                System.out
+                        .println("Enter a valid decision! (OK/NOK, 0 abort)");
+                decision = sc.nextLine();
+            }
+            if (!decision.equals("0")) {
+                if (decision.equals("OK")) {
+                    cm.setClaimStatus(claims.get(n - 1), ClaimStatus.OK);
+                } else {
+                    cm.setClaimStatus(claims.get(n - 1), ClaimStatus.NOK);
+                }
+            }
+        }
 	}
-    }
 
-    // TODO grosse duplication dégueulasse
+	// TODO grosse duplication dégueulasse
 
-    // Allows a user to classify a claim.
-    private void classifyClaim(ArrayList<Claim> result) {
-	String category;
-	int n;
+	// Allows a user to classify a claim.
+	private void classifyClaim(ArrayList<Claim> result) {
+		String category;
+		int n;
 
-	System.out.print("Would you like to classify a claim? (Y/N) ");
-	if (getYesNo()) {
-	    n = askNumber(0, result.size(), "classify");
-	    if (n != 0) {
-		System.out
-			.println("How do you want to classify the claim (simple/complex, 0 abort)");
-		category = sc.nextLine();
-		while (!category.equals("simple")
-			&& !category.equals("complex") && !category.equals("0")) {
-		    System.out
-			    .println("Enter a valid category! (simple/complex, 0 abort)");
-		    category = sc.nextLine();
-		}
-		if (!category.equals("0")) {
-		    if (category.equals("simple")) {
-			cm.setClaimCategory(result.get(n - 1), Category.simple);
-		    } else {
-			cm.setClaimCategory(result.get(n - 1), Category.complex);
-		    }
-		}
-	    }
+        n = askNumber(0, result.size(), "classify");
+        if (n != 0) {
+            System.out
+                    .println("How do you want to classify the claim (simple/complex, 0 abort)");
+            category = sc.nextLine();
+            while (!category.equals("simple")
+                    && !category.equals("complex") && !category.equals("0")) {
+                System.out
+                        .println("Enter a valid category! (simple/complex, 0 abort)");
+                category = sc.nextLine();
+            }
+            if (!category.equals("0")) {
+                if (category.equals("simple")) {
+                    cm.setClaimCategory(result.get(n - 1), Category.simple);
+                } else {
+                    cm.setClaimCategory(result.get(n - 1), Category.complex);
+                }
+            }
+        }
 	}
-    }
 
     // Asks a user to give a number between the parameters for the specified
     // action
