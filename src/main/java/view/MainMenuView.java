@@ -24,8 +24,8 @@ public class MainMenuView extends View {
 	private ClaimManager claimManager;
 	private PaymentManager paymentManager;
 
-    private static int ABCDOPTIONSNUMBER = 9;
-    private static int CDOPTIONSNUMBER = 5;
+    private static int ABCDOPTIONSNUMBER = 10;
+    private static int CDOPTIONSNUMBER = 6;
     private static int FINOPTIONSNUMBER = 5;
 
 	// Constructors
@@ -46,23 +46,18 @@ public class MainMenuView extends View {
 		clear();
 
 		switch (ua.getRank()) {
-
-		case ACD:
-			menuABcd();
-			break;
-
-		case BCD:
-			menuABcd();
-			break;
-
-		case CD:
-			menuCd();
-			break;
-
-		case FIN:
-			menuFin();
-			break;
-
+            case ACD:
+                menuABcd();
+                break;
+            case BCD:
+                menuABcd();
+                break;
+            case CD:
+                menuCd();
+                break;
+            case FIN:
+                menuFin();
+                break;
 		}
 
 		mainMenuReturn();
@@ -75,14 +70,14 @@ public class MainMenuView extends View {
 
     // Prints the options available for a CD employee
     private void printCDSharedMenu() {
-        System.out.println("5. Register claim");
+        System.out.println("5. Register claim\n6. Send letter");
     }
 
 	// TODO refactor?
 	private void menuABcd() {
 		printSharedMenu();
         printCDSharedMenu();
-		System.out.println("6. Send a form to a client\n7. Check a form\n8. Classify a claim\n9. Make a decision about a claim");
+		System.out.println("7. Send a form to a client\n8. Check a form\n9. Classify a claim\n10. Make a decision about a claim");
 
 		switch (askOption(ABCDOPTIONSNUMBER)) {
             case 1:
@@ -101,15 +96,18 @@ public class MainMenuView extends View {
                 addClaim();
                 break;
             case 6:
-                sendForm();
+                sendLetter();
                 break;
             case 7:
-                checkForm();
+                sendForm();
                 break;
             case 8:
-                new SearchClaimView(ua, claimManager);
+                checkForm();
                 break;
             case 9:
+                new SearchClaimView(ua, claimManager);
+                break;
+            case 10:
                 new SearchClaimView(ua, claimManager);
                 break;
             case 0:
@@ -138,6 +136,9 @@ public class MainMenuView extends View {
 		case 5:
 			addClaim();
 			break;
+        case 6:
+            sendLetter();
+            break;
 		case 0:
 			new LoginView(new UserManager(), this.cm, this.claimManager,
 					this.paymentManager);
@@ -169,6 +170,12 @@ public class MainMenuView extends View {
 					this.paymentManager);
 		}
 	}
+
+    // Allows the user to send a letter to a client about his claim's status
+    private void sendLetter() {
+        System.out.println("First find the claim you want to send a letter about.");
+        new SearchClaimView(ua, claimManager);
+    }
 
 	private void mainMenuReturn() {
 		System.out.println("\n\nPress enter to get back to the main menu... ");

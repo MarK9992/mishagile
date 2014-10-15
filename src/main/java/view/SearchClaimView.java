@@ -36,15 +36,8 @@ public class SearchClaimView extends SearchView<Claim> {
 		clear();
 		System.out
 				.println("1. Search claim by claimant\n2. Search claim by date\n3. Search claim by claimant AND date");
-		System.out.print("\nPlease choose an option:");
-		String option = sc.nextLine();
 
-		while (!inputCheck(option, 3)) {
-			System.out.print("\nPlease choose a VALID option: ");
-			option = sc.nextLine();
-		}
-
-		switch (Integer.parseInt(option)) {
+		switch (askOption(3)) {
 		case 1:
 			claimantSearch();
 			break;
@@ -177,17 +170,9 @@ public class SearchClaimView extends SearchView<Claim> {
 	protected void printDetails() {
 		System.out
 				.print("\nEnter the index of the claim you want to see detailed: ");
-		String choice = sc.nextLine();
-
-		while (!inputCheck(choice, results.size())) {
-			System.out.print("\nPlease choose a VALID index: ");
-			choice = sc.nextLine();
-		}
-		int choiceInt;
-		if (Integer.parseInt(choice) <= 0) {
+		int choiceInt = askOption(results.size());
+		if (choiceInt <= 0) {
 			choiceInt = 1;
-		} else {
-			choiceInt = Integer.parseInt(choice);
 		}
 
 		System.out.println(results.get(choiceInt - 1));

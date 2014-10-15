@@ -44,14 +44,7 @@ public class SearchClientView extends SearchView<Client> {
 	protected void display() {
 		clear();
 		System.out.println("1. Search by names\n2. Search by insurance.");
-		System.out.print("\nPlease choose an option:");
-		String option = sc.nextLine();
-
-		while (!inputCheck(option, 2)) {
-			System.out.print("\nPlease choose a VALID option: ");
-			option = sc.nextLine();
-		}
-		switch (Integer.parseInt(option)) {
+		switch (askOption(2)) {
 		case 1:
 			namesSearch();
 			break;
@@ -93,13 +86,7 @@ public class SearchClientView extends SearchView<Client> {
 
 		System.out
 				.print("\nEnter the index of the client you want to see detailed (0 exit): ");
-		String choice = sc.nextLine();
-
-		while (!inputCheck(choice, results.size())) {
-			System.out.print("\nPlease choose a VALID index: ");
-			choice = sc.nextLine();
-		}
-		choiceInt = Integer.parseInt(choice);
+        choiceInt = askOption(results.size());
 		if (choiceInt > 0) {
 			System.out.println(results.get(choiceInt - 1));
 		}
