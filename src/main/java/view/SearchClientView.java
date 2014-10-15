@@ -44,14 +44,7 @@ public class SearchClientView extends SearchView<Client> {
     protected void display() {
 	clear();
 	System.out.println("1. Search by names\n2. Search by insurance.");
-	System.out.print("\nPlease choose an option:");
-	String option = sc.nextLine();
-
-	while (!inputCheck(option, 2)) {
-	    System.out.print("\nPlease choose a VALID option: ");
-	    option = sc.nextLine();
-	}
-	switch (Integer.parseInt(option)) {
+	switch (askOption(2)) {
 	case 1:
 	    namesSearch();
 	    break;
