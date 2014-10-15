@@ -73,6 +73,7 @@ public class MainMenuView extends View {
 				.println("0. Logout\n1. Check if client insured\n2. Search claim\n3. Search client\n4. Create client");
 	}
 
+    // Prints the options available for a CD employee
     private void printCDSharedMenu() {
         System.out.println("5. Register claim");
     }
@@ -82,15 +83,8 @@ public class MainMenuView extends View {
 		printSharedMenu();
         printCDSharedMenu();
 		System.out.println("6. Send a form to a client\n7. Check a form\n8. Classify a claim\n9. Make a decision about a claim");
-		System.out.print("\nPlease choose an option:");
-		String option = sc.nextLine();
 
-		while (!inputCheck(option, ABCDOPTIONSNUMBER)) {
-			System.out.print("\nPlease choose a VALID option: ");
-			option = sc.nextLine();
-		}
-
-		switch (Integer.parseInt(option)) {
+		switch (askOption(ABCDOPTIONSNUMBER)) {
             case 1:
                 checkClient();
                 break;
@@ -127,15 +121,8 @@ public class MainMenuView extends View {
 	private void menuCd() {
 		printSharedMenu();
         printCDSharedMenu();
-		System.out.print("\nPlease choose an option:");
-		String option = sc.nextLine();
 
-		while (!inputCheck(option, CDOPTIONSNUMBER)) {
-			System.out.print("\nPlease choose a VALID option: ");
-			option = sc.nextLine();
-		}
-
-		switch (Integer.parseInt(option)) {
+		switch (askOption(CDOPTIONSNUMBER)) {
 		case 1:
 			checkClient();
 			break;
@@ -160,15 +147,8 @@ public class MainMenuView extends View {
 	private void menuFin() {
 		printSharedMenu();
 		System.out.println("5. Proceed payment");
-		System.out.print("\nPlease choose an option:");
-		String option = sc.nextLine();
 
-		while (!inputCheck(option, FINOPTIONSNUMBER)) {
-			System.out.print("\nPlease choose a VALID option: ");
-			option = sc.nextLine();
-		}
-
-		switch (Integer.parseInt(option)) {
+		switch (askOption(FINOPTIONSNUMBER)) {
 		case 1:
 			checkClient();
 			break;
@@ -279,27 +259,5 @@ public class MainMenuView extends View {
 		Form form = cm.checkForm(names[0], names[1], askFormType());
 
 		System.out.println(form);
-	}
-
-	private FormType askFormType() {
-		System.out.println("What kind of form ? (A, B, or C)");
-		do {
-			switch (sc.nextLine().charAt(0)) {
-			case 'A':
-				return FormType.A;
-			case 'a':
-				return FormType.A;
-			case 'B':
-				return FormType.B;
-			case 'b':
-				return FormType.B;
-			case 'C':
-				return FormType.C;
-			case 'c':
-				return FormType.C;
-			default:
-				System.out.println("Please enter a correct input. (A, B or C)");
-			}
-		} while (true);
 	}
 }

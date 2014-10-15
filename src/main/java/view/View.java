@@ -2,6 +2,7 @@ package view;
 
 import claim.Claim;
 import client.Insurance;
+import communication.FormType;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -89,7 +90,11 @@ public abstract class View {
 		} while (true);
 	}
 
-	// Asks the user to enter an insurance
+    /**
+     * Asks the user to enter an insurance
+     *
+     * @return the insurance
+     */
 	protected Insurance askInsurance() {
 		System.out.println("What kind of insurance? (A, B, C, or D)");
 
@@ -117,7 +122,11 @@ public abstract class View {
 		} while (true);
 	}
 
-	// asks the user to enter a date
+    /**
+     * Asks the user to enter a date.
+     *
+     * @return the string date
+     */
 	protected String askDate() {
 		System.out.print("Enter a date dd/mm/yyyy format: ");
 		return sc.nextLine();
@@ -135,4 +144,49 @@ public abstract class View {
 			System.out.println("No claim was found...");
 		}
 	}
+
+    /**
+     * Asks the user to enter an option between 0 and maxoption.
+     *
+     * @param maxoption the maximum input
+     * @return the input
+     */
+    protected int askOption(int maxoption) {
+        System.out.print("\nPlease choose an option:");
+        String option = sc.nextLine();
+
+        while (!inputCheck(option, maxoption)) {
+            System.out.print("\nPlease choose a VALID option: ");
+            option = sc.nextLine();
+        }
+
+        return Integer.parseInt(option);
+    }
+
+    /**
+     * Asks the user to enter a form type.
+     *
+     * @return the formtype
+     */
+    protected FormType askFormType() {
+        System.out.println("What kind of form ? (A, B, or C)");
+        do {
+            switch (sc.nextLine().charAt(0)) {
+                case 'A':
+                    return FormType.A;
+                case 'a':
+                    return FormType.A;
+                case 'B':
+                    return FormType.B;
+                case 'b':
+                    return FormType.B;
+                case 'C':
+                    return FormType.C;
+                case 'c':
+                    return FormType.C;
+                default:
+                    System.out.println("Please enter a correct input. (A, B or C)");
+            }
+        } while (true);
+    }
 }
