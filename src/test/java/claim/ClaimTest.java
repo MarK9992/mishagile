@@ -33,12 +33,6 @@ public class ClaimTest {
 				"09/09/1992", Category.complex);
 	}
 
-	@Ignore
-	@Test
-	public void testGetDate() {
-		fail("Not yet implemented"); // TODO
-	}
-
 	@Test
 	public void testClaim() {
 		assertEquals(0, c.getCarPrice());
@@ -50,6 +44,8 @@ public class ClaimTest {
 		assertEquals("09/09/1992 accident", c1.getCarHistory());
 		assertEquals(ClaimStatus.REGISTERED, c1.getStatus());
 		assertEquals(Category.complex, c1.getCategory());
+		assertEquals("01/01/2014", c.getDate());
+		assertEquals("09/09/1992", c1.getDate());
 	}
 
 	@Test
