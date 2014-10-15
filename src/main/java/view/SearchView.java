@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 /**
  * Abstract class for search views.
- *
+ * 
  * Created by marc on 14/10/14.
  */
 public abstract class SearchView<E> extends View {
@@ -19,8 +19,8 @@ public abstract class SearchView<E> extends View {
      * Default constructor.
      */
     public SearchView() {
-        super();
-        results = new ArrayList<E>();
+	super();
+	results = new ArrayList<E>();
     }
 
     // Methods
@@ -28,5 +28,23 @@ public abstract class SearchView<E> extends View {
     /**
      * Asks the user if he would like to print the details of a result entry.
      */
-    protected abstract void printDetails();
+    protected void printDetails(String question) {
+	if (results != null) {
+	    System.out.print(question);
+	    String choice = sc.nextLine();
+
+	    while (!inputCheck(choice, results.size())) {
+		System.out.print("\nPlease choose a VALID index: ");
+		choice = sc.nextLine();
+	    }
+	    int choiceInt;
+	    if (Integer.parseInt(choice) <= 0) {
+		choiceInt = 1;
+	    } else {
+		choiceInt = Integer.parseInt(choice);
+	    }
+
+	    System.out.println(results.get(choiceInt - 1));
+	}
+    }
 }
