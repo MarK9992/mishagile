@@ -19,50 +19,50 @@ public class LoginView extends View {
     // Constructors
 
     public LoginView(UserManager um, ClientManager cm,
-	    ClaimManager claimManager, PaymentManager pm) {
-	super();
-	this.um = um;
-	this.cm = cm;
-	this.claimManager = claimManager;
-	this.paymentManager = pm;
-	display();
+                     ClaimManager claimManager, PaymentManager pm) {
+        super();
+        this.um = um;
+        this.cm = cm;
+        this.claimManager = claimManager;
+        this.paymentManager = pm;
+        display();
     }
 
     public LoginView(UserManager um, ClientManager cm, ClaimManager claimManager) {
-	super();
-	this.um = um;
-	this.cm = cm;
-	this.claimManager = claimManager;
-	this.paymentManager = new PaymentManager(this.claimManager);
-	display();
+        super();
+        this.um = um;
+        this.cm = cm;
+        this.claimManager = claimManager;
+        this.paymentManager = new PaymentManager(this.claimManager);
+        display();
     }
 
     public LoginView() {
-	this(new UserManager(), new ClientManager(), new ClaimManager());
+        this(new UserManager(), new ClientManager(), new ClaimManager());
     }
 
     // Methods
     public String getLogin() {
-	System.out.print("LOGIN: ");
-	return sc.nextLine();
+        System.out.print("LOGIN: ");
+        return sc.nextLine();
     }
 
     public String getPassword() {
-	System.out.print("PASSWORD: ");
-	return sc.nextLine();
+        System.out.print("PASSWORD: ");
+        return sc.nextLine();
     }
 
     @Override
     public void display() {
-	System.out
-		.println("Welcome to INSERT METAPHOR\n\nPlease enter your login and password.\n");
+        System.out
+                .println("Welcome to INSERT METAPHOR\n\nPlease enter your login and password.\n");
 
-	UserAccount ua;
+        UserAccount ua;
 
-	while ((ua = um.login(getLogin(), getPassword())) == null) {
-	    System.out
-		    .println("LOGIN and/or PASSWORD incorrect. Please try again.\n");
-	}
-	new MainMenuView(ua, cm, claimManager, paymentManager);
+        while ((ua = um.login(getLogin(), getPassword())) == null) {
+            System.out
+                    .println("LOGIN and/or PASSWORD incorrect. Please try again.\n");
+        }
+        new MainMenuView(ua, cm, claimManager, paymentManager);
     }
 }

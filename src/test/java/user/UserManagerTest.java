@@ -3,8 +3,6 @@ package user;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import user.UserAccount;
-import user.UserManager;
 
 import java.util.ArrayList;
 
@@ -39,8 +37,8 @@ public class UserManagerTest {
 
     @Test
     public void UserManagerTest() {
-	assertEquals(ual2, um.getUserList());
-	assertEquals(ual, um1.getUserList());
+	assertEquals(ual2, um.getList());
+	assertEquals(ual, um1.getList());
     }
 
     @Test

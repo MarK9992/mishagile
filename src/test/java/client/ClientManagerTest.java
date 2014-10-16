@@ -9,7 +9,6 @@ import java.util.ArrayList;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import claim.Claim;
@@ -59,10 +58,10 @@ public class ClientManagerTest {
 
     @Test
     public void testAddClaimToClient() {
-	assertEquals(0, cm2.getClientList().get(0).getClaimList().size());
-	cm2.addClaimToClient(cm2.getClientList().get(0), new Claim());
-	assertEquals(1, cm2.getClientList().get(0).getClaimList().size());
-	assertEquals(new Claim(), cm2.getClientList().get(0).getClaimList()
+	assertEquals(0, cm2.getList().get(0).getClaimList().size());
+	cm2.addClaimToClient(cm2.getList().get(0), new Claim());
+	assertEquals(1, cm2.getList().get(0).getClaimList().size());
+	assertEquals(new Claim(), cm2.getList().get(0).getClaimList()
 		.get(0));
     }
 
@@ -73,11 +72,11 @@ public class ClientManagerTest {
 
     @Test
     public void testAddClient() {
-	assertEquals(0, cm.getClientList().size());
+	assertEquals(0, cm.getList().size());
 	cm.addClient("Yassine", "Tijani", 'A');
-	assertEquals(1, cm.getClientList().size());
+	assertEquals(1, cm.getList().size());
 	assertEquals(new Client("Yassine", "Tijani", Insurance.A,
-		new ArrayList<Claim>()), cm.getClientList().get(0));
+		new ArrayList<Claim>()), cm.getList().get(0));
     }
 
     @Test
@@ -97,8 +96,8 @@ public class ClientManagerTest {
 
     @Test
     public void testClientManager() {
-	assertEquals(new ArrayList<Client>(), cm.getClientList());
-	assertEquals(clientList, cm1.getClientList());
+	assertEquals(new ArrayList<Client>(), cm.getList());
+	assertEquals(clientList, cm1.getList());
 	assertEquals(formList, cm1.getFormList());
     }
 

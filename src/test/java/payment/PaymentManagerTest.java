@@ -31,7 +31,7 @@ public class PaymentManagerTest {
     @Test
     public void testPaymentManager() {
 	assertNotNull(pm);
-	assertNotNull(pm.getPaymentsList());
+	assertNotNull(pm.getList());
 	assertNotNull(pm.getCm());
     }
 
@@ -39,18 +39,18 @@ public class PaymentManagerTest {
     public void testAddPayment() {
 	pm.addPayment(new Claim(), "12/12/12", PaymentMode.BANKTRANSFER);
 	pm.addPayment(new Claim(), "11/11/11", PaymentMode.CHECK);
-	assertEquals(2, pm.getPaymentsList().size());
+	assertEquals(2, pm.getList().size());
 	assertEquals(new Payment(new Claim(), "12/12/12",
-		PaymentMode.BANKTRANSFER), pm.getPaymentsList().get(0));
+		PaymentMode.BANKTRANSFER), pm.getList().get(0));
 	assertEquals(new Payment(new Claim(), "11/11/11", PaymentMode.CHECK),
-		pm.getPaymentsList().get(1));
+		pm.getList().get(1));
     }
 
     @Test
     public void testSetClaimStatusPayed() {
 	pm.addPayment(new Claim(), "12/12/12", PaymentMode.BANKTRANSFER);
-	pm.setClaimStatusPayed(pm.getPaymentsList().get(0).getClaimHandled());
-	assertEquals(ClaimStatus.PAYED, pm.getPaymentsList().get(0)
+	pm.setClaimStatusPayed(pm.getList().get(0).getClaimHandled());
+	assertEquals(ClaimStatus.PAYED, pm.getList().get(0)
 		.getClaimHandled().getStatus());
     }
 
