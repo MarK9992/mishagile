@@ -13,60 +13,65 @@ public class UserAccount {
     // Constructors
 
     public UserAccount() {
-        this("login", "password", UserRank.CD);
+	this("login", "password", UserRank.CD);
     }
 
     public UserAccount(String login, String password, UserRank rank) {
-        this.login = login;
-        this.password = password;
-        this.rank = rank;
+	this.login = login;
+	this.password = password;
+	this.rank = rank;
     }
 
     // Methods
 
     public boolean match(String login, String password) {
-        if(this.login.equals(login) && this.password.equals(password)) {
-            return true;
-        }
-        return false;
+	if (this.login.equals(login) && this.password.equals(password)) {
+	    return true;
+	}
+	return false;
     }
 
     // Accessors
 
     public String getLogin() {
-        return login;
+	return login;
     }
 
     public String getPassword() {
-        return password;
+	return password;
     }
 
     public UserRank getRank() {
-        return rank;
+	return rank;
     }
 
     // Override
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof UserAccount)) return false;
+	if (this == o)
+	    return true;
+	if (!(o instanceof UserAccount))
+	    return false;
 
-        UserAccount that = (UserAccount) o;
+	UserAccount that = (UserAccount) o;
 
-        if (!login.equals(that.login)) return false;
-        if (!password.equals(that.password)) return false;
-        if (rank != that.rank) return false;
+	if (!login.equals(that.login))
+	    return false;
+	if (!password.equals(that.password))
+	    return false;
+	if (rank != that.rank)
+	    return false;
 
-        return true;
+	return true;
     }
 
     @Override
     public int hashCode() {
-        int result = login.hashCode();
-        result = 31 * result + password.hashCode();
-        result = 31 * result + rank.hashCode();
-        return result;
+	int result = login.hashCode();
+	result = 31 * result + password.hashCode();
+	result = 31 * result + rank.hashCode();
+	return result;
     }
 
 }

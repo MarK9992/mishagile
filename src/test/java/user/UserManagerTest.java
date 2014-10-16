@@ -22,39 +22,39 @@ public class UserManagerTest {
 
     @Before
     public void setUp() {
-        um = new UserManager();
-        ual = new ArrayList<UserAccount>();
-        ual2 = new ArrayList<UserAccount>();
-        ual.add(new UserAccount());
-        ual.add(new UserAccount("acd", "acd", UserRank.ACD));
-        ual.add(new UserAccount("bcd", "bcd", UserRank.BCD));
-        ual.add(new UserAccount("cd", "cd", UserRank.CD));
-        ual.add(new UserAccount("fin", "fin", UserRank.FIN));
-        ual2.add(new UserAccount("acd", "acd", UserRank.ACD));
-        ual2.add(new UserAccount("bcd", "bcd", UserRank.BCD));
-        ual2.add(new UserAccount("cd", "cd", UserRank.CD));
-        ual2.add(new UserAccount("fin", "fin", UserRank.FIN));
-        um1 = new UserManager(ual);
+	um = new UserManager();
+	ual = new ArrayList<UserAccount>();
+	ual2 = new ArrayList<UserAccount>();
+	ual.add(new UserAccount());
+	ual.add(new UserAccount("acd", "acd", UserRank.ACD));
+	ual.add(new UserAccount("bcd", "bcd", UserRank.BCD));
+	ual.add(new UserAccount("cd", "cd", UserRank.CD));
+	ual.add(new UserAccount("fin", "fin", UserRank.FIN));
+	ual2.add(new UserAccount("acd", "acd", UserRank.ACD));
+	ual2.add(new UserAccount("bcd", "bcd", UserRank.BCD));
+	ual2.add(new UserAccount("cd", "cd", UserRank.CD));
+	ual2.add(new UserAccount("fin", "fin", UserRank.FIN));
+	um1 = new UserManager(ual);
     }
 
     @Test
     public void UserManagerTest() {
-        assertEquals(ual2, um.getUserList());
-        assertEquals(ual, um1.getUserList());
+	assertEquals(ual2, um.getUserList());
+	assertEquals(ual, um1.getUserList());
     }
 
     @Test
     public void LoginTest() {
-        assertNull(um.login("login", "password"));
-        assertNull(um1.login("Bob", "agile"));
-        assertEquals(new UserAccount(), um1.login("login", "password"));
+	assertNull(um.login("login", "password"));
+	assertNull(um1.login("Bob", "agile"));
+	assertEquals(new UserAccount(), um1.login("login", "password"));
     }
 
     @After
     public void tearDown() {
-        um = null;
-        um1 = null;
-        ual = null;
-        ual2 = null;
+	um = null;
+	um1 = null;
+	ual = null;
+	ual2 = null;
     }
 }

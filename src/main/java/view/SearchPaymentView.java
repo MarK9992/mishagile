@@ -101,7 +101,8 @@ public class SearchPaymentView extends SearchView<Payment> {
 	if (payment != null) {
 	    int index = 1;
 	    for (Payment p : payment) {
-		System.out.println(index + ". " + p.getPaymentDate() + " "
+		System.out.println("\n" + index + ". " + p.getPaymentDate()
+			+ " "
 			+ p.getClaimHandled().getClaimant().namesToString()
 			+ " " + p.getPayment());
 	    }

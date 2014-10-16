@@ -1,5 +1,5 @@
 package payment;
 
 public enum PaymentMode {
-	BANKTRANSFER, CHECK;
+    BANKTRANSFER, CHECK;
 }

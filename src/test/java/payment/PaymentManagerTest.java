@@ -13,45 +13,45 @@ import claim.ClaimStatus;
 
 public class PaymentManagerTest {
 
-	private PaymentManager pm;
-	private ClaimManager cm;
+    private PaymentManager pm;
+    private ClaimManager cm;
 
-	@Before
-	public void setUp() throws Exception {
-		cm = new ClaimManager();
-		pm = new PaymentManager(cm);
-	}
+    @Before
+    public void setUp() throws Exception {
+	cm = new ClaimManager();
+	pm = new PaymentManager(cm);
+    }
 
-	@After
-	public void tearDown() throws Exception {
-		pm = null;
-		cm = null;
-	}
+    @After
+    public void tearDown() throws Exception {
+	pm = null;
+	cm = null;
+    }
 
-	@Test
-	public void testPaymentManager() {
-		assertNotNull(pm);
-		assertNotNull(pm.getPaymentsList());
-		assertNotNull(pm.getCm());
-	}
+    @Test
+    public void testPaymentManager() {
+	assertNotNull(pm);
+	assertNotNull(pm.getPaymentsList());
+	assertNotNull(pm.getCm());
+    }
 
-	@Test
-	public void testAddPayment() {
-		pm.addPayment(new Claim(), "12/12/12", PaymentMode.BANKTRANSFER);
-		pm.addPayment(new Claim(), "11/11/11", PaymentMode.CHECK);
-		assertEquals(2, pm.getPaymentsList().size());
-		assertEquals(new Payment(new Claim(), "12/12/12",
-				PaymentMode.BANKTRANSFER), pm.getPaymentsList().get(0));
-		assertEquals(new Payment(new Claim(), "11/11/11", PaymentMode.CHECK),
-				pm.getPaymentsList().get(1));
-	}
+    @Test
+    public void testAddPayment() {
+	pm.addPayment(new Claim(), "12/12/12", PaymentMode.BANKTRANSFER);
+	pm.addPayment(new Claim(), "11/11/11", PaymentMode.CHECK);
+	assertEquals(2, pm.getPaymentsList().size());
+	assertEquals(new Payment(new Claim(), "12/12/12",
+		PaymentMode.BANKTRANSFER), pm.getPaymentsList().get(0));
+	assertEquals(new Payment(new Claim(), "11/11/11", PaymentMode.CHECK),
+		pm.getPaymentsList().get(1));
+    }
 
-	@Test
-	public void testSetClaimStatusPayed() {
-		pm.addPayment(new Claim(), "12/12/12", PaymentMode.BANKTRANSFER);
-		pm.setClaimStatusPayed(pm.getPaymentsList().get(0).getClaimHandled());
-		assertEquals(ClaimStatus.PAYED, pm.getPaymentsList().get(0)
-				.getClaimHandled().getStatus());
-	}
+    @Test
+    public void testSetClaimStatusPayed() {
+	pm.addPayment(new Claim(), "12/12/12", PaymentMode.BANKTRANSFER);
+	pm.setClaimStatusPayed(pm.getPaymentsList().get(0).getClaimHandled());
+	assertEquals(ClaimStatus.PAYED, pm.getPaymentsList().get(0)
+		.getClaimHandled().getStatus());
+    }
 
 }

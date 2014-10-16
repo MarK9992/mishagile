@@ -34,6 +34,7 @@ public class SearchClientView extends SearchView<Client> {
     public SearchClientView(ClientManager clientManager) {
 	super();
 	this.clientManager = clientManager;
+	display();
     }
 
     // Methods
@@ -72,11 +73,15 @@ public class SearchClientView extends SearchView<Client> {
 
     // Prints a resulting list of clients
     private void printList(ArrayList<Client> clients) {
-	int index = 1;
+	if (clients.size() > 0) {
+	    int index = 1;
 
-	for (Client client : clients) {
-	    System.out.println(index + ". " + client.namesToString() + " "
-		    + client.getInsurance());
+	    for (Client client : clients) {
+		System.out.println("\n" + index + ". " + client.namesToString()
+			+ " " + client.getInsurance());
+	    }
+	} else {
+	    System.out.println("No client was found...");
 	}
     }
 }

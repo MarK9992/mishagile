@@ -36,7 +36,7 @@ public abstract class View {
      * Clears console.
      */
     protected void clear() {
-	for (int i = 0; i < 20; i++) {
+	for (int i = 0; i < 4; i++) {
 	    System.out.println();
 	}
     }
@@ -50,9 +50,9 @@ public abstract class View {
     protected String[] askClientNames() {
 	String[] names = new String[2];
 
-	System.out.print("Enter client's name and firstname.\nname: ");
+	System.out.print("\nEnter client's name and firstname.\n\nName: ");
 	names[1] = sc.nextLine();
-	System.out.print("firstname");
+	System.out.print("Firstname: ");
 	names[0] = sc.nextLine();
 	return names;
     }
@@ -85,7 +85,7 @@ public abstract class View {
 	    case 'n':
 		return false;
 	    default:
-		System.out.print("Please answer correctly! (Y/N)");
+		System.out.print("Please answer correctly! (Y/N) ");
 	    }
 	} while (true);
     }
@@ -96,7 +96,7 @@ public abstract class View {
      * @return the insurance
      */
     protected Insurance askInsurance() {
-	System.out.println("What kind of insurance? (A, B, C, or D)");
+	System.out.print("What kind of insurance? (A, B, C, or D) ");
 
 	do {
 	    switch (sc.nextLine().charAt(0)) {
@@ -117,7 +117,7 @@ public abstract class View {
 	    case 'd':
 		return Insurance.D;
 	    default:
-		System.out.print("Please answer correctly! (A, B, C, or D)");
+		System.out.print("Please answer correctly! (A, B, C, or D) ");
 	    }
 	} while (true);
     }
@@ -128,7 +128,7 @@ public abstract class View {
      * @return the string date
      */
     protected String askDate() {
-	System.out.print("Enter a date dd/mm/yyyy format: ");
+	System.out.print("Enter a date (dd/mm/yyyy format): ");
 	return sc.nextLine();
     }
 
@@ -136,12 +136,12 @@ public abstract class View {
 	if (claims != null) {
 	    int index = 1;
 	    for (Claim cm : claims) {
-		System.out.println(index + ". " + cm.getDate() + " "
+		System.out.println("\n" + index + ". " + cm.getDate() + " "
 			+ cm.getClaimant().namesToString() + " "
 			+ cm.getStatus().toString());
 	    }
 	} else {
-	    System.out.println("No claim was found...");
+	    System.out.println("\nNo claim was found...");
 	}
     }
 
@@ -153,7 +153,7 @@ public abstract class View {
      * @return the input
      */
     protected int askOption(int maxoption) {
-	System.out.print("\nPlease choose an option:");
+	System.out.print("\nPlease choose an option: ");
 	String option = sc.nextLine();
 
 	while (!inputCheck(option, maxoption)) {
@@ -170,7 +170,7 @@ public abstract class View {
      * @return the formtype
      */
     protected FormType askFormType() {
-	System.out.println("What kind of form ? (A, B, or C)");
+	System.out.println("What kind of form? (A, B, or C) ");
 	do {
 	    switch (sc.nextLine().charAt(0)) {
 	    case 'A':
@@ -186,7 +186,8 @@ public abstract class View {
 	    case 'c':
 		return FormType.C;
 	    default:
-		System.out.println("Please enter a correct input. (A, B or C)");
+		System.out
+			.println("Please enter a correct input (A, B or C): ");
 	    }
 	} while (true);
     }

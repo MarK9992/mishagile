@@ -8,38 +8,38 @@ import java.util.ArrayList;
 // TODO refactor singleton?
 public class UserManager {
 
-	// Attributs
+    // Attributs
 
-	private ArrayList<UserAccount> userList;
+    private ArrayList<UserAccount> userList;
 
-	// Constructeurs
+    // Constructeurs
 
-	public UserManager() {
-		this(new ArrayList<UserAccount>());
+    public UserManager() {
+	this(new ArrayList<UserAccount>());
+    }
+
+    public UserManager(ArrayList<UserAccount> userList) {
+	this.userList = userList;
+	this.userList.add(new UserAccount("acd", "acd", UserRank.ACD));
+	this.userList.add(new UserAccount("bcd", "bcd", UserRank.BCD));
+	this.userList.add(new UserAccount("cd", "cd", UserRank.CD));
+	this.userList.add(new UserAccount("fin", "fin", UserRank.FIN));
+    }
+
+    // Method
+
+    public UserAccount login(String login, String password) {
+	for (UserAccount ua : userList) {
+	    if (ua.match(login, password)) {
+		return ua;
+	    }
 	}
+	return null;
+    }
 
-	public UserManager(ArrayList<UserAccount> userList) {
-		this.userList = userList;
-		this.userList.add(new UserAccount("acd", "acd", UserRank.ACD));
-		this.userList.add(new UserAccount("bcd", "bcd", UserRank.BCD));
-		this.userList.add(new UserAccount("cd", "cd", UserRank.CD));
-		this.userList.add(new UserAccount("fin", "fin", UserRank.FIN));
-	}
+    // Accesseurs
 
-	// Method
-
-	public UserAccount login(String login, String password) {
-		for (UserAccount ua : userList) {
-			if (ua.match(login, password)) {
-				return ua;
-			}
-		}
-		return null;
-	}
-
-	// Accesseurs
-
-	public ArrayList<UserAccount> getUserList() {
-		return userList;
-	}
+    public ArrayList<UserAccount> getUserList() {
+	return userList;
+    }
 }

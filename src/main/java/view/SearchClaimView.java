@@ -127,6 +127,7 @@ public class SearchClaimView extends SearchView<Claim> {
 		}
 	    }
 	}
+	System.out.println("Decision successfully made.");
     }
 
     // TODO grosse duplication dégueulasse
@@ -155,6 +156,7 @@ public class SearchClaimView extends SearchView<Claim> {
 		}
 	    }
 	}
+	System.out.println("Claim successfully classified.");
     }
 
     // Asks a user to give a number between the parameters for the specified

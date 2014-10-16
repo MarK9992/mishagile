@@ -44,7 +44,7 @@ public abstract class SearchView<E> extends View {
 		choiceInt = Integer.parseInt(choice);
 	    }
 
-	    System.out.println(results.get(choiceInt - 1));
+	    System.out.println("\n" + results.get(choiceInt - 1));
 	}
     }
 }

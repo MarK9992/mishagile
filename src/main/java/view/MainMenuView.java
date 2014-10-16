@@ -219,12 +219,13 @@ public class MainMenuView extends View {
 
 	if (cm.checkClient(names[0], names[1]) == null) {
 	    do {
-		System.out.print("\nInsurance (A, B, C or D): ");
+		System.out.print("Insurance (A, B, C or D): ");
 	    } while (!cm.addClient(names[0], names[1], sc.nextLine().charAt(0)));
+	    System.out.println("Client successfully added.");
 	}
 
 	else {
-	    System.out.println("Client already exists.");
+	    System.out.println("\nClient already exists.\n");
 	}
 
 	return cm.checkClient(names[0], names[1]);
@@ -233,11 +234,10 @@ public class MainMenuView extends View {
     private void addClaim() {
 	Client client = addClient();
 	String date, carHistory, carPrice, damageCost;
-	System.out.print("Date: ");
-	date = sc.nextLine();
-	System.out.print("\nCar history: ");
+	date = askDate();
+	System.out.print("Car history: ");
 	carHistory = sc.nextLine();
-	System.out.print("\nCar price: ");
+	System.out.print("Car price: ");
 	carPrice = sc.nextLine();
 
 	while (!isInt(carPrice)) {
@@ -245,7 +245,7 @@ public class MainMenuView extends View {
 	    carPrice = sc.nextLine();
 	}
 
-	System.out.print("\nDamage cost: ");
+	System.out.print("Damage cost: ");
 	damageCost = sc.nextLine();
 
 	while (!isInt(damageCost)) {
@@ -257,6 +257,7 @@ public class MainMenuView extends View {
 		ClaimStatus.REGISTERED, client, date, Category.undefined);
 	claimManager.addClaim(newClaim);
 	cm.addClaimToClient(client, newClaim);
+	System.out.println("Claim successfully added.");
     }
 
     private void checkForm() {
