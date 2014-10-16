@@ -55,7 +55,7 @@ public class LoginView extends View {
     @Override
     public void display() {
         System.out
-                .println("Welcome to INSERT METAPHOR\n\nPlease enter your login and password.\n");
+                .println("Welcome to Assembly Line\n\nPlease enter your login and password.\n");
 
         UserAccount ua;
 

@@ -11,7 +11,7 @@ import claim.ClaimStatus;
  */
 public class uiTest {
 
-    @Test
+    @Ignore
     public void uiTest() {
 	new LoginView();
     }
