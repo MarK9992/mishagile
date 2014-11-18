@@ -40,8 +40,8 @@ public class ClaimManagerTest {
 
     @Test
     public void testClaimManager() {
-	assertEquals(new ArrayList<Claim>(), cm.getClaimList());
-	assertEquals(claimList, cm1.getClaimList());
+	assertEquals(new ArrayList<Claim>(), cm.getList());
+	assertEquals(claimList, cm1.getList());
     }
 
     @Test
@@ -67,10 +67,10 @@ public class ClaimManagerTest {
     @Test
     public void testAddClaim() {
 	Claim claimAdd = new Claim();
-	assertEquals(0, cm.getClaimList().size());
+	assertEquals(0, cm.getList().size());
 	cm.addClaim(claimAdd);
-	assertEquals(1, cm.getClaimList().size());
-	assertTrue(cm.getClaimList().contains(claimAdd));
+	assertEquals(1, cm.getList().size());
+	assertTrue(cm.getList().contains(claimAdd));
     }
 
     @Test
@@ -82,7 +82,7 @@ public class ClaimManagerTest {
 	assertEquals(Category.simple, claim2.getCategory());
 	assertEquals(ClaimStatus.CLASSIFIED, claim2.getStatus());
 	;
-	assertEquals(Category.undefined, cm1.getClaimList().get(0)
+	assertEquals(Category.undefined, cm1.getList().get(0)
 		.getCategory());
     }
 
@@ -92,7 +92,7 @@ public class ClaimManagerTest {
 	cm.setClaimStatus(claim2, ClaimStatus.PAYED);
 	assertEquals(ClaimStatus.NOK, claim1.getStatus());
 	assertEquals(ClaimStatus.PAYED, claim2.getStatus());
-	assertEquals(ClaimStatus.REGISTERED, cm1.getClaimList().get(0)
+	assertEquals(ClaimStatus.REGISTERED, cm1.getList().get(0)
 		.getStatus());
     }
 
